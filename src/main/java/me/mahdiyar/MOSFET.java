@@ -1,8 +1,8 @@
 
 package me.mahdiyar;
 
-import java.awt.Color;
-import java.awt.Graphics;
+.Color;
+.Graphics;
 
 public class MOSFET
 {

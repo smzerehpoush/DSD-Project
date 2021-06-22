@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.*;
+.*;
 
 abstract class MosInfo extends Canvas
 {

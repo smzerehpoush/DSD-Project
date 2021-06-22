@@ -1,7 +1,7 @@
 
 package me.mahdiyar;
 
-import java.awt.Point;
+.Point;
 
 public interface VisualElement
 {

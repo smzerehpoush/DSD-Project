@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.Graphics;
+.Graphics;
 
 public class Plot
 {

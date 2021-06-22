@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.*;
+.*;
 
 // Referenced classes of package v10.mos_2:
 //            PlotCanvas, FloatPoint, Format, Conversion, 

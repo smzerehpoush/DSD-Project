@@ -2,8 +2,8 @@
 
 package me.mahdiyar;
 
-import java.awt.Graphics;
-import java.awt.Point;
+.Graphics;
+.Point;
 
 // Referenced classes of package v10.mos_2:
 //            VisualElement

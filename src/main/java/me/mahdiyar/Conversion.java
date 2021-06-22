@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.Dimension;
+.Dimension;
 import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.Vector;

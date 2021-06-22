@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.Color;
+.Color;
 
 // Referenced classes of package v10.mos_2:
 //            Format, FloatRange

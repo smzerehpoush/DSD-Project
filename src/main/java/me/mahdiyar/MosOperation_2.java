@@ -2,7 +2,7 @@
 
 package me.mahdiyar;
 
-import java.awt.Component;
+.Component;
 
 // Referenced classes of package v10.mos_2:
 //            MosOperation, UpDown, MosInfo_2, MosDevCircuit_2, 

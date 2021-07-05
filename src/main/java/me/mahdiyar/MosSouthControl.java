@@ -1,7 +1,7 @@
 
 package me.mahdiyar;
 
-.*;
+
 import java.util.StringTokenizer;
 
 // Referenced classes of package v10.mos_2:

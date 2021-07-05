@@ -1,0 +1,57 @@
+
+a
+java:S2184"ECast one of the operands of this subtraction operation to a "double".(Œ›ªúÿÿÿÿ
+a
+java:S2184ı"ECast one of the operands of this subtraction operation to a "double".(ÓÑİ øÿÿÿÿ
+9
+java:S2189¶""Correct this loop's end condition.(›‹
+8
+java:S2189¤""Correct this loop's end condition.(éå¹2
+1
+java:S36269"Remove this redundant jump.(ûÁİ…
+1
+java:S3626="Remove this redundant jump.(ûÁİ…
+1
+java:S3626u"Remove this redundant jump.(ûÁİ…
+1
+java:S3626y"Remove this redundant jump.(ûÁİ…
+K
+java:S1854_"5Remove this useless assignment to local variable "k".(¥‘§å
+K
+java:S1854d"5Remove this useless assignment to local variable "l".(«ê‹
+G
+java:S1874W",Remove this use of "size"; it is deprecated.(Îõïÿÿÿÿÿ
+2
+java:S3626ã"Remove this redundant jump.(ûÁİ…
+2
+java:S3626ç"Remove this redundant jump.(ûÁİ…
+C
+java:S1874Ä",Remove this use of "size"; it is deprecated.(ú¯µ…
+2
+java:S3626Â"Remove this redundant jump.(ûÁİ…
+2
+java:S3626Æ"Remove this redundant jump.(ûÁİ…
+H
+java:S1874Ì",Remove this use of "size"; it is deprecated.(ø¨”ùıÿÿÿÿ
+H
+java:S1874‡",Remove this use of "size"; it is deprecated.(ø¨”ùıÿÿÿÿ
+2
+java:S3626©"Remove this redundant jump.(ûÁİ…
+2
+java:S3626­"Remove this redundant jump.(ûÁİ…
+C
+java:S1874¤",Remove this use of "size"; it is deprecated.(·„á³
+v
+java:S2234¨"ZParameters to initLogY have the same names but not the same order as the method arguments.(˜®ÇÂüÿÿÿÿ
+v
+java:S2234¬"ZParameters to initLinY have the same names but not the same order as the method arguments.(¼Ö‰üÿÿÿÿ
+<
+java:S1481_"&Remove this unused "k" local variable.(¥‘§å
+<
+java:S1481d"&Remove this unused "l" local variable.(«ê‹
+D
+java:S1068€"(Remove this unused "TICK" private field.(íÌò¥ÿÿÿÿÿ
+E
+java:S1068")Remove this unused "TSIZE" private field.(ĞÅ·ÿÿÿÿÿ
+B
+java:S1068†",Remove this unused "showGrid" private field.(äÆğW

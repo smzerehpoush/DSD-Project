@@ -2,7 +2,7 @@
 package me.mahdiyar;
 
 import java.applet.Applet;
-.*;
+
 
 // Referenced classes of package v10.mos_2:
 //            Mos_2

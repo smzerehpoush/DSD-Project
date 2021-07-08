@@ -1,19 +1,29 @@
-
-
 package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            PlotCanvas, MosDevCircuit, IdsVgs, MosInfo, 
-//            DataWrapper, CustomAWT, FunctionData, UpDown
-
 abstract class MosOperation extends Panel
-    implements CustomAWT
-{
+        implements CustomAWT {
 
-    public MosOperation(FunctionData functiondata, MosDevCircuit mosdevcircuit)
-    {
+    protected double Vgs;
+    protected double Vd;
+    protected double Vt;
+    protected boolean isNChannel;
+    protected Thread kicker;
+    protected UpDown udVgs;
+    protected UpDown udVd;
+    protected PlotCanvas outputPlot;
+    protected PlotCanvas transferPlot;
+    protected FunctionData outputIV;
+    protected FunctionData transferIV;
+    protected DataWrapper outputWrap;
+    protected DataWrapper transferWrap;
+    protected MosDevCircuit mosCkt;
+    protected MosInfo info;
+    private int width;
+    private int height;
+
+    public MosOperation(FunctionData functiondata, MosDevCircuit mosdevcircuit) {
         setLayout(null);
         mosCkt = mosdevcircuit;
         outputPlot = new PlotCanvas();
@@ -36,108 +46,87 @@ abstract class MosOperation extends Panel
         Vt = 1.0D;
     }
 
-    public void update(Graphics g)
-    {
+    public void update(Graphics g) {
         paint(g);
     }
 
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         checkSize();
         setVgs();
         setVd();
         repaintComps();
     }
 
-    public void setNChannel(boolean flag)
-    {
-        if(isNChannel != flag)
-        {
-            isNChannel = flag;
-            setChannelType();
-        }
-    }
-
-    public void setVt(double d)
-    {
+    public void setVt(double d) {
         Vt = d;
         setVt();
     }
 
-    public void setVgs(double d)
-    {
+    public void setVgs(double d) {
         Vgs = d;
     }
 
-    public void setVd(double d)
-    {
+    public void setVd(double d) {
         Vd = d;
     }
 
-    public void infoVisible()
-    {
-        if(info.isVisible())
-        {
+    public void infoVisible() {
+        if (info.isVisible()) {
             info.hide();
             return;
-        } else
-        {
+        } else {
             info.show();
             return;
         }
     }
 
-    public void outVisible()
-    {
-        if(outputPlot.isVisible())
-        {
+    public void outVisible() {
+        if (outputPlot.isVisible()) {
             outputPlot.hide();
             return;
-        } else
-        {
+        } else {
             outputPlot.show();
             return;
         }
     }
 
-    public void transVisible()
-    {
-        if(transferPlot.isVisible())
-        {
+    public void transVisible() {
+        if (transferPlot.isVisible()) {
             transferPlot.hide();
             return;
-        } else
-        {
+        } else {
             transferPlot.show();
             return;
         }
     }
 
-    public void setVgsControl(UpDown updown)
-    {
+    public void setVgsControl(UpDown updown) {
         udVgs = updown;
     }
 
-    public void setVdControl(UpDown updown)
-    {
+    public void setVdControl(UpDown updown) {
         udVd = updown;
     }
 
-    public boolean isNChannel()
-    {
+    public boolean isNChannel() {
         return isNChannel;
     }
 
-    public void start()
-    {
-        if(kicker == null)
+    public void setNChannel(boolean flag) {
+        if (isNChannel != flag) {
+            isNChannel = flag;
+            setChannelType();
+        }
+    }
+
+    public void start() {
+        if (kicker == null)
             kicker = new Thread(this);
         kicker.start();
     }
 
-    public void stop()
-    {
-        if(kicker != null)
+    public void stop() {
+        if (kicker != null)
             kicker.stop();
         kicker = null;
     }
@@ -146,8 +135,7 @@ abstract class MosOperation extends Panel
 
     protected abstract void setInfo();
 
-    private void setChannelType()
-    {
+    private void setChannelType() {
         mosCkt.setNChannel(isNChannel);
         info.setNChannel(isNChannel);
         outputIV.setBooleanParam(isNChannel);
@@ -158,16 +146,14 @@ abstract class MosOperation extends Panel
         transferPlot.setChanged(true);
     }
 
-    protected void setVgs()
-    {
+    protected void setVgs() {
         mosCkt.setVgs(Vgs);
         info.setVgs(Vgs);
         outputWrap.setCurrentP(Vgs);
         transferWrap.setCurrentX(Vgs);
     }
 
-    private void setVt()
-    {
+    private void setVt() {
         mosCkt.setVt(Vt);
         info.setVt(Vt);
         outputIV.setDoubleParam(Vt);
@@ -178,19 +164,16 @@ abstract class MosOperation extends Panel
         transferPlot.setChanged(true);
     }
 
-    private void checkSize()
-    {
+    private void checkSize() {
         Dimension dimension = size();
-        if(dimension.width != width || dimension.height != height)
-        {
+        if (dimension.width != width || dimension.height != height) {
             width = dimension.width;
             height = dimension.height;
             sizeAndPlace();
         }
     }
 
-    private void sizeAndPlace()
-    {
+    private void sizeAndPlace() {
         int i = (width * 2) / 3;
         int j = (height * 4) / 5;
         int k = height - j - 2;
@@ -206,8 +189,7 @@ abstract class MosOperation extends Panel
         info.move(0, j);
     }
 
-    private void repaintComps()
-    {
+    private void repaintComps() {
         mosCkt.repaint();
         outputPlot.repaint();
         transferPlot.repaint();
@@ -215,22 +197,4 @@ abstract class MosOperation extends Panel
     }
 
     public abstract void run();
-
-    private int width;
-    private int height;
-    protected double Vgs;
-    protected double Vd;
-    protected double Vt;
-    protected boolean isNChannel;
-    protected Thread kicker;
-    protected UpDown udVgs;
-    protected UpDown udVd;
-    protected PlotCanvas outputPlot;
-    protected PlotCanvas transferPlot;
-    protected FunctionData outputIV;
-    protected FunctionData transferIV;
-    protected DataWrapper outputWrap;
-    protected DataWrapper transferWrap;
-    protected MosDevCircuit mosCkt;
-    protected MosInfo info;
 }

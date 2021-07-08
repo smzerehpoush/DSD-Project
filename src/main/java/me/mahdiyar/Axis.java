@@ -1,5 +1,3 @@
-
-
 package me.mahdiyar;
 
 import java.awt.*;
@@ -8,11 +6,25 @@ import java.awt.*;
 //            PlotCanvas, FloatPoint, Format, Conversion, 
 //            IntRange, DataWrapper, Plot, FloatRange
 
-public class Axis
-{
+public class Axis {
 
-    public Axis(PlotCanvas plotcanvas)
-    {
+    private static final int TICK = 30;
+    private static final int TSIZE = 4;
+    private final PlotCanvas canvas;
+    private DataWrapper data;
+    private final Conversion conv;
+    private final Point origin;
+    private boolean showGrid;
+    private boolean labelXUp;
+    private boolean labelYLeft;
+    private boolean arrowUp;
+    private boolean arrowLeft;
+    private IntRange xLogRange;
+    private IntRange yLogRange;
+    private boolean logX;
+    private boolean logY;
+
+    public Axis(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
         origin = new Point(0, 0);
         showGrid = false;
@@ -27,13 +39,11 @@ public class Axis
         conv = plotcanvas.getConversion();
     }
 
-    public void init()
-    {
+    public void init() {
         data = canvas.getData();
     }
 
-    public void draw(Graphics g)
-    {
+    public void draw(Graphics g) {
         FontMetrics fontmetrics = g.getFontMetrics();
         Format format = data.getFormatX();
         Format format1 = data.getFormatY();
@@ -43,129 +53,106 @@ public class Axis
         drawY(g, format1);
     }
 
-    public void setLogPlot(boolean flag, boolean flag1)
-    {
+    public void setLogPlot(boolean flag, boolean flag1) {
         FloatRange floatrange = data.getRangeX();
         FloatRange floatrange1 = data.getRangeY();
-        if(flag && (floatrange.min > 0.0D || floatrange.max < 0.0D))
-            logX = true;
-        else
-            logX = false;
-        if(flag1 && (floatrange1.min > 0.0D || floatrange1.max < 0.0D))
-        {
+        logX = flag && (floatrange.min > 0.0D || floatrange.max < 0.0D);
+        if (flag1 && (floatrange1.min > 0.0D || floatrange1.max < 0.0D)) {
             logY = true;
             return;
-        } else
-        {
+        } else {
             logY = false;
             return;
         }
     }
 
-    public void setGrid(boolean flag)
-    {
+    public void setGrid(boolean flag) {
         showGrid = flag;
     }
 
-    public Point getOrigin()
-    {
+    public Point getOrigin() {
         return origin;
     }
 
-    public boolean isLogX()
-    {
+    public boolean isLogX() {
         return logX;
     }
 
-    public boolean isLogY()
-    {
+    public boolean isLogY() {
         return logY;
     }
 
-    private void drawX(Graphics g, Format format)
-    {
+    private void drawX(Graphics g, Format format) {
         int i = canvas.size().width;
         g.drawLine(0, origin.y, i, origin.y);
         FontMetrics fontmetrics = g.getFontMetrics();
         byte byte0;
         int j;
-        if(labelXUp)
-        {
+        if (labelXUp) {
             j = -fontmetrics.getDescent();
             int k = j - fontmetrics.getHeight();
             byte0 = 4;
-        } else
-        {
+        } else {
             j = fontmetrics.getLeading() + fontmetrics.getAscent();
             int l = j + fontmetrics.getHeight();
             byte0 = -4;
         }
         String s = data.getNameX();
-        if(arrowLeft)
-        {
+        if (arrowLeft) {
             Plot.drawArrowLeft(0, origin.y, 4, g);
             g.drawString(s, 1, origin.y + j);
-        } else
-        {
+        } else {
             Plot.drawArrowRight(i, origin.y, 4, g);
             int i1 = fontmetrics.stringWidth(s) + 1;
             g.drawString(s, i - i1, origin.y + j);
         }
-        if(logX)
-        {
+        if (logX) {
             tickLogX(g, byte0, j);
             return;
-        } else
-        {
+        } else {
             tickLinX(g, format, byte0, j, i);
             return;
         }
     }
 
-    private void tickLinX(Graphics g, Format format, int i, int j, int k)
-    {
+    private void tickLinX(Graphics g, Format format, int i, int j, int k) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeX();
         double d = data.getOrigin().x;
         double d1 = conv.toPhysX(30);
         int j1 = origin.x;
         int l1 = origin.y;
-        while(d >= floatrange.min) 
-        {
+        while (d >= floatrange.min) {
             String s = format.formE(d);
             int l = fontmetrics.stringWidth(s) / 2;
             g.drawLine(j1, l1, j1, l1 + i);
-            if(arrowLeft && j1 > 30)
+            if (arrowLeft && j1 > 30)
                 g.drawString(s, j1 - l, l1 + j);
             d -= d1;
             j1 -= 30;
         }
         d = data.getOrigin().x + d1;
-        for(int k1 = origin.x + 30; d <= floatrange.max; k1 += 30)
-        {
+        for (int k1 = origin.x + 30; d <= floatrange.max; k1 += 30) {
             String s1 = format.formE(d);
             int i1 = fontmetrics.stringWidth(s1) / 2;
             g.drawLine(k1, l1, k1, l1 + i);
-            if(!arrowLeft && k1 < k - 30)
+            if (!arrowLeft && k1 < k - 30)
                 g.drawString(s1, k1 - i1, l1 + j);
             d += d1;
         }
 
     }
 
-    private void tickLogX(Graphics g, int i, int j)
-    {
+    private void tickLogX(Graphics g, int i, int j) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeX();
-        byte byte0 = ((byte)(xLogRange.max - xLogRange.min <= 6 ? 1 : 2));
+        byte byte0 = ((byte) (xLogRange.max - xLogRange.min <= 6 ? 1 : 2));
         int k1 = conv.toScrX(byte0);
         int j2 = origin.y;
-        if(floatrange.min > 0.0D)
-        {
+        if (floatrange.min > 0.0D) {
             int k = xLogRange.min;
             int l1 = origin.x;
-            for(; k <= xLogRange.max; k += byte0)
-            {
+            for (; k <= xLogRange.max; k += byte0) {
                 String s = "1E" + k;
                 int i1 = fontmetrics.stringWidth(s) / 2;
                 g.drawLine(l1, j2, l1, j2 + i);
@@ -175,12 +162,10 @@ public class Axis
 
             return;
         }
-        if(floatrange.max < 0.0D)
-        {
+        if (floatrange.max < 0.0D) {
             int l = xLogRange.max;
             int i2 = origin.x;
-            for(; l <= xLogRange.max; l -= byte0)
-            {
+            for (; l <= xLogRange.max; l -= byte0) {
                 String s1 = "-1E" + l;
                 int j1 = fontmetrics.stringWidth(s1) / 2;
                 g.drawLine(i2, j2, i2, j2 + i);
@@ -191,93 +176,80 @@ public class Axis
         }
     }
 
-    private void drawY(Graphics g, Format format)
-    {
+    private void drawY(Graphics g, Format format) {
         int i = canvas.size().height;
         g.drawLine(origin.x, 0, origin.x, i);
         FontMetrics fontmetrics = g.getFontMetrics();
         int j = fontmetrics.getHeight();
         byte byte0;
         byte byte1;
-        if(labelYLeft)
-        {
+        if (labelYLeft) {
             byte1 = -1;
             byte0 = 4;
-        } else
-        {
+        } else {
             byte1 = 0;
             byte0 = -4;
         }
         String s = data.getNameY();
         int k = byte1 * fontmetrics.stringWidth(s);
-        if(k == 0)
+        if (k == 0)
             k = 2;
-        if(arrowUp)
-        {
+        if (arrowUp) {
             Plot.drawArrowUp(origin.x, 0, 4, g);
             g.drawString(s, origin.x + k, j);
-        } else
-        {
+        } else {
             Plot.drawArrowDown(origin.x, i, 4, g);
             g.drawString(s, origin.x + k, i - j);
         }
-        if(logY)
-        {
+        if (logY) {
             tickLogY(g, byte0, byte1);
             return;
-        } else
-        {
+        } else {
             tickLinY(g, format, byte0, byte1, i);
             return;
         }
     }
 
-    private void tickLinY(Graphics g, Format format, int i, int j, int k)
-    {
+    private void tickLinY(Graphics g, Format format, int i, int j, int k) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeY();
         double d = data.getOrigin().y;
         double d1 = conv.toPhysY(30);
         int j1 = origin.x;
-        for(int k1 = origin.y; d >= floatrange.min; k1 += 30)
-        {
+        for (int k1 = origin.y; d >= floatrange.min; k1 += 30) {
             g.drawLine(j1, k1, j1 + i, k1);
             String s = format.formE(d);
             int l = j * fontmetrics.stringWidth(s);
-            if(l == 0)
+            if (l == 0)
                 l = 2;
-            if(!arrowUp && k1 < k - 30)
+            if (!arrowUp && k1 < k - 30)
                 g.drawString(s, j1 + l, k1);
             d -= d1;
         }
 
         d = data.getOrigin().y + d1;
-        for(int l1 = origin.y - 30; d <= floatrange.max; l1 -= 30)
-        {
+        for (int l1 = origin.y - 30; d <= floatrange.max; l1 -= 30) {
             g.drawLine(j1, l1, j1 + i, l1);
             String s1 = format.formE(d);
             int i1 = j * fontmetrics.stringWidth(s1);
-            if(i1 == 0)
+            if (i1 == 0)
                 i1 = 2;
-            if(arrowUp && l1 > 30)
+            if (arrowUp && l1 > 30)
                 g.drawString(s1, j1 + i1, l1);
             d += d1;
         }
 
     }
 
-    private void tickLogY(Graphics g, int i, int j)
-    {
+    private void tickLogY(Graphics g, int i, int j) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeY();
-        byte byte0 = ((byte)(yLogRange.max - yLogRange.min <= 6 ? 1 : 2));
+        byte byte0 = ((byte) (yLogRange.max - yLogRange.min <= 6 ? 1 : 2));
         int k1 = conv.toScrY(byte0);
         int l1 = origin.x;
         int i2 = origin.y;
-        if(floatrange.min > 0.0D)
-        {
-            for(int k = yLogRange.min; k <= yLogRange.max; k += byte0)
-            {
+        if (floatrange.min > 0.0D) {
+            for (int k = yLogRange.min; k <= yLogRange.max; k += byte0) {
                 String s = "1E" + k;
                 int i1 = j * fontmetrics.stringWidth(s);
                 g.drawLine(l1, i2, l1 + i, i2);
@@ -287,10 +259,8 @@ public class Axis
 
             return;
         }
-        if(floatrange.max < 0.0D)
-        {
-            for(int l = yLogRange.max; l <= yLogRange.max; l -= byte0)
-            {
+        if (floatrange.max < 0.0D) {
+            for (int l = yLogRange.max; l <= yLogRange.max; l -= byte0) {
                 String s1 = "-1E" + l;
                 int j1 = j * fontmetrics.stringWidth(s1);
                 g.drawLine(l1, i2, l1 + i, i2);
@@ -301,81 +271,67 @@ public class Axis
         }
     }
 
-    private void initX(FontMetrics fontmetrics, Format format)
-    {
+    private void initX(FontMetrics fontmetrics, Format format) {
         FloatRange floatrange = data.getRangeY();
         String s = data.getNameY();
         int i = fontmetrics.stringWidth(s);
         String s1 = format.formE(floatrange.min);
         int j = fontmetrics.stringWidth(s1);
-        if(j > i)
+        if (j > i)
             i = j;
         s1 = format.formE(floatrange.max);
         j = fontmetrics.stringWidth(s1);
-        if(j > i)
+        if (j > i)
             i = j;
         i += 2;
         arrowLeft = false;
-        if(logX)
-        {
+        if (logX) {
             initLogX(i);
             return;
-        } else
-        {
+        } else {
             initLinX(i);
             return;
         }
     }
 
-    private void initLinX(int i)
-    {
+    private void initLinX(int i) {
         int j = canvas.size().width;
         FloatRange floatrange = data.getRangeX();
         FloatPoint floatpoint = data.getOrigin();
         int k;
         int l;
-        if(floatrange.min >= 0.0D)
-        {
+        if (floatrange.min >= 0.0D) {
             k = 0;
             l = j;
             floatpoint.x = floatrange.min;
-        } else
-        if(floatrange.max <= 0.0D)
-        {
+        } else if (floatrange.max <= 0.0D) {
             k = j;
             l = 0;
             floatpoint.x = floatrange.max;
             arrowLeft = true;
-        } else
-        {
-            l = (int)((floatrange.max / (floatrange.max - floatrange.min)) * (double)j);
+        } else {
+            l = (int) ((floatrange.max / (floatrange.max - floatrange.min)) * (double) j);
             k = j - l;
             floatpoint.x = 0.0D;
         }
         int k1;
-        if(k <= l)
-        {
+        if (k <= l) {
             int i1 = i - k;
             labelYLeft = true;
-            if(i1 >= 0)
-            {
+            if (i1 >= 0) {
                 origin.x = i;
                 k1 = j - i1;
-            } else
-            {
+            } else {
                 origin.x = k;
                 k1 = j;
             }
-        } else
-        {
+        } else {
             int j1 = i - l;
             labelYLeft = false;
-            if(j1 >= 0)
-            {
+            if (j1 >= 0) {
                 origin.x = j - i;
                 k1 = j - j1;
-            } else
-            {
+            } else {
                 origin.x = j - l;
                 k1 = j;
             }
@@ -383,95 +339,76 @@ public class Axis
         conv.setX(k1, floatrange.max - floatrange.min);
     }
 
-    private void initLogX(int i)
-    {
-        if(xLogRange == null)
+    private void initLogX(int i) {
+        if (xLogRange == null)
             xLogRange = new IntRange();
         FloatRange floatrange = data.getRangeX();
         int j = canvas.size().width;
         double d = Math.log(10D);
         int k;
-        if(floatrange.min > 0.0D)
-        {
+        if (floatrange.min > 0.0D) {
             origin.x = i;
             k = j - i;
             labelYLeft = true;
-            xLogRange.min = (int)(Math.log(floatrange.min) / d) - 1;
-            xLogRange.max = (int)(Math.log(floatrange.max) / d) + 1;
-        } else
-        if(floatrange.max < 0.0D)
-        {
+            xLogRange.min = (int) (Math.log(floatrange.min) / d) - 1;
+            xLogRange.max = (int) (Math.log(floatrange.max) / d) + 1;
+        } else if (floatrange.max < 0.0D) {
             origin.x = j - i;
             k = origin.x;
             labelYLeft = false;
             arrowLeft = true;
-            xLogRange.max = (int)Math.log(-floatrange.min) + 1;
-            xLogRange.min = (int)Math.log(-floatrange.max) - 1;
-        } else
-        {
+            xLogRange.max = (int) Math.log(-floatrange.min) + 1;
+            xLogRange.min = (int) Math.log(-floatrange.max) - 1;
+        } else {
             return;
         }
         conv.setX(k, xLogRange.max - xLogRange.min);
     }
 
-    private void initY(FontMetrics fontmetrics)
-    {
+    private void initY(FontMetrics fontmetrics) {
         int i = fontmetrics.getHeight();
         int j = canvas.size().height;
         arrowUp = true;
-        if(logY)
-        {
+        if (logY) {
             initLogY(j, i);
             return;
-        } else
-        {
+        } else {
             initLinY(j, i);
             return;
         }
     }
 
-    private void initLinY(int i, int j)
-    {
+    private void initLinY(int i, int j) {
         FloatRange floatrange = data.getRangeY();
         int k;
         int l;
-        if(floatrange.min >= 0.0D)
-        {
+        if (floatrange.min >= 0.0D) {
             k = 0;
             l = i;
-        } else
-        if(floatrange.max <= 0.0D)
-        {
+        } else if (floatrange.max <= 0.0D) {
             k = i;
             l = 0;
             arrowUp = false;
-        } else
-        {
-            l = (int)((floatrange.max / (floatrange.max - floatrange.min)) * (double)i);
+        } else {
+            l = (int) ((floatrange.max / (floatrange.max - floatrange.min)) * (double) i);
             k = i - l;
         }
         int i1;
-        if(k <= l)
-        {
+        if (k <= l) {
             labelXUp = false;
-            if(k < j)
-            {
+            if (k < j) {
                 origin.y = i - j;
                 i1 = origin.y;
-            } else
-            {
+            } else {
                 origin.y = i - k;
                 i1 = i;
             }
-        } else
-        {
+        } else {
             labelXUp = true;
-            if(l <= j)
-            {
+            if (l <= j) {
                 origin.y = j;
                 i1 = i - j;
-            } else
-            {
+            } else {
                 origin.y = l;
                 i1 = i;
             }
@@ -479,49 +416,28 @@ public class Axis
         conv.setY(i1, floatrange.max - floatrange.min);
     }
 
-    private void initLogY(int i, int j)
-    {
+    private void initLogY(int i, int j) {
         double d = Math.log(10D);
         FloatRange floatrange = data.getRangeY();
-        if(yLogRange == null)
+        if (yLogRange == null)
             yLogRange = new IntRange();
         int k;
-        if(floatrange.min > 0.0D)
-        {
+        if (floatrange.min > 0.0D) {
             origin.y = i - j;
             k = origin.y;
             labelXUp = false;
-            yLogRange.min = (int)(Math.log(floatrange.min) / d) - 1;
-            yLogRange.max = (int)(Math.log(floatrange.max) / d) + 1;
-        } else
-        if(floatrange.max < 0.0D)
-        {
+            yLogRange.min = (int) (Math.log(floatrange.min) / d) - 1;
+            yLogRange.max = (int) (Math.log(floatrange.max) / d) + 1;
+        } else if (floatrange.max < 0.0D) {
             labelXUp = true;
             arrowUp = false;
             origin.y = j;
             k = i - j;
-            yLogRange.max = (int)(Math.log(-floatrange.min) / d) + 1;
-            yLogRange.min = (int)(Math.log(-floatrange.max) / d) - 1;
-        } else
-        {
+            yLogRange.max = (int) (Math.log(-floatrange.min) / d) + 1;
+            yLogRange.min = (int) (Math.log(-floatrange.max) / d) - 1;
+        } else {
             return;
         }
         conv.setY(k, yLogRange.max - yLogRange.min);
     }
-
-    private static final int TICK = 30;
-    private static final int TSIZE = 4;
-    private PlotCanvas canvas;
-    private DataWrapper data;
-    private Conversion conv;
-    private Point origin;
-    private boolean showGrid;
-    private boolean labelXUp;
-    private boolean labelYLeft;
-    private boolean arrowUp;
-    private boolean arrowLeft;
-    private IntRange xLogRange;
-    private IntRange yLogRange;
-    private boolean logX;
-    private boolean logY;
 }

@@ -1,12 +1,8 @@
-
-
 package me.mahdiyar;
 
 
-public class DataFormatException extends Exception
-{
+public class DataFormatException extends Exception {
 
-    public DataFormatException()
-    {
+    public DataFormatException() {
     }
 }

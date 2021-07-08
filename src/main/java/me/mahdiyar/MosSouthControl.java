@@ -1,4 +1,3 @@
-
 package me.mahdiyar;
 
 import java.awt.*;
@@ -7,11 +6,19 @@ import java.util.StringTokenizer;
 // Referenced classes of package v10.mos_2:
 //            MosOperation, UpDown10, UpDown
 
-abstract class MosSouthControl extends Panel
-{
+abstract class MosSouthControl extends Panel {
 
-    public MosSouthControl(MosOperation mosoperation)
-    {
+    private final MosOperation mos;
+    private Label Vgs;
+    private Label Vd;
+    private UpDown10 vgs;
+    private UpDown10 vd;
+    private Choice choice;
+    private Choice nVt;
+    private Choice pVt;
+    private Choice channelType;
+    private boolean nChannel;
+    public MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
         initComps();
         add(Vgs);
@@ -28,20 +35,16 @@ abstract class MosSouthControl extends Panel
         nChannel = true;
     }
 
-    public boolean action(Event event, Object obj)
-    {
+    public boolean action(Event event, Object obj) {
         Object obj1 = null;
-        if(event.target == channelType)
-        {
+        if (event.target == channelType) {
             String s = channelType.getSelectedItem();
             nChannel = mos.isNChannel();
-            if(s.equals("N-channel"))
+            if (s.equals("N-channel"))
                 nChannel = true;
-            else
-            if(s.equals("P-channel"))
+            else if (s.equals("P-channel"))
                 nChannel = false;
-            if(nChannel != mos.isNChannel())
-            {
+            if (nChannel != mos.isNChannel()) {
                 setChoice();
                 mos.setNChannel(nChannel);
                 double d2 = 0.0D;
@@ -53,18 +56,15 @@ abstract class MosSouthControl extends Panel
                 mos.repaint();
                 return true;
             }
-        } else
-        if(event.target == choice)
-        {
+        } else if (event.target == choice) {
             String s1 = choice.getSelectedItem();
-            try
-            {
+            try {
                 double d1 = getVt(s1);
                 mos.setVt(d1);
                 mos.repaint();
                 return true;
+            } catch (NumberFormatException _ex) {
             }
-            catch(NumberFormatException _ex) { }
         }
         return false;
     }
@@ -72,26 +72,23 @@ abstract class MosSouthControl extends Panel
     protected abstract String getVdLabel();
 
     private double getVt(String s)
-        throws NumberFormatException
-    {
+            throws NumberFormatException {
         double d = 0.0D;
         StringTokenizer stringtokenizer = new StringTokenizer(s);
         int i;
-        for(i = 0; stringtokenizer.hasMoreElements() && i < 3; i++)
-        {
+        for (i = 0; stringtokenizer.hasMoreElements() && i < 3; i++) {
             String s1 = stringtokenizer.nextToken();
-            if(i == 2)
+            if (i == 2)
                 d = (new Double(s1)).doubleValue();
         }
 
-        if(i < 2)
+        if (i < 2)
             throw new NumberFormatException();
         else
             return d;
     }
 
-    private void initComps()
-    {
+    private void initComps() {
         Vgs = new Label("Vgs");
         Vgs.setAlignment(2);
         Vd = new Label(getVdLabel());
@@ -120,23 +117,11 @@ abstract class MosSouthControl extends Panel
         channelType.select("N-channel");
     }
 
-    private void setChoice()
-    {
+    private void setChoice() {
         remove(choice);
         choice = nChannel ? nVt : pVt;
         add(choice, 5);
         validate();
         choice.select(1);
     }
-
-    private MosOperation mos;
-    private Label Vgs;
-    private Label Vd;
-    private UpDown10 vgs;
-    private UpDown10 vd;
-    private Choice choice;
-    private Choice nVt;
-    private Choice pVt;
-    private Choice channelType;
-    private boolean nChannel;
 }

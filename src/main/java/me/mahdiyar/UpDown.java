@@ -1,4 +1,3 @@
-
 package me.mahdiyar;
 
 import java.awt.*;
@@ -6,11 +5,24 @@ import java.awt.*;
 // Referenced classes of package v10.mos_2:
 //            CustomAWT
 
-public class UpDown extends Canvas
-{
+public class UpDown extends Canvas {
 
-    public UpDown(int i, int j, Color color, Color color1)
-    {
+    protected int width;
+    protected int height;
+    protected int dxArrow;
+    protected int dyArrow;
+    protected boolean topPressed;
+    protected boolean bottomPressed;
+    protected CustomAWT listener;
+    int[] xpoints;
+    int[] ypoints;
+    private final Color arrowColor;
+    private final Color bkgdColor;
+    private Polygon upArrow;
+    private Polygon downArrow;
+    private Image offscreen;
+    private Graphics gOffscreen;
+    public UpDown(int i, int j, Color color, Color color1) {
         topPressed = false;
         bottomPressed = false;
         arrowColor = color;
@@ -20,28 +32,23 @@ public class UpDown extends Canvas
         initSizes(i, j);
     }
 
-    public boolean downArrowPressed()
-    {
+    public boolean downArrowPressed() {
         return bottomPressed;
     }
 
-    public boolean upArrowPressed()
-    {
+    public boolean upArrowPressed() {
         return topPressed;
     }
 
-    public void update(Graphics g)
-    {
+    public void update(Graphics g) {
         paint(g);
     }
 
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         Dimension dimension = size();
-        if(width != dimension.width || height != dimension.height)
+        if (width != dimension.width || height != dimension.height)
             initSizes(dimension.width, dimension.height);
-        if(offscreen == null || width != dimension.width || height != dimension.height)
-        {
+        if (offscreen == null || width != dimension.width || height != dimension.height) {
             offscreen = createImage(width, height);
             gOffscreen = offscreen.getGraphics();
         }
@@ -49,13 +56,11 @@ public class UpDown extends Canvas
         g.drawImage(offscreen, 0, 0, null);
     }
 
-    public void addListener(CustomAWT customawt)
-    {
+    public void addListener(CustomAWT customawt) {
         listener = customawt;
     }
 
-    private void initSizes(int i, int j)
-    {
+    private void initSizes(int i, int j) {
         width = i;
         dyArrow = j / 2;
         height = 2 * dyArrow;
@@ -74,8 +79,7 @@ public class UpDown extends Canvas
         downArrow = new Polygon(xpoints, ypoints, 3);
     }
 
-    private void paintScrollbar(Graphics g)
-    {
+    private void paintScrollbar(Graphics g) {
         g.setColor(bkgdColor);
         g.fill3DRect(0, 0, dxArrow, dyArrow, !topPressed);
         g.fill3DRect(0, dyArrow, dxArrow, dyArrow, !bottomPressed);
@@ -83,20 +87,4 @@ public class UpDown extends Canvas
         g.fillPolygon(upArrow);
         g.fillPolygon(downArrow);
     }
-
-    protected int width;
-    protected int height;
-    protected int dxArrow;
-    protected int dyArrow;
-    protected boolean topPressed;
-    protected boolean bottomPressed;
-    protected CustomAWT listener;
-    private Color arrowColor;
-    private Color bkgdColor;
-    private Polygon upArrow;
-    private Polygon downArrow;
-    private Image offscreen;
-    private Graphics gOffscreen;
-    int xpoints[];
-    int ypoints[];
 }

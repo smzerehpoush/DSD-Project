@@ -1,12 +1,10 @@
-
 package me.mahdiyar;
 
 
 public interface CustomAWT
-    extends Runnable
-{
+        extends Runnable {
 
-    public abstract void start();
+    void start();
 
-    public abstract void stop();
+    void stop();
 }

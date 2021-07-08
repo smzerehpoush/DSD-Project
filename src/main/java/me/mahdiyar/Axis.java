@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class Axis {
 
-    private static final int TICK = 30;
-    private static final int TSIZE = 4;
     private final PlotCanvas canvas;
     private DataWrapper data;
     private final Conversion conv;

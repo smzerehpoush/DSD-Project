@@ -64,13 +64,6 @@ public class PlotCanvas extends Canvas {
         data.drawSpot(g, Color.red);
     }
 
-    public void setBkgd(boolean flag) {
-        if (showFullData != flag) {
-            showFullData = flag;
-            dataChanged = true;
-        }
-    }
-
     public DataWrapper getData() {
         return data;
     }

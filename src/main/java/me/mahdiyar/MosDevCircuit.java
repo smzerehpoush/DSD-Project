@@ -2,10 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            VisualElement, BatterySymbol, GroundSymbol, Format, 
-//            Plot, MOSFET
-
 public abstract class MosDevCircuit extends Canvas {
 
     private static final int nSat = 3;
@@ -40,6 +36,7 @@ public abstract class MosDevCircuit extends Canvas {
     private double vT;
     private double vgsMax;
     private int counter;
+
     public MosDevCircuit() {
         bGrd = new GroundSymbol();
         sGrd = new GroundSymbol();

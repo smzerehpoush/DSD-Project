@@ -50,6 +50,7 @@ abstract class MosOperation extends Panel
         paint(g);
     }
 
+
     public void paint(Graphics g) {
         checkSize();
         setVgs();

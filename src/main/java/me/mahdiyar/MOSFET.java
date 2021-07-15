@@ -8,6 +8,7 @@ public class MOSFET {
     private int y;
     private int width;
     private int height;
+    private int shift;
     private boolean nChannel;
     private int yContactTop;
     private int ySemiTop;
@@ -43,8 +44,8 @@ public class MOSFET {
         clear(g);
         g.setColor(Color.black);
         g.drawRect(x, y, width - 1, height - 1);
-        drawFirstLayer(g);
         drawSecondLayer(g);
+        drawFirstLayer(g);
     }
 
     public void clear(Graphics g) {
@@ -57,11 +58,12 @@ public class MOSFET {
     }
 
 
-    public void setRect(int i, int j, int k, int l) {
-        x = i;
-        y = j;
-        width = k;
-        height = l;
+    public void setRect(int x, int y, int width, int height, int shift) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.shift = shift;
         setParameters();
     }
 
@@ -123,9 +125,9 @@ public class MOSFET {
     }
 
     private void drawSecondLayer(Graphics g) {
+        drawBulkNeutral(g);
         drawSDRegions(g);
         drawContacts(g);
-        drawBulkNeutral(g);
     }
 
     private void drawContacts(Graphics g) {
@@ -146,23 +148,62 @@ public class MOSFET {
     }
 
     private void drawSDRegions(Graphics g) {
-        g.setColor(nChannel ? Color.blue : Color.red);
+        Color color = nChannel ? Color.blue : Color.red;
+        Color lightColor = nChannel ? new Color(114, 188, 212) : new Color(255, 127, 127);
+        g.setColor(color);
         int i = wSource / 2;
+        //1
         g.fillRect(xS - i, ySemiTop, wSource, hChannel);
+        drawTop(g, xS - i, ySemiTop, wSource, shift, color);
+        drawRightSide(g, xS - i, ySemiTop, wSource, hChannel, shift, color);
+        //2
         g.fillRect(xD - i, ySemiTop, wSource, hChannel);
+        drawTop(g, xD - i, ySemiTop, wSource, shift, color);
+        drawRightSide(g, xD - i, ySemiTop, wSource, hChannel, shift, lightColor);
+        drawTop(g, xS - i + wSource, ySemiTop, xD - xS, shift, color);
     }
 
     private void drawOxide(Graphics g) {
-        g.setColor(Color.lightGray);
+        Color color = Color.LIGHT_GRAY;
+        g.setColor(color);
+//        int i = wSource / 2;
+//        drawTop(g, x, y, width, shift, color);
         g.fillRect(x, y, width, hOxide);
     }
 
     private void drawBulkNeutral(Graphics g) {
-        g.setColor(nChannel ? Color.red : Color.blue);
-        g.fillRect(x, ySemiTop, wNeutralSide, hNeutralSide);
-        g.fillRect(x, yNeutralTop, width, hNeutral);
-        g.fillRect((x + width) - wNeutralSide, ySemiTop, wNeutralSide, hNeutralSide);
         drawBulkNeutral2(g);
+        Color color = nChannel ? Color.RED : Color.blue;
+        Color lightColor = nChannel ? new Color(255, 127, 127) : new Color(114, 188, 212);
+        //1 - red
+        g.setColor(color);
+        g.fillRect(x, ySemiTop, wNeutralSide, hNeutralSide);
+        drawRightSide(g, x, ySemiTop, wNeutralSide, hNeutralSide, shift, lightColor);
+        //2 - green
+        g.fillRect(x, yNeutralTop, width, hNeutral);
+        //3 - blue
+        g.fillRect((x + width) - wNeutralSide, ySemiTop, wNeutralSide, hNeutralSide);
+        drawTop(g, x, ySemiTop, wNeutralSide, shift, color);
+        drawTop(g, (x + width) - wNeutralSide, ySemiTop, wNeutralSide, shift, color);
+        drawRightSide(g, x, y, width, height, shift, lightColor);
+    }
+
+    private void drawTop(Graphics g, int x, int y, int width, int d, Color color) {
+        Color tmp = g.getColor();
+        g.setColor(color);
+        int[] xPoints = new int[]{x, x + d, x + width + d, x + width};
+        int[] yPoints = new int[]{y, y - d, y - d, y};
+        g.fillPolygon(xPoints, yPoints, 4);
+        g.setColor(tmp);
+    }
+
+    private void drawRightSide(Graphics g, int x, int y, int width, int height, int d, Color color) {
+        Color tmp = g.getColor();
+        g.setColor(color);
+        int[] xPoints = new int[]{x + width, x + width + d, x + width + d, x + width};
+        int[] yPoints = new int[]{y, y - d, y + height - d, y + height};
+        g.fillPolygon(xPoints, yPoints, 4);
+        g.setColor(tmp);
     }
 
     private void drawBulkNeutral2(Graphics g) {

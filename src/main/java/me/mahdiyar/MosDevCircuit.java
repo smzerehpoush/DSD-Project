@@ -134,10 +134,8 @@ public abstract class MosDevCircuit extends Canvas {
             return;
         if (d > vgs)
             d = vgs;
-        if (nChannel)
-            g.setColor(Color.blue);
-        else
-            g.setColor(Color.red);
+        Color color = nChannel ? Color.BLUE : Color.RED;
+        g.setColor(color);
         if (d > vT) {
             yLin[1] = yLin[0] + (int) (yToV * (vgs - vT));
             yLin[2] = yLin[0] + (int) (yToV * (d - vT));
@@ -185,7 +183,7 @@ public abstract class MosDevCircuit extends Canvas {
         Graphics g = imgMosCkt.getGraphics();
         yMos = height / 2;
         yLowWire = (yMos * 3) / 4;
-        fet.setRect(width / 10, yMos, (width * 8) / 10, (height * 4) / 10);
+        fet.setRect(width / 10, yMos, (width * 8) / 10, (height * 4) / 10, height / 2);
         initForChannelA();
         initForChannelB();
         drawCircuit(g);

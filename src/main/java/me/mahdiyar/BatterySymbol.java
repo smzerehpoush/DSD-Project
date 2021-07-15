@@ -60,10 +60,6 @@ public class BatterySymbol
         }
     }
 
-    public int getScale() {
-        return scale;
-    }
-
     public void setScale(int i) {
         if (i > 4 || i < 0)
             scale = 2;

@@ -51,7 +51,7 @@ public class PlotCanvas extends Canvas {
     }
 
     public void paint(Graphics g) {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (dimension.width != width || dimension.height != height) {
             width = dimension.width;
             height = dimension.height;

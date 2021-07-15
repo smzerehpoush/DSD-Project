@@ -12,7 +12,7 @@ public class Mos2Frame extends Frame {
         Mos2Panel mos2Panel = new Mos2Panel();
         mos2Panel.setSize(800, 600);
         add("Center", mos2Panel);
-        setSize(800,600);
+        setSize(800, 600);
         setVisible(true);
         addWindowListener(new WindowAdapter() {
             @Override

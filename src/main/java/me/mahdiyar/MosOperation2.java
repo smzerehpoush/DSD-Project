@@ -18,17 +18,11 @@ class MosOperation2 extends MosOperation {
                 super.transferWrap.showCurrentSpot(true);
                 return;
             }
-        if (super.Vgs > super.Vt || super.Vd > super.Vgs - super.Vt) {
-            super.transferWrap.showCurrentSpot(false);
-            return;
-        } else {
-            super.transferWrap.showCurrentSpot(true);
-            return;
-        }
+        super.transferWrap.showCurrentSpot(!(super.Vgs > super.Vt) && !(super.Vd > super.Vgs - super.Vt));
     }
 
     protected void setInfo() {
-        super.info = new MosInfo_2();
+        super.info = new MosInfo2();
     }
 
     public void run() {
@@ -74,7 +68,8 @@ class MosOperation2 extends MosOperation {
             }
             try {
                 Thread.sleep(100L);
-            } catch (InterruptedException _ex) {
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         } while (true);
     }

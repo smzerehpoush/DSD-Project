@@ -108,9 +108,6 @@ public class BatterySymbol
             }
         if (s1.equals("up") || s1.equals("down")) {
             plusSide = s1;
-            return;
-        } else {
-            return;
         }
     }
 
@@ -162,27 +159,18 @@ public class BatterySymbol
     public int getLeftX() {
         if (align.equals("vertical"))
             return plus.x - plusHalfWidth;
-        if (plus.x < minus.x)
-            return plus.x;
-        else
-            return minus.x;
+        return Math.min(plus.x, minus.x);
     }
 
     public int getRightX() {
         if (align.equals("vertical"))
             return plus.x + plusHalfWidth;
-        if (plus.x > minus.x)
-            return plus.x;
-        else
-            return minus.x;
+        return Math.max(plus.x, minus.x);
     }
 
     public int getHiY() {
         if (align.equals("vertical")) {
-            if (plus.y < minus.y)
-                return plus.y;
-            else
-                return minus.y;
+            return Math.min(plus.y, minus.y);
         } else {
             return plus.y - plusHalfWidth;
         }
@@ -190,10 +178,7 @@ public class BatterySymbol
 
     public int getLowY() {
         if (align.equals("vertical")) {
-            if (plus.y > minus.y)
-                return plus.y;
-            else
-                return minus.y;
+            return Math.max(plus.y, minus.y);
         } else {
             return plus.y + plusHalfWidth;
         }
@@ -224,7 +209,6 @@ public class BatterySymbol
             case 4: // '\004'
                 plusToMinus = 6;
                 plusHalfWidth = 8;
-                return;
         }
     }
 
@@ -250,10 +234,8 @@ public class BatterySymbol
         minusHalfWidth = plusHalfWidth / 2;
         if (align.equals("vertical")) {
             setVerticalMinus();
-            return;
         } else {
             setHorizontalMinus();
-            return;
         }
     }
 
@@ -261,10 +243,8 @@ public class BatterySymbol
         minus.x = plus.x;
         if (plusSide.equals("down")) {
             minus.y = plus.y - plusToMinus;
-            return;
         } else {
             minus.y = plus.y + plusToMinus;
-            return;
         }
     }
 
@@ -272,10 +252,8 @@ public class BatterySymbol
         minus.y = plus.y;
         if (plusSide.equals("left")) {
             minus.x = plus.x + plusToMinus;
-            return;
         } else {
             minus.x = plus.x - plusToMinus;
-            return;
         }
     }
 }

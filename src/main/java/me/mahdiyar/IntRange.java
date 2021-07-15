@@ -25,7 +25,7 @@ public class IntRange {
     }
 
     public void union(IntRange intrange) {
-        min = intrange.min >= min ? min : intrange.min;
-        max = intrange.max <= max ? max : intrange.max;
+        min = Math.min(intrange.min, min);
+        max = Math.max(intrange.max, max);
     }
 }

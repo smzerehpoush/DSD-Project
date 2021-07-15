@@ -147,7 +147,7 @@ abstract class MosOperation extends Panel
     }
 
     private void checkSize() {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (dimension.width != width || dimension.height != height) {
             width = dimension.width;
             height = dimension.height;

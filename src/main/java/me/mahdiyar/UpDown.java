@@ -46,7 +46,7 @@ public class UpDown extends Canvas {
     }
 
     public void paint(Graphics g) {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (width != dimension.width || height != dimension.height)
             initSizes(dimension.width, dimension.height);
         if (offscreen == null || width != dimension.width || height != dimension.height) {
@@ -66,7 +66,7 @@ public class UpDown extends Canvas {
         dyArrow = j / 2;
         height = 2 * dyArrow;
         dxArrow = i + 1;
-        resize(i, height);
+        setSize(i, height);
         xpoints[0] = i / 2;
         ypoints[0] = Math.max(2, dyArrow / 5);
         xpoints[1] = (i * 3) / 4;

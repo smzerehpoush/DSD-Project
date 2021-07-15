@@ -18,6 +18,7 @@ abstract class MosSouthControl extends Panel {
     private Choice pVt;
     private Choice channelType;
     private boolean nChannel;
+
     public MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
         initComps();
@@ -36,7 +37,6 @@ abstract class MosSouthControl extends Panel {
     }
 
     public boolean action(Event event, Object obj) {
-        Object obj1 = null;
         if (event.target == channelType) {
             String s = channelType.getSelectedItem();
             nChannel = mos.isNChannel();
@@ -63,7 +63,8 @@ abstract class MosSouthControl extends Panel {
                 mos.setVt(d1);
                 mos.repaint();
                 return true;
-            } catch (NumberFormatException _ex) {
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
             }
         }
         return false;
@@ -79,7 +80,7 @@ abstract class MosSouthControl extends Panel {
         for (i = 0; stringtokenizer.hasMoreElements() && i < 3; i++) {
             String s1 = stringtokenizer.nextToken();
             if (i == 2)
-                d = (new Double(s1)).doubleValue();
+                d = new Double(s1);
         }
 
         if (i < 2)
@@ -90,9 +91,9 @@ abstract class MosSouthControl extends Panel {
 
     private void initComps() {
         Vgs = new Label("Vgs");
-        Vgs.setAlignment(2);
+        Vgs.setAlignment(Label.RIGHT);
         Vd = new Label(getVdLabel());
-        Vd.setAlignment(2);
+        Vd.setAlignment(Label.RIGHT);
         vgs = new UpDown10(12, 25, Color.black, Color.lightGray);
         vd = new UpDown10(12, 25, Color.black, Color.lightGray);
         nVt = new Choice();

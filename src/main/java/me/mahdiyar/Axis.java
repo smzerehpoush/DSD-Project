@@ -12,20 +12,18 @@ public class Axis {
     private DataWrapper data;
     private final Conversion conv;
     private final Point origin;
-    private boolean showGrid;
     private boolean labelXUp;
     private boolean labelYLeft;
     private boolean arrowUp;
     private boolean arrowLeft;
     private IntRange xLogRange;
     private IntRange yLogRange;
-    private boolean logX;
-    private boolean logY;
+    private final boolean logX;
+    private final boolean logY;
 
     public Axis(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
         origin = new Point(0, 0);
-        showGrid = false;
         labelXUp = false;
         labelYLeft = true;
         arrowUp = true;
@@ -51,27 +49,8 @@ public class Axis {
         drawY(g, format1);
     }
 
-    public void setLogPlot(boolean flag, boolean flag1) {
-        FloatRange floatrange = data.getRangeX();
-        FloatRange floatrange1 = data.getRangeY();
-        logX = flag && (floatrange.min > 0.0D || floatrange.max < 0.0D);
-        logY = flag1 && (floatrange1.min > 0.0D || floatrange1.max < 0.0D);
-    }
-
-    public void setGrid(boolean flag) {
-        showGrid = flag;
-    }
-
     public Point getOrigin() {
         return origin;
-    }
-
-    public boolean isLogX() {
-        return logX;
-    }
-
-    public boolean isLogY() {
-        return logY;
     }
 
     private void drawX(Graphics g, Format format) {
@@ -82,11 +61,9 @@ public class Axis {
         int j;
         if (labelXUp) {
             j = -fontmetrics.getDescent();
-            int k = j - fontmetrics.getHeight();
             byte0 = 4;
         } else {
             j = fontmetrics.getLeading() + fontmetrics.getAscent();
-            int l = j + fontmetrics.getHeight();
             byte0 = -4;
         }
         String s = data.getNameX();

@@ -13,7 +13,7 @@ public class PlotCanvas extends Canvas {
     private int width;
     private int height;
     private Image imgBkgd;
-    private boolean showFullData;
+    private final boolean showFullData;
     private boolean dataChanged;
 
     public PlotCanvas() {
@@ -32,18 +32,6 @@ public class PlotCanvas extends Canvas {
     public void addData(Data data1) {
         data.add(data1);
         dataChanged = true;
-    }
-
-    public void removeAllData() {
-        if (!data.isEmpty()) {
-            data.removeAll();
-            dataChanged = true;
-        }
-    }
-
-    public void removeData(Data data1) {
-        if (data.remove(data1))
-            dataChanged = true;
     }
 
     public void update(Graphics g) {

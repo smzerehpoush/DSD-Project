@@ -67,23 +67,23 @@ public abstract class Data {
         double[] ad = getX();
         double d = ad[0];
         double d1 = ad[0];
-        for (int i = 0; i < ad.length; i++) {
-            if (ad[i] < d)
-                d = ad[i];
-            if (ad[i] > d1)
-                d1 = ad[i];
+        for (double v : ad) {
+            if (v < d)
+                d = v;
+            if (v > d1)
+                d1 = v;
         }
 
         xRange = new FloatRange(d, d1);
         double[][] ad1 = getY();
         d = ad1[0][0];
         d1 = d;
-        for (int j = 0; j < ad1.length; j++) {
+        for (double[] doubles : ad1) {
             for (int k = 0; k < ad1[0].length; k++) {
-                if (ad1[j][k] < d)
-                    d = ad1[j][k];
-                if (ad1[j][k] > d1)
-                    d1 = ad1[j][k];
+                if (doubles[k] < d)
+                    d = doubles[k];
+                if (doubles[k] > d1)
+                    d1 = doubles[k];
             }
 
         }

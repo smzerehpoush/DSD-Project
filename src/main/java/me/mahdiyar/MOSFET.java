@@ -39,29 +39,6 @@ public class MOSFET {
         nChannel = true;
     }
 
-    public MOSFET(int i, int j) {
-        nChannel = true;
-        x = 0;
-        y = 0;
-        width = i;
-        height = j;
-        setParameters();
-    }
-
-    public MOSFET(int i, int j, int k, int l) {
-        nChannel = true;
-        x = i;
-        y = j;
-        width = k;
-        height = l;
-        setParameters();
-    }
-
-    public MOSFET(int i, int j, int k, int l, boolean flag) {
-        this(i, j, k, l);
-        nChannel = flag;
-    }
-
     public void draw(Graphics g) {
         clear(g);
         g.setColor(Color.black);
@@ -75,25 +52,10 @@ public class MOSFET {
         g.fillRect(x, y, width, height);
     }
 
-    public boolean isNChannel() {
-        return nChannel;
-    }
-
     public void setNChannel(boolean flag) {
         nChannel = flag;
     }
 
-    public void setLocation(int i, int j) {
-        x = i;
-        y = j;
-        setParameters();
-    }
-
-    public void setSize(int i, int j) {
-        width = i;
-        height = j;
-        setParameters();
-    }
 
     public void setRect(int i, int j, int k, int l) {
         x = i;
@@ -113,10 +75,6 @@ public class MOSFET {
 
     public int getWidth() {
         return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 
     public int getSourceX() {

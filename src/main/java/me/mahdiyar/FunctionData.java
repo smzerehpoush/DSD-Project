@@ -6,7 +6,6 @@ package me.mahdiyar;
 
 public abstract class FunctionData extends Data {
 
-    protected static final int NOPOINTS = 80;
 
     public FunctionData() {
     }

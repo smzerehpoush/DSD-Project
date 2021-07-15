@@ -3,7 +3,7 @@ package me.mahdiyar;
 class MosOperation2 extends MosOperation {
 
     public MosOperation2(FunctionData functiondata) {
-        super(functiondata, new MosDevCircuit_2());
+        super(functiondata, new MosDevCircuit2());
     }
 
     protected void setVd() {

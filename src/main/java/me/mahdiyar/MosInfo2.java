@@ -29,7 +29,7 @@ class MosInfo2 extends MosInfo {
     }
 
     @Override
-    protected void setDescrB() {
+    protected void setDescription() {
         if (super.nChannel) {
             if (super.Vgs < super.Vt) {
                 super.info[1] = "";

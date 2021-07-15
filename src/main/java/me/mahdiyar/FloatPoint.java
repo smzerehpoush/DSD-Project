@@ -10,8 +10,4 @@ public class FloatPoint {
         x = 0.0D;
         y = 0.0D;
     }
-    public FloatPoint(double d, double d1) {
-        x = d;
-        y = d1;
-    }
 }

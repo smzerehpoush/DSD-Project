@@ -8,53 +8,14 @@ import java.awt.*;
 public class BatterySymbol
         implements VisualElement {
 
-    private static final int POSTONEG = 4;
-    private static final int HALFWIDTH = 4;
     private int scale;
     private int plusToMinus;
     private int plusHalfWidth;
     private int minusHalfWidth;
-    private Point plus;
+    private final Point plus;
     private final Point minus;
     private String align;
     private String plusSide;
-
-    public BatterySymbol() {
-        scale = 2;
-        plusToMinus = 4;
-        plusHalfWidth = 4;
-        plus = new Point(0, 0);
-        minus = new Point(0, 0);
-        align = "horizontal";
-        plusSide = "right";
-        setScale();
-    }
-
-    public BatterySymbol(int i) {
-        scale = 2;
-        plusToMinus = 4;
-        plusHalfWidth = 4;
-        plus = new Point(0, 0);
-        minus = new Point(0, 0);
-        align = "horizontal";
-        plusSide = "right";
-        if (i >= 0 || i <= 4)
-            scale = i;
-        setScale();
-    }
-
-    public BatterySymbol(Point point) {
-        scale = 2;
-        plusToMinus = 4;
-        plusHalfWidth = 4;
-        plus = new Point(0, 0);
-        minus = new Point(0, 0);
-        align = "horizontal";
-        plusSide = "right";
-        plus = point;
-        setMinus();
-        setScale();
-    }
 
     public BatterySymbol(String s, String s1) {
         scale = 2;
@@ -77,21 +38,9 @@ public class BatterySymbol
     public void draw(Graphics g) {
         if (align.equals("vertical")) {
             drawVertical(g);
-            return;
         } else {
             drawHorizontal(g);
-            return;
         }
-    }
-
-    public void erase(Graphics g) {
-        erase(g, Color.white);
-    }
-
-    public void erase(Graphics g, Color color) {
-        g.setXORMode(color);
-        draw(g);
-        g.setPaintMode();
     }
 
     public void setAlign(String s, String s1) {
@@ -127,10 +76,6 @@ public class BatterySymbol
         return plus;
     }
 
-    public Point getMinus() {
-        return minus;
-    }
-
     public void reverse() {
         if (plus.y == minus.y) {
             int i = plus.x;
@@ -138,11 +83,10 @@ public class BatterySymbol
             minus.x = i;
             if (plus.x > minus.x) {
                 plusSide = "right";
-                return;
             } else {
                 plusSide = "left";
-                return;
             }
+            return;
         }
         if (plus.x == minus.x) {
             int j = plus.y;

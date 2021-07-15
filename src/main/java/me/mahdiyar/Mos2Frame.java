@@ -23,6 +23,6 @@ public class Mos2Frame extends Frame {
     }
 
     public static void main(String[] args) {
-        Mos2Frame frame = new Mos2Frame();
+        new Mos2Frame();
     }
 }

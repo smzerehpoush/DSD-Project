@@ -4,8 +4,6 @@ import java.awt.*;
 
 public abstract class MosDevCircuit extends Canvas {
 
-    private static final int nSat = 3;
-    private static final int nLin = 4;
     protected BatterySymbol Vd;
     protected double vgs;
     protected double vd;
@@ -18,11 +16,9 @@ public abstract class MosDevCircuit extends Canvas {
     private final GroundSymbol bGrd;
     private final GroundSymbol sGrd;
     private final BatterySymbol Vgs;
-    private String VdName;
     private int yMos;
     private int yLowWire;
     private FontMetrics fm;
-    private int maxWSource;
     private int xChannelMaxSat;
     private double yToV;
     private double xToV;
@@ -121,11 +117,6 @@ public abstract class MosDevCircuit extends Canvas {
         return vT + vgsMax;
     }
 
-    public void setVgsMax(double d) {
-        vgsMax = Math.abs(d);
-        refreshChannel();
-    }
-
     protected abstract int getVgsY();
 
     protected abstract int getVdY();
@@ -151,12 +142,10 @@ public abstract class MosDevCircuit extends Canvas {
             yLin[1] = yLin[0] + (int) (yToV * (vgs - vT));
             yLin[2] = yLin[0] + (int) (yToV * (d - vT));
             g.fillPolygon(xLin, yLin, 4);
-            return;
         } else {
             ySat[1] = ySat[0] + (int) (yToV * (vgs - vT));
             xSat[2] = xChannelMaxSat + (int) (xToV * d);
             g.fillPolygon(xSat, ySat, 3);
-            return;
         }
     }
 
@@ -176,7 +165,7 @@ public abstract class MosDevCircuit extends Canvas {
     }
 
     private void initImg() {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (dimension.width == width && dimension.height == height)
             return;
         width = dimension.width;

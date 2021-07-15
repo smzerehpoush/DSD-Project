@@ -16,7 +16,7 @@ abstract class MosInfo extends Canvas {
     private Graphics gImg;
     private int counter;
 
-    public MosInfo() {
+    protected MosInfo() {
         nChannel = true;
         changed = true;
         info = new String[4];
@@ -24,10 +24,12 @@ abstract class MosInfo extends Canvas {
         Vt = 1.0D;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
         checkSize();
         if (changed)
@@ -60,7 +62,7 @@ abstract class MosInfo extends Canvas {
     protected abstract void setVd(double d);
 
     private void checkSize() {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (width != dimension.width || height != dimension.height) {
             width = dimension.width;
             height = dimension.height;
@@ -89,10 +91,11 @@ abstract class MosInfo extends Canvas {
                 else
                     gImg.setColor(Color.red);
             } else if (k == 1)
-                if (counter++ % 2 == 0)
+                if (counter++ % 2 == 0) {
                     gImg.setColor(Color.magenta);
-                else
+                } else {
                     gImg.setColor(Color.black);
+                }
             gImg.drawString(info[k], 2, j);
             j += i;
         }
@@ -111,10 +114,8 @@ abstract class MosInfo extends Canvas {
             }
         if (Vgs <= Vt) {
             info[0] = "Vgs < Vt : p-channel is induced.";
-            return;
         } else {
             info[0] = "Vgs > Vt : the p-channel is cutoff.";
-            return;
         }
     }
 }

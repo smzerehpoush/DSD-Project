@@ -1,9 +1,9 @@
 package me.mahdiyar;
 
-class MosOperation2 extends MosOperation {
+class MosOperation2Panel extends MosOperationPanel {
 
-    public MosOperation2(FunctionData functiondata) {
-        super(functiondata, new MosDevCircuit_2());
+    public MosOperation2Panel(FunctionData functiondata) {
+        super(functiondata, new MosDevCircuit2());
     }
 
     protected void setVd() {
@@ -18,23 +18,19 @@ class MosOperation2 extends MosOperation {
                 super.transferWrap.showCurrentSpot(true);
                 return;
             }
-        if (super.Vgs > super.Vt || super.Vd > super.Vgs - super.Vt) {
-            super.transferWrap.showCurrentSpot(false);
-            return;
-        } else {
-            super.transferWrap.showCurrentSpot(true);
-            return;
-        }
+        super.transferWrap.showCurrentSpot(!(super.Vgs > super.Vt) && !(super.Vd > super.Vgs - super.Vt));
     }
 
+    @Override
     protected void setInfo() {
-        super.info = new MosInfo_2();
+        super.info = new MosInfo2();
     }
 
+    @Override
     public void run() {
         double d = 0.10000000000000001D;
         double d1 = super.mosCkt.getVgsMax();
-        do {
+        while (true) {
             if (super.udVgs.downArrowPressed()) {
                 super.Vgs -= d;
                 if (super.isNChannel) {
@@ -76,6 +72,6 @@ class MosOperation2 extends MosOperation {
                 Thread.sleep(100L);
             } catch (InterruptedException _ex) {
             }
-        } while (true);
+        }
     }
 }

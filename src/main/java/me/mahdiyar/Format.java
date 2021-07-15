@@ -1,10 +1,5 @@
 package me.mahdiyar;
 
-import java.util.Enumeration;
-import java.util.Vector;
-
-// Referenced classes of package v10.mos_2:
-//            DataFormatException
 
 public class Format {
 
@@ -12,28 +7,6 @@ public class Format {
     private double commonFactor;
     private int exponent;
     private boolean rounded;
-
-    public Format() {
-        noOfSigDigits = 3;
-        commonFactor = 1.0D;
-        rounded = false;
-    }
-
-    public Format(int i) {
-        noOfSigDigits = 3;
-        commonFactor = 1.0D;
-        rounded = false;
-        if (i >= 1)
-            noOfSigDigits = i;
-    }
-
-    public Format(double d) {
-        noOfSigDigits = 3;
-        commonFactor = 1.0D;
-        rounded = false;
-        if (d != 0.0D)
-            commonFactor = d;
-    }
 
     public Format(int i, double d) {
         noOfSigDigits = 3;
@@ -48,7 +21,7 @@ public class Format {
     public String formE(double d) {
         rounded = false;
         double d1 = d * commonFactor;
-        String s = "";
+        String s;
         if (d1 > 0.0D)
             s = formPos(d1);
         else if (d1 == 0.0D)
@@ -58,26 +31,10 @@ public class Format {
         return s;
     }
 
-    public Vector formE(Vector vector)
-            throws DataFormatException {
-        Vector vector1 = new Vector(vector.size());
-        Enumeration enumeration = vector.elements();
-        Object obj = null;
-        Double double1;
-        for (; enumeration.hasMoreElements(); vector1.addElement(formE(double1.doubleValue()))) {
-            Object obj1 = enumeration.nextElement();
-            if (!(obj1 instanceof Double))
-                throw new DataFormatException();
-            double1 = (Double) obj1;
-        }
-
-        return vector1;
-    }
-
     private String formPos(double d) {
         if (d < 0.0D)
             return "-" + formPos(-d);
-        String s = "";
+        String s;
         if (d < 1.0D)
             s = formPosSmall(d);
         else if (d == 1.0D)
@@ -109,9 +66,9 @@ public class Format {
             exponent++;
             rounded = true;
         }
-        StringBuffer stringbuffer = new StringBuffer(String.valueOf(i));
-        stringbuffer.insert(1, '.');
-        String s = stringbuffer.toString();
+        StringBuilder stringBuilder = new StringBuilder(String.valueOf(i));
+        stringBuilder.insert(1, '.');
+        String s = stringBuilder.toString();
         if (rounded)
             return s.substring(0, s.length() - 1);
         else
@@ -120,7 +77,7 @@ public class Format {
 
     private String formPosLarge(double d) {
         exponent = 0;
-        String s = "";
+        String s;
         if (d < 10D) {
             s = toSigDigits(d);
             if (rounded)

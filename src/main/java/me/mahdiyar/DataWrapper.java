@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// Referenced classes of package v10.mos_2:
+
 //            PlotCanvas, FloatPoint, Format, Conversion, 
 //            Axis, FloatRange, FunctionData, Data
 
@@ -14,12 +14,12 @@ public class DataWrapper {
     private final Axis axis;
     private final Conversion conv;
     private final Vector dataset;
+    private final FloatPoint origin;
     private FloatRange xRange;
     private FloatRange yRange;
     private double pCurrent;
     private double xCurrent;
     private boolean showSpot;
-    private final FloatPoint origin;
 
     public DataWrapper(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
@@ -48,7 +48,7 @@ public class DataWrapper {
             xRange.union(data.getRangeX());
             yRange.union(data.getRangeY());
         }
-        dataset.addElement(data);
+        dataset.add(data);
     }
 
     public void setRange() {
@@ -70,7 +70,7 @@ public class DataWrapper {
             return;
         Point point = axis.getOrigin();
         Enumeration enumeration = dataset.elements();
-        int i = canvas.size().width / 2;
+        int i = canvas.getSize().width / 2;
         FontMetrics fontmetrics = g.getFontMetrics();
         int k = fontmetrics.getDescent();
         while (enumeration.hasMoreElements()) {
@@ -78,9 +78,9 @@ public class DataWrapper {
             int[] ai = conv.toScrX(data.getX());
             int[][] ai1 = conv.toScrY(data.getY());
             g.setColor(data.getColor());
-            for (int l = 0; l < ai1.length; l++) {
+            for (int[] ints : ai1) {
                 for (int i1 = 1; i1 < ai.length; i1++)
-                    g.drawLine(point.x + ai[i1], point.y - ai1[l][i1], point.x + ai[i1 - 1], point.y - ai1[l][i1 - 1]);
+                    g.drawLine(point.x + ai[i1], point.y - ints[i1], point.x + ai[i1 - 1], point.y - ints[i1 - 1]);
 
             }
 
@@ -112,7 +112,7 @@ public class DataWrapper {
                         g.drawLine(point.x + ai[i], point.y - ai1[i], point.x + ai[i - 1], point.y - ai1[i - 1]);
 
                     int j = point.x + ai[ai.length - 1];
-                    int k = canvas.size().width / 2;
+                    int k = canvas.getSize().width / 2;
                     String s = functiondata.getNameP();
                     Format format = functiondata.getFormatP();
                     s += "=" + format.formE(pCurrent);

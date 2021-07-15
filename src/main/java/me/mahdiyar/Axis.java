@@ -2,30 +2,24 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            PlotCanvas, FloatPoint, Format, Conversion, 
-//            IntRange, DataWrapper, Plot, FloatRange
-
 public class Axis {
 
     private final PlotCanvas canvas;
-    private DataWrapper data;
     private final Conversion conv;
     private final Point origin;
-    private boolean showGrid;
+    private final boolean logX;
+    private final boolean logY;
+    private DataWrapper data;
     private boolean labelXUp;
     private boolean labelYLeft;
     private boolean arrowUp;
     private boolean arrowLeft;
     private IntRange xLogRange;
     private IntRange yLogRange;
-    private boolean logX;
-    private boolean logY;
 
     public Axis(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
         origin = new Point(0, 0);
-        showGrid = false;
         labelXUp = false;
         labelYLeft = true;
         arrowUp = true;
@@ -51,48 +45,22 @@ public class Axis {
         drawY(g, format1);
     }
 
-    public void setLogPlot(boolean flag, boolean flag1) {
-        FloatRange floatrange = data.getRangeX();
-        FloatRange floatrange1 = data.getRangeY();
-        logX = flag && (floatrange.min > 0.0D || floatrange.max < 0.0D);
-        if (flag1 && (floatrange1.min > 0.0D || floatrange1.max < 0.0D)) {
-            logY = true;
-            return;
-        } else {
-            logY = false;
-            return;
-        }
-    }
-
-    public void setGrid(boolean flag) {
-        showGrid = flag;
-    }
-
     public Point getOrigin() {
         return origin;
     }
 
-    public boolean isLogX() {
-        return logX;
-    }
-
-    public boolean isLogY() {
-        return logY;
-    }
 
     private void drawX(Graphics g, Format format) {
-        int i = canvas.size().width;
+        int i = canvas.getSize().width;
         g.drawLine(0, origin.y, i, origin.y);
         FontMetrics fontmetrics = g.getFontMetrics();
         byte byte0;
         int j;
         if (labelXUp) {
             j = -fontmetrics.getDescent();
-            int k = j - fontmetrics.getHeight();
             byte0 = 4;
         } else {
             j = fontmetrics.getLeading() + fontmetrics.getAscent();
-            int l = j + fontmetrics.getHeight();
             byte0 = -4;
         }
         String s = data.getNameX();
@@ -106,10 +74,8 @@ public class Axis {
         }
         if (logX) {
             tickLogX(g, byte0, j);
-            return;
         } else {
             tickLinX(g, format, byte0, j, i);
-            return;
         }
     }
 
@@ -175,7 +141,7 @@ public class Axis {
     }
 
     private void drawY(Graphics g, Format format) {
-        int i = canvas.size().height;
+        int i = canvas.getSize().height;
         g.drawLine(origin.x, 0, origin.x, i);
         FontMetrics fontmetrics = g.getFontMetrics();
         int j = fontmetrics.getHeight();
@@ -201,10 +167,8 @@ public class Axis {
         }
         if (logY) {
             tickLogY(g, byte0, byte1);
-            return;
         } else {
             tickLinY(g, format, byte0, byte1, i);
-            return;
         }
     }
 
@@ -285,15 +249,13 @@ public class Axis {
         arrowLeft = false;
         if (logX) {
             initLogX(i);
-            return;
         } else {
             initLinX(i);
-            return;
         }
     }
 
     private void initLinX(int i) {
-        int j = canvas.size().width;
+        int j = canvas.getSize().width;
         FloatRange floatrange = data.getRangeX();
         FloatPoint floatpoint = data.getOrigin();
         int k;
@@ -341,7 +303,7 @@ public class Axis {
         if (xLogRange == null)
             xLogRange = new IntRange();
         FloatRange floatrange = data.getRangeX();
-        int j = canvas.size().width;
+        int j = canvas.getSize().width;
         double d = Math.log(10D);
         int k;
         if (floatrange.min > 0.0D) {
@@ -365,14 +327,12 @@ public class Axis {
 
     private void initY(FontMetrics fontmetrics) {
         int i = fontmetrics.getHeight();
-        int j = canvas.size().height;
+        int j = canvas.getSize().height;
         arrowUp = true;
         if (logY) {
             initLogY(j, i);
-            return;
         } else {
             initLinY(j, i);
-            return;
         }
     }
 

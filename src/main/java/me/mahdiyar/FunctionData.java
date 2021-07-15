@@ -1,14 +1,9 @@
 package me.mahdiyar;
 
-
-// Referenced classes of package v10.mos_2:
-//            Data, Format
-
 public abstract class FunctionData extends Data {
 
-    protected static final int NOPOINTS = 80;
 
-    public FunctionData() {
+    protected FunctionData() {
     }
 
     protected abstract double f(double d, double d1);

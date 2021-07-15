@@ -2,7 +2,7 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
+
 //            Conversion, Axis, DataWrapper, Data
 
 public class PlotCanvas extends Canvas {
@@ -13,7 +13,7 @@ public class PlotCanvas extends Canvas {
     private int width;
     private int height;
     private Image imgBkgd;
-    private boolean showFullData;
+    private final boolean showFullData;
     private boolean dataChanged;
 
     public PlotCanvas() {
@@ -24,6 +24,7 @@ public class PlotCanvas extends Canvas {
         dataChanged = false;
     }
 
+    @Override
     public void addNotify() {
         super.addNotify();
         axis.init();
@@ -34,24 +35,14 @@ public class PlotCanvas extends Canvas {
         dataChanged = true;
     }
 
-    public void removeAllData() {
-        if (!data.isEmpty()) {
-            data.removeAll();
-            dataChanged = true;
-        }
-    }
-
-    public void removeData(Data data1) {
-        if (data.remove(data1))
-            dataChanged = true;
-    }
-
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
-        Dimension dimension = size();
+        Dimension dimension = getSize();
         if (dimension.width != width || dimension.height != height) {
             width = dimension.width;
             height = dimension.height;

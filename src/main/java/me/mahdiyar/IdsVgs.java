@@ -1,13 +1,9 @@
 package me.mahdiyar;
 
-
-// Referenced classes of package v10.mos_2:
-//            FunctionData, Data, Format
-
 class IdsVgs extends FunctionData {
 
-    private double K;
-    private double Vt;
+    private double k;
+    private double vt;
     private boolean isNChannel;
 
     IdsVgs() {
@@ -17,46 +13,51 @@ class IdsVgs extends FunctionData {
         return false;
     }
 
+    @Override
     public String getNameX() {
         return "Vgs";
     }
 
+    @Override
     public String getNameY() {
         return "Ids";
     }
 
+    @Override
     protected void init() {
-        Vt = 1.0D;
-        K = 0.00025000000000000001D;
+        vt = 1.0D;
+        k = 0.00025000000000000001D;
         isNChannel = true;
     }
 
+    @Override
     public void setBooleanParam(boolean flag) {
         if (isNChannel != flag) {
             isNChannel = flag;
-            K = -K;
+            k = -k;
             if (isNChannel)
-                Vt = 1.0D;
+                vt = 1.0D;
             else
-                Vt = -1D;
+                vt = -1D;
             setRange();
         }
     }
 
+    @Override
     public void setDoubleParam(double d) {
-        if (Vt != d) {
-            if (Vt * d < 0.0D)
+        if (vt != d) {
+            if (vt * d < 0.0D)
                 return;
-            Vt = d;
+            vt = d;
             setRange();
         }
     }
 
     protected double f(double d, double d1) {
-        if (Math.abs(d) < Math.abs(Vt))
+        if (Math.abs(d) < Math.abs(vt))
             return 0.0D;
         else
-            return K * (d - Vt) * (d - Vt);
+            return k * (d - vt) * (d - vt);
     }
 
     public double[] getX() {
@@ -65,9 +66,9 @@ class IdsVgs extends FunctionData {
         double d1;
         if (isNChannel) {
             d = 0.0D;
-            d1 = Vt + 5D;
+            d1 = vt + 5D;
         } else {
-            d = Vt - 5D;
+            d = vt - 5D;
             d1 = 0.0D;
         }
         double d2 = (d1 - d) / (double) ad.length;
@@ -78,6 +79,7 @@ class IdsVgs extends FunctionData {
         return ad;
     }
 
+    @Override
     public Format getFormatY() {
         return new Format(2, 1000D);
     }

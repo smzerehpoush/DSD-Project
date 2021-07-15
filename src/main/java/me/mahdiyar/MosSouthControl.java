@@ -3,22 +3,23 @@ package me.mahdiyar;
 import java.awt.*;
 import java.util.StringTokenizer;
 
-// Referenced classes of package v10.mos_2:
+
 //            MosOperation, UpDown10, UpDown
 
 abstract class MosSouthControl extends Panel {
 
-    private final MosOperation mos;
+    private final MosOperationPanel mos;
     private Label Vgs;
     private Label Vd;
-    private UpDown10 vgs;
-    private UpDown10 vd;
+    private UpDownCanvas10 vgs;
+    private UpDownCanvas10 vd;
     private Choice choice;
     private Choice nVt;
     private Choice pVt;
     private Choice channelType;
     private boolean nChannel;
-    public MosSouthControl(MosOperation mosoperation) {
+
+    protected MosSouthControl(MosOperationPanel mosoperation) {
         mos = mosoperation;
         initComps();
         add(Vgs);
@@ -36,7 +37,6 @@ abstract class MosSouthControl extends Panel {
     }
 
     public boolean action(Event event, Object obj) {
-        Object obj1 = null;
         if (event.target == channelType) {
             String s = channelType.getSelectedItem();
             nChannel = mos.isNChannel();
@@ -79,7 +79,7 @@ abstract class MosSouthControl extends Panel {
         for (i = 0; stringtokenizer.hasMoreElements() && i < 3; i++) {
             String s1 = stringtokenizer.nextToken();
             if (i == 2)
-                d = (new Double(s1)).doubleValue();
+                d = new Double(s1);
         }
 
         if (i < 2)
@@ -90,11 +90,11 @@ abstract class MosSouthControl extends Panel {
 
     private void initComps() {
         Vgs = new Label("Vgs");
-        Vgs.setAlignment(2);
+        Vgs.setAlignment(Label.RIGHT);
         Vd = new Label(getVdLabel());
-        Vd.setAlignment(2);
-        vgs = new UpDown10(12, 25, Color.black, Color.lightGray);
-        vd = new UpDown10(12, 25, Color.black, Color.lightGray);
+        Vd.setAlignment(Label.RIGHT);
+        vgs = new UpDownCanvas10(12, 25, Color.black, Color.lightGray);
+        vd = new UpDownCanvas10(12, 25, Color.black, Color.lightGray);
         nVt = new Choice();
         nVt.addItem("Vt = 0.5 V");
         nVt.addItem("Vt = 1.0 V");

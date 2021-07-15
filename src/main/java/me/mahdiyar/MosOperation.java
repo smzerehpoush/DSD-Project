@@ -71,33 +71,15 @@ abstract class MosOperation extends Panel
     }
 
     public void infoVisible() {
-        if (info.isVisible()) {
-            info.hide();
-            return;
-        } else {
-            info.show();
-            return;
-        }
+        info.setVisible(!info.isVisible());
     }
 
     public void outVisible() {
-        if (outputPlot.isVisible()) {
-            outputPlot.hide();
-            return;
-        } else {
-            outputPlot.show();
-            return;
-        }
+        outputPlot.setVisible(!outputPlot.isVisible());
     }
 
     public void transVisible() {
-        if (transferPlot.isVisible()) {
-            transferPlot.hide();
-            return;
-        } else {
-            transferPlot.show();
-            return;
-        }
+        transferPlot.setVisible(!transferPlot.isVisible());
     }
 
     public void setVgsControl(UpDown updown) {
@@ -179,14 +161,14 @@ abstract class MosOperation extends Panel
         int k = height - j - 2;
         int l = width - i;
         int i1 = j / 2;
-        outputPlot.resize(l, i1);
-        transferPlot.resize(l, j - i1);
-        mosCkt.resize(i, j);
-        info.resize(width, k);
-        mosCkt.move(0, 0);
-        outputPlot.move(i, 0);
-        transferPlot.move(i, i1);
-        info.move(0, j);
+        outputPlot.setSize(l, i1);
+        transferPlot.setSize(l, j - i1);
+        mosCkt.setSize(i, j);
+        info.setSize(width, k);
+        mosCkt.setLocation(0, 0);
+        outputPlot.setLocation(i, 0);
+        transferPlot.setLocation(i, i1);
+        info.setLocation(0, j);
     }
 
     private void repaintComps() {

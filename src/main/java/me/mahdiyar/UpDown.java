@@ -22,6 +22,7 @@ public class UpDown extends Canvas {
     private Polygon downArrow;
     private Image offscreen;
     private Graphics gOffscreen;
+
     public UpDown(int i, int j, Color color, Color color1) {
         topPressed = false;
         bottomPressed = false;

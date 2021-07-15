@@ -10,7 +10,7 @@ public class Mos2Panel extends Panel {
         OutputIV outputiv = new OutputIV();
         MosOperation2 mosoperation2 = new MosOperation2(outputiv);
         add("Center", mosoperation2);
-        add("North", new MosSouthControl_2(mosoperation2));
-        add("South", new MosNorthControl(mosoperation2));
+        add("North", new MosTopControl(mosoperation2));
+        add("South", new MosBottomControl(mosoperation2));
     }
 }

@@ -11,6 +11,7 @@ class MosBottomControl extends Panel {
     Button id;
     Button ids;
     Button info;
+
     public MosBottomControl(MosOperation mosoperation) {
         mos = mosoperation;
         id = new Button("Id vs. Vds");

@@ -5,12 +5,12 @@ package me.mahdiyar;
 
 public class Conversion {
 
+    private final double xFillFactor;
+    private final double yFillFactor;
     private double xToScr;
     private double yToScr;
     private double xToPhys;
     private double yToPhys;
-    private final double xFillFactor;
-    private final double yFillFactor;
 
     public Conversion() {
         xFillFactor = 0.94999999999999996D;

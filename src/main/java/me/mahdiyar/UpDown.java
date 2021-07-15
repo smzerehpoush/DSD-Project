@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class UpDown extends Canvas {
 
+    private final Color arrowColor;
+    private final Color bkgdColor;
     protected int width;
     protected int height;
     protected int dxArrow;
@@ -16,8 +18,6 @@ public class UpDown extends Canvas {
     protected CustomAWT listener;
     int[] xpoints;
     int[] ypoints;
-    private final Color arrowColor;
-    private final Color bkgdColor;
     private Polygon upArrow;
     private Polygon downArrow;
     private Image offscreen;

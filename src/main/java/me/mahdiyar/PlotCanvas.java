@@ -10,10 +10,10 @@ public class PlotCanvas extends Canvas {
     private final Axis axis;
     private final DataWrapper data;
     private final Conversion conv;
+    private final boolean showFullData;
     private int width;
     private int height;
     private Image imgBkgd;
-    private final boolean showFullData;
     private boolean dataChanged;
 
     public PlotCanvas() {

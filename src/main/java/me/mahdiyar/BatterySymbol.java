@@ -8,12 +8,12 @@ import java.awt.*;
 public class BatterySymbol
         implements VisualElement {
 
+    private final Point plus;
+    private final Point minus;
     private int scale;
     private int plusToMinus;
     private int plusHalfWidth;
     private int minusHalfWidth;
-    private final Point plus;
-    private final Point minus;
     private String align;
     private String plusSide;
 

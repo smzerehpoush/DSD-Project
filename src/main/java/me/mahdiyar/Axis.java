@@ -9,17 +9,17 @@ import java.awt.*;
 public class Axis {
 
     private final PlotCanvas canvas;
-    private DataWrapper data;
     private final Conversion conv;
     private final Point origin;
+    private final boolean logX;
+    private final boolean logY;
+    private DataWrapper data;
     private boolean labelXUp;
     private boolean labelYLeft;
     private boolean arrowUp;
     private boolean arrowLeft;
     private IntRange xLogRange;
     private IntRange yLogRange;
-    private final boolean logX;
-    private final boolean logY;
 
     public Axis(PlotCanvas plotcanvas) {
         canvas = plotcanvas;

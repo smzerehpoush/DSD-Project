@@ -14,12 +14,12 @@ public class DataWrapper {
     private final Axis axis;
     private final Conversion conv;
     private final Vector dataset;
+    private final FloatPoint origin;
     private FloatRange xRange;
     private FloatRange yRange;
     private double pCurrent;
     private double xCurrent;
     private boolean showSpot;
-    private final FloatPoint origin;
 
     public DataWrapper(PlotCanvas plotcanvas) {
         canvas = plotcanvas;

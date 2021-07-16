@@ -48,13 +48,12 @@ public class BatterySymbol
             align = s;
         else
             return;
-        if (align.equals("horizontal"))
+        if (align.equals("horizontal")) {
             if (s1.equals("right") || s1.equals("left")) {
                 plusSide = s1;
-                return;
-            } else {
-                return;
             }
+            return;
+        }
         if (s1.equals("up") || s1.equals("down")) {
             plusSide = s1;
         }
@@ -149,6 +148,8 @@ public class BatterySymbol
             case 4: // '\004'
                 plusToMinus = 6;
                 plusHalfWidth = 8;
+                return;
+            default:
         }
     }
 

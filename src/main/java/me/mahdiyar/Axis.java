@@ -85,7 +85,7 @@ public class Axis {
     private void tickLinX(Graphics g, Format format, int i, int j, int k) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeX();
-        double d = data.getOrigin().x;
+        double d = data.getOrigin().getX();
         double d1 = conv.toPhysX(30);
         int j1 = origin.x;
         int l1 = origin.y;
@@ -98,7 +98,7 @@ public class Axis {
             d -= d1;
             j1 -= 30;
         }
-        d = data.getOrigin().x + d1;
+        d = data.getOrigin().getX() + d1;
         for (int k1 = origin.x + 30; d <= floatrange.max; k1 += 30) {
             String s1 = format.formE(d);
             int i1 = fontmetrics.stringWidth(s1) / 2;
@@ -132,12 +132,13 @@ public class Axis {
         if (floatrange.max < 0.0D) {
             int l = xLogRange.max;
             int i2 = origin.x;
-            for (; l <= xLogRange.max; l -= byte0) {
+            while (l <= xLogRange.max) {
                 String s1 = "-1E" + l;
                 int j1 = fontmetrics.stringWidth(s1) / 2;
                 g.drawLine(i2, j2, i2, j2 + i);
                 g.drawString(s1, i2 - j1, j2 + j);
                 i2 -= k1;
+                l -= byte0;
             }
 
         }
@@ -178,7 +179,7 @@ public class Axis {
     private void tickLinY(Graphics g, Format format, int i, int j, int k) {
         FontMetrics fontmetrics = g.getFontMetrics();
         FloatRange floatrange = data.getRangeY();
-        double d = data.getOrigin().y;
+        double d = data.getOrigin().getY();
         double d1 = conv.toPhysY(30);
         int j1 = origin.x;
         for (int k1 = origin.y; d >= floatrange.min; k1 += 30) {
@@ -192,7 +193,7 @@ public class Axis {
             d -= d1;
         }
 
-        d = data.getOrigin().y + d1;
+        d = data.getOrigin().getY() + d1;
         for (int l1 = origin.y - 30; d <= floatrange.max; l1 -= 30) {
             g.drawLine(j1, l1, j1 + i, l1);
             String s1 = format.formE(d);
@@ -225,12 +226,14 @@ public class Axis {
             return;
         }
         if (floatrange.max < 0.0D) {
-            for (int l = yLogRange.max; l <= yLogRange.max; l -= byte0) {
+            int l = yLogRange.max;
+            while (l <= yLogRange.max) {
                 String s1 = "-1E" + l;
                 int j1 = j * fontmetrics.stringWidth(s1);
                 g.drawLine(l1, i2, l1 + i, i2);
                 g.drawString(s1, l1 + j1, i2);
                 i2 -= k1;
+                l -= byte0;
             }
 
         }
@@ -266,16 +269,16 @@ public class Axis {
         if (floatrange.min >= 0.0D) {
             k = 0;
             l = j;
-            floatpoint.x = floatrange.min;
+            floatpoint.setX(floatrange.min);
         } else if (floatrange.max <= 0.0D) {
             k = j;
             l = 0;
-            floatpoint.x = floatrange.max;
+            floatpoint.setX(floatrange.max);
             arrowLeft = true;
         } else {
             l = (int) ((floatrange.max / (floatrange.max - floatrange.min)) * (double) j);
             k = j - l;
-            floatpoint.x = 0.0D;
+            floatpoint.setX(0.0D);
         }
         int k1;
         if (k <= l) {
@@ -325,17 +328,17 @@ public class Axis {
         } else {
             return;
         }
-        conv.setX(k, xLogRange.max - xLogRange.min);
+        conv.setX(k, (double) xLogRange.max - xLogRange.min);
     }
 
     private void initY(FontMetrics fontmetrics) {
-        int i = fontmetrics.getHeight();
-        int j = canvas.getSize().height;
+        int j = fontmetrics.getHeight();
+        int i = canvas.getSize().height;
         arrowUp = true;
         if (logY) {
-            initLogY(j, i);
+            initLogY(i, j);
         } else {
-            initLinY(j, i);
+            initLinY(i, j);
         }
     }
 
@@ -399,6 +402,6 @@ public class Axis {
         } else {
             return;
         }
-        conv.setY(k, yLogRange.max - yLogRange.min);
+        conv.setY(k, (double) yLogRange.max - yLogRange.min);
     }
 }

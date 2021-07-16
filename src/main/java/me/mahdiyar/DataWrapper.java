@@ -70,7 +70,7 @@ public class DataWrapper {
             return;
         Point point = axis.getOrigin();
         Enumeration enumeration = dataset.elements();
-        int i = canvas.size().width / 2;
+        int i = canvas.getSize().width / 2;
         FontMetrics fontmetrics = g.getFontMetrics();
         int k = fontmetrics.getDescent();
         while (enumeration.hasMoreElements()) {
@@ -112,7 +112,7 @@ public class DataWrapper {
                         g.drawLine(point.x + ai[i], point.y - ai1[i], point.x + ai[i - 1], point.y - ai1[i - 1]);
 
                     int j = point.x + ai[ai.length - 1];
-                    int k = canvas.size().width / 2;
+                    int k = canvas.getSize().width / 2;
                     String s = functiondata.getNameP();
                     Format format = functiondata.getFormatP();
                     s += "=" + format.formE(pCurrent);

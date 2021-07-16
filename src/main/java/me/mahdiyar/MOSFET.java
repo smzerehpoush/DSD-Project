@@ -27,7 +27,6 @@ public class MOSFET {
     private int xG;
     private int xBulkElectrode;
     private int xSEnd;
-    private int xDEnd;
     private int xNeutralCenter;
     private int wContactTop;
     private int wContactBottom;
@@ -155,7 +154,7 @@ public class MOSFET {
         //1
         g.fillRect(xS - i, ySemiTop, wSource, hChannel);
         drawTop(g, xS - i, ySemiTop, wSource, shift, color);
-        drawRightSide(g, xS - i, ySemiTop, wSource, hChannel, shift, color);
+        drawRightSide(g, xS - i, ySemiTop, wSource, hChannel, shift, lightColor);
         //2
         g.fillRect(xD - i, ySemiTop, wSource, hChannel);
         drawTop(g, xD - i, ySemiTop, wSource, shift, color);
@@ -165,10 +164,10 @@ public class MOSFET {
 
     private void drawOxide(Graphics g) {
         Color color = Color.LIGHT_GRAY;
+        Color tmp = g.getColor();
         g.setColor(color);
-//        int i = wSource / 2;
-//        drawTop(g, x, y, width, shift, color);
         g.fillRect(x, y, width, hOxide);
+        g.setColor(tmp);
     }
 
     private void drawBulkNeutral(Graphics g) {
@@ -183,9 +182,18 @@ public class MOSFET {
         g.fillRect(x, yNeutralTop, width, hNeutral);
         //3 - blue
         g.fillRect((x + width) - wNeutralSide, ySemiTop, wNeutralSide, hNeutralSide);
+        g.setColor(Color.black);
         drawTop(g, x, ySemiTop, wNeutralSide, shift, color);
         drawTop(g, (x + width) - wNeutralSide, ySemiTop, wNeutralSide, shift, color);
-        drawRightSide(g, x, y, width, height, shift, lightColor);
+        Color tmp = g.getColor();
+        g.setColor(lightColor);
+        int[] xPoints = new int[]{x + width, x + width + shift, x + width + shift, x + width};
+        int[] yPoints = new int[]{ySemiTop, ySemiTop - shift, y + height - shift, y + height};
+        g.fillPolygon(xPoints, yPoints, 4);
+        g.setColor(tmp);
+        g.setColor(Color.black);
+        g.drawLine(x + width, ySemiTop, x + width, y + height);
+        g.drawLine(x + width, ySemiTop, x + width + shift, ySemiTop - shift);
     }
 
     private void drawTop(Graphics g, int x, int y, int width, int d, Color color) {
@@ -233,7 +241,7 @@ public class MOSFET {
         wNeutralCenter = (wChannel * 3) / 4;
         xG = x + width / 2;
         xSEnd = xG - wChannel / 2;
-        xDEnd = xSEnd + wChannel;
+        int xDEnd = xSEnd + wChannel;
         xS = xSEnd - wSource / 2;
         xD = xDEnd + wSource / 2;
         xBulkElectrode = x + width / 5;

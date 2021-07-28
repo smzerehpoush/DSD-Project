@@ -12,11 +12,12 @@ import java.awt.print.PrinterJob;
 
 public class Mos2Frame extends Frame implements Printable, ActionListener {
 
+    private final Mos2Panel mos2Panel;
 
     public Mos2Frame() throws HeadlessException {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
-        Mos2Panel mos2Panel = new Mos2Panel();
+        mos2Panel = new Mos2Panel();
         mos2Panel.setSize(800, 600);
         add("Center", mos2Panel);
         setSize(800, 600);
@@ -44,7 +45,7 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         }
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        this.printAll(g);
+        mos2Panel.printAll(g);
         return PAGE_EXISTS;
     }
 

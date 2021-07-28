@@ -1,10 +1,9 @@
 package me.mahdiyar.d3;
 
+import me.mahdiyar.d2.Mos_2;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -13,11 +12,13 @@ import java.awt.print.PrinterJob;
 public class Mos2Frame extends Frame implements Printable, ActionListener {
 
     private final Mos2Panel mos2Panel;
+    private final Mos_2 mos_2;
 
     public Mos2Frame() throws HeadlessException {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
         mos2Panel = new Mos2Panel();
+        mos_2 = new Mos_2();
         mos2Panel.setSize(800, 600);
         add("Center", mos2Panel);
         setSize(800, 600);
@@ -30,6 +31,15 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         Button printButton = new Button("Print This Window");
         printButton.addActionListener(this);
         add("South", printButton);
+        Choice dimension = new Choice();
+        dimension.addItem("3D");
+        dimension.addItem("2D");
+        dimension.select("3D");
+        add("North",dimension);
+        dimension.addItemListener(e -> {
+            this.remove(mos2Panel);
+            this.add("Center", mos_2);
+        });
     }
 
     public static void main(String[] args) {

@@ -27,7 +27,7 @@ public abstract class MosDevCircuit extends Canvas
         vgsMax = 4D;
         vgs = 0.0D;
         vd = 0.0D;
-        setBackground(Color.white);
+        setBackground(Color.lightGray);
         fet = new MOSFET();
         fet.setNChannel(nChannel);
     }
@@ -155,7 +155,7 @@ public abstract class MosDevCircuit extends Canvas
         FontMetrics fontmetrics = g.getFontMetrics();
         int i = fontmetrics.getHeight();
         int j = fet.getChannelY() + i;
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         String s = nChannel ? "n" : "p";
         String s1 = nChannel ? "p-type Si" : "n-type Si";
         g.drawString(s, fet.getSourceX(), j);

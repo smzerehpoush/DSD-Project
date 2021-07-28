@@ -15,7 +15,6 @@ abstract class MosSouthControl extends Panel {
     private Choice pVt;
     private Choice channelType;
     private Checkbox checkbox;
-    private Choice dimension;
     private boolean nChannel;
 
 
@@ -34,7 +33,6 @@ abstract class MosSouthControl extends Panel {
         add(choice);
         add(channelType);
         add(checkbox);
-        add(dimension);
         nChannel = true;
     }
 
@@ -72,11 +70,6 @@ abstract class MosSouthControl extends Panel {
             mos.setLabelsVisibility(checkbox.getState());
             mos.repaint();
             return true;
-        } else if (event.target == dimension) {
-            mos.setDimension(dimension.getSelectedItem());
-            mos.repaint();
-            return true;
-
         }
         return false;
     }
@@ -129,10 +122,6 @@ abstract class MosSouthControl extends Panel {
         channelType.select("N-channel");
         checkbox = new Checkbox("show labels");
         checkbox.setState(true);
-        dimension = new Choice();
-        dimension.addItem("3D");
-        dimension.addItem("2D");
-        dimension.select("3D");
     }
 
     private void setChoice() {

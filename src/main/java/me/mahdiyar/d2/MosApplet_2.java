@@ -13,7 +13,7 @@ public class MosApplet_2 extends Applet
     public void init()
     {
         setLayout(new BorderLayout());
-        setBackground(Color.white);
+        setBackground(Color.lightGray);
         Mos_2 mos_2 = new Mos_2();
         mos_2.resize(410, 370);
         add("Center", mos_2);

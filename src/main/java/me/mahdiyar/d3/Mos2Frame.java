@@ -3,7 +3,10 @@ package me.mahdiyar.d3;
 import me.mahdiyar.d2.Mos_2;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -12,15 +15,29 @@ import java.awt.print.PrinterJob;
 public class Mos2Frame extends Frame implements Printable, ActionListener {
 
     private final Mos2Panel mos2Panel;
+    private final Panel panelContent;
     private final Mos_2 mos_2;
+    private final CardLayout cardLayout;
 
     public Mos2Frame() throws HeadlessException {
-        setLayout(new BorderLayout());
-        setBackground(Color.lightGray);
+        cardLayout = new CardLayout();
+        panelContent =new Panel();
         mos2Panel = new Mos2Panel();
         mos_2 = new Mos_2();
+
+        panelContent.setLayout(cardLayout);
+
         mos2Panel.setSize(800, 600);
-        add("Center", mos2Panel);
+        mos_2.setSize(800, 600);
+
+        panelContent.add(mos2Panel,"3D");
+        panelContent.add(mos_2,"2D");
+
+        cardLayout.show(panelContent,"3D");
+        setLayout(new BorderLayout());
+        setBackground(Color.lightGray);
+
+        add( panelContent);
         setSize(800, 600);
         setVisible(true);
         addWindowListener(new WindowAdapter() {
@@ -35,10 +52,10 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         dimension.addItem("3D");
         dimension.addItem("2D");
         dimension.select("3D");
-        add("North",dimension);
+        add("North", dimension);
         dimension.addItemListener(e -> {
-            this.remove(mos2Panel);
-            this.add("Center", mos_2);
+            mos2Panel.setVisible(!mos2Panel.isVisible());
+            mos_2.setVisible(!mos_2.isVisible());
         });
     }
 

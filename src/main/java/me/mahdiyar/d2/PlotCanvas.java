@@ -100,7 +100,7 @@ public class PlotCanvas extends Canvas
     private void repaintImg()
     {
         Graphics g = imgBkgd.getGraphics();
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.fillRect(0, 0, width, height);
         g.setColor(Color.black);
         axis.draw(g);

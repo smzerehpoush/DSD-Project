@@ -121,12 +121,12 @@ public class MOSFET {
     private void drawFirstLayer(Graphics g) {
         drawOxide(g);
         drawBulkContact(g);
+        drawContacts(g);
     }
 
     private void drawSecondLayer(Graphics g) {
         drawBulkNeutral(g);
         drawSDRegions(g);
-        drawContacts(g);
     }
 
     private void drawContacts(Graphics g) {

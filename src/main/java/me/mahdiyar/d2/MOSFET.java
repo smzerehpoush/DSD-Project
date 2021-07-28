@@ -49,7 +49,7 @@ public class MOSFET
 
     public void clear(Graphics g)
     {
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.fillRect(x, y, width, height);
     }
 
@@ -171,7 +171,7 @@ public class MOSFET
 
     private void drawContacts(Graphics g)
     {
-        g.setColor(Color.gray);
+        g.setColor(Color.black);
         int i = yContactTop;
         int j = wContactTop / 2;
         int k = wContactBottom / 2;
@@ -198,7 +198,7 @@ public class MOSFET
 
     private void drawOxide(Graphics g)
     {
-        g.setColor(Color.lightGray);
+        g.setColor(Color.gray);
         g.fillRect(x, y, width, hOxide);
     }
 

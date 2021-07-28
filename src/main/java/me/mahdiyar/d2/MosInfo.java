@@ -75,7 +75,7 @@ abstract class MosInfo extends Canvas
 
     private void drawDescr()
     {
-        gImg.setColor(Color.white);
+        gImg.setColor(Color.lightGray);
         gImg.fillRect(0, 0, width, height);
         gImg.drawRect(0, 0, width - 1, height - 1);
         FontMetrics fontmetrics = gImg.getFontMetrics();

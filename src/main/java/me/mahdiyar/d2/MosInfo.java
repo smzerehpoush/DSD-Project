@@ -4,11 +4,9 @@ package me.mahdiyar.d2;
 
 import java.awt.*;
 
-abstract class MosInfo extends Canvas
-{
+abstract class MosInfo extends Canvas {
 
-    public MosInfo()
-    {
+    protected MosInfo() {
         nChannel = true;
         changed = true;
         info = new String[4];
@@ -16,39 +14,34 @@ abstract class MosInfo extends Canvas
         Vt = 1.0D;
     }
 
-    public void update(Graphics g)
-    {
+    @Override
+    public void update(Graphics g) {
         paint(g);
     }
 
-    public void paint(Graphics g)
-    {
+    @Override
+    public void paint(Graphics g) {
         checkSize();
-        if(changed)
+        if (changed)
             drawDescr();
         g.drawImage(img, 0, 0, null);
     }
 
-    public void setVgs(double d)
-    {
-        if(Vgs >= Vt && d < Vt || Vgs <= Vt && d > Vt)
+    public void setVgs(double d) {
+        if (Vgs >= Vt && d < Vt || Vgs <= Vt && d > Vt)
             changed = true;
         Vgs = d;
     }
 
-    public void setVt(double d)
-    {
-        if(Vt != d)
-        {
+    public void setVt(double d) {
+        if (Vt != d) {
             changed = true;
             Vt = d;
         }
     }
 
-    public void setNChannel(boolean flag)
-    {
-        if(nChannel != flag)
-        {
+    public void setNChannel(boolean flag) {
+        if (nChannel != flag) {
             changed = true;
             nChannel = flag;
         }
@@ -58,14 +51,12 @@ abstract class MosInfo extends Canvas
 
     protected abstract void setVd(double d);
 
-    private void checkSize()
-    {
-        Dimension dimension = size();
-        if(width != dimension.width || height != dimension.height)
-        {
+    private void checkSize() {
+        Dimension dimension = getSize();
+        if (width != dimension.width || height != dimension.height) {
             width = dimension.width;
             height = dimension.height;
-            if(gImg != null)
+            if (gImg != null)
                 gImg.dispose();
             img = createImage(width, height);
             gImg = img.getGraphics();
@@ -73,8 +64,7 @@ abstract class MosInfo extends Canvas
         }
     }
 
-    private void drawDescr()
-    {
+    private void drawDescr() {
         gImg.setColor(Color.lightGray);
         gImg.fillRect(0, 0, width, height);
         gImg.drawRect(0, 0, width - 1, height - 1);
@@ -84,20 +74,18 @@ abstract class MosInfo extends Canvas
         setDescrA();
         setDescrB();
         gImg.setColor(Color.black);
-        for(int k = 0; k < info.length; k++)
-        {
-            if(k == 0)
-            {
-                if(nChannel)
+        for (int k = 0; k < info.length; k++) {
+            if (k == 0) {
+                if (nChannel)
                     gImg.setColor(Color.blue);
                 else
                     gImg.setColor(Color.red);
-            } else
-            if(k == 1)
-                if(counter++ % 2 == 0)
+            } else if (k == 1) {
+                if (counter++ % 2 == 0)
                     gImg.setColor(Color.magenta);
                 else
                     gImg.setColor(Color.black);
+            }
             gImg.drawString(info[k], 2, j);
             j += i;
         }
@@ -105,26 +93,20 @@ abstract class MosInfo extends Canvas
         changed = false;
     }
 
-    private void setDescrA()
-    {
-        if(nChannel)
-            if(Vgs >= Vt)
-            {
+    private void setDescrA() {
+        if (nChannel) {
+            if (Vgs >= Vt) {
                 info[0] = "Vgs > Vt : n-channel is induced.";
                 return;
-            } else
-            {
+            } else {
                 info[0] = "Vgs < Vt : the n-channel is cutoff.";
                 return;
             }
-        if(Vgs <= Vt)
-        {
+        }
+        if (Vgs <= Vt) {
             info[0] = "Vgs < Vt : p-channel is induced.";
-            return;
-        } else
-        {
+        } else {
             info[0] = "Vgs > Vt : the p-channel is cutoff.";
-            return;
         }
     }
 

@@ -2,11 +2,8 @@
 package me.mahdiyar.d2;
 
 
-public interface CustomAWT
-    extends Runnable
-{
+public interface CustomAWT extends Runnable {
+    void start();
 
-    public abstract void start();
-
-    public abstract void stop();
+    void stop();
 }

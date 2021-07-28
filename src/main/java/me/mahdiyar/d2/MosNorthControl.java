@@ -1,5 +1,3 @@
-
-
 package me.mahdiyar.d2;
 
 import java.awt.*;
@@ -7,11 +5,9 @@ import java.awt.*;
 // Referenced classes of package v10.mos_2:
 //            MosOperation
 
-class MosNorthControl extends Panel
-{
+class MosNorthControl extends Panel {
 
-    public MosNorthControl(MosOperation mosoperation)
-    {
+    public MosNorthControl(MosOperation mosoperation) {
         mos = mosoperation;
         id = new Button("Id vs. Vds");
         add(id);
@@ -24,24 +20,19 @@ class MosNorthControl extends Panel
         add(new Label("   "));
     }
 
-    public boolean action(Event event, Object obj)
-    {
-        if(event.target == id)
-        {
+    public boolean action(Event event, Object obj) {
+        if (event.target == id) {
             mos.outVisible();
             return true;
         }
-        if(event.target == ids)
-        {
+        if (event.target == ids) {
             mos.transVisible();
             return true;
         }
-        if(event.target == info)
-        {
+        if (event.target == info) {
             mos.infoVisible();
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }

@@ -1,45 +1,14 @@
-
 package me.mahdiyar.d2;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
-public class MOSFET
-{
+public class Mosfet2D {
 
-    public MOSFET()
-    {
+    public Mosfet2D() {
         nChannel = true;
     }
 
-    public MOSFET(int i, int j)
-    {
-        nChannel = true;
-        x = 0;
-        y = 0;
-        width = i;
-        height = j;
-        setParameters();
-    }
-
-    public MOSFET(int i, int j, int k, int l)
-    {
-        nChannel = true;
-        x = i;
-        y = j;
-        width = k;
-        height = l;
-        setParameters();
-    }
-
-    public MOSFET(int i, int j, int k, int l, boolean flag)
-    {
-        this(i, j, k, l);
-        nChannel = flag;
-    }
-
-    public void draw(Graphics g)
-    {
+    public void draw(Graphics g) {
         clear(g);
         g.setColor(Color.black);
         g.drawRect(x, y, width - 1, height - 1);
@@ -47,38 +16,20 @@ public class MOSFET
         drawSecondLayer(g);
     }
 
-    public void clear(Graphics g)
-    {
+    public void clear(Graphics g) {
         g.setColor(Color.lightGray);
         g.fillRect(x, y, width, height);
     }
 
-    public void setNChannel(boolean flag)
-    {
+    public void setNChannel(boolean flag) {
         nChannel = flag;
     }
 
-    public boolean isNChannel()
-    {
+    public boolean isNChannel() {
         return nChannel;
     }
 
-    public void setLocation(int i, int j)
-    {
-        x = i;
-        y = j;
-        setParameters();
-    }
-
-    public void setSize(int i, int j)
-    {
-        width = i;
-        height = j;
-        setParameters();
-    }
-
-    public void setRect(int i, int j, int k, int l)
-    {
+    public void setRect(int i, int j, int k, int l) {
         x = i;
         y = j;
         width = k;
@@ -86,91 +37,74 @@ public class MOSFET
         setParameters();
     }
 
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
-    public int getSourceX()
-    {
+    public int getSourceX() {
         return xS;
     }
 
-    public int getContactY()
-    {
+    public int getContactY() {
         return yContactTop;
     }
 
-    public int getGateX()
-    {
+    public int getGateX() {
         return xG;
     }
 
-    public int getDrainX()
-    {
+    public int getDrainX() {
         return xD;
     }
 
-    public int getChannelX()
-    {
+    public int getChannelX() {
         return xSEnd;
     }
 
-    public int getChannelY()
-    {
+    public int getChannelY() {
         return ySemiTop;
     }
 
-    public int getChannelLength()
-    {
+    public int getChannelLength() {
         return wChannel;
     }
 
-    public int getChannelHeight()
-    {
+    public int getChannelHeight() {
         return hChannel;
     }
 
-    public int getBulkX()
-    {
+    public int getBulkX() {
         return xBulkElectrode;
     }
 
-    public int getBulkY()
-    {
+    public int getBulkY() {
         return yBulkElectrode;
     }
 
-    private void drawFirstLayer(Graphics g)
-    {
+    private void drawFirstLayer(Graphics g) {
         drawOxide(g);
         drawBulkContact(g);
     }
 
-    private void drawSecondLayer(Graphics g)
-    {
+    private void drawSecondLayer(Graphics g) {
         drawSDRegions(g);
         drawContacts(g);
         drawBulkNeutral(g);
     }
 
-    private void drawContacts(Graphics g)
-    {
+    private void drawContacts(Graphics g) {
         g.setColor(Color.black);
         int i = yContactTop;
         int j = wContactTop / 2;
@@ -182,28 +116,24 @@ public class MOSFET
         g.fillRect(xD - k, y, wContactBottom, hOxide);
     }
 
-    private void drawBulkContact(Graphics g)
-    {
+    private void drawBulkContact(Graphics g) {
         g.setColor(Color.gray);
         g.fillRect(x, ySemiBottom, width, hBulkContact);
     }
 
-    private void drawSDRegions(Graphics g)
-    {
+    private void drawSDRegions(Graphics g) {
         g.setColor(nChannel ? Color.blue : Color.red);
         int i = wSource / 2;
         g.fillRect(xS - i, ySemiTop, wSource, hChannel);
         g.fillRect(xD - i, ySemiTop, wSource, hChannel);
     }
 
-    private void drawOxide(Graphics g)
-    {
+    private void drawOxide(Graphics g) {
         g.setColor(Color.gray);
         g.fillRect(x, y, width, hOxide);
     }
 
-    private void drawBulkNeutral(Graphics g)
-    {
+    private void drawBulkNeutral(Graphics g) {
         g.setColor(nChannel ? Color.red : Color.blue);
         g.fillRect(x, ySemiTop, wNeutralSide, hNeutralSide);
         g.fillRect(x, yNeutralTop, width, hNeutral);
@@ -211,14 +141,12 @@ public class MOSFET
         drawBulkNeutral2(g);
     }
 
-    private void drawBulkNeutral2(Graphics g)
-    {
+    private void drawBulkNeutral2(Graphics g) {
         g.setColor(nChannel ? Color.red : Color.blue);
         g.fillRect(xNeutralCenter, yNeutralTop - hNeutralCenter, wNeutralCenter, hNeutralCenter);
     }
 
-    private void setParameters()
-    {
+    private void setParameters() {
         hOxide = height / 10;
         hContact = height / 15;
         hBulkContact = hContact;

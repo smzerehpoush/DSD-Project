@@ -1,17 +1,10 @@
-
 package me.mahdiyar.d2;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            VisualElement, BatterySymbol, GroundSymbol, Format, 
-//            Plot, MOSFET
+public abstract class MosDevCircuit extends Canvas {
 
-public abstract class MosDevCircuit extends Canvas
-{
-
-    public MosDevCircuit()
-    {
+    protected MosDevCircuit() {
         bGrd = new GroundSymbol();
         sGrd = new GroundSymbol();
         Vgs = new BatterySymbol("horizontal", "right");
@@ -28,29 +21,27 @@ public abstract class MosDevCircuit extends Canvas
         vgs = 0.0D;
         vd = 0.0D;
         setBackground(Color.lightGray);
-        fet = new MOSFET();
+        fet = new Mosfet2D();
         fet.setNChannel(nChannel);
     }
 
-    public void update(Graphics g)
-    {
+    @Override
+    public void update(Graphics g) {
         paint(g);
     }
 
-    public void paint(Graphics g)
-    {
+    @Override
+    public void paint(Graphics g) {
         initImg();
         drawOffscreen(gOff);
         g.drawImage(imgOff, 0, 0, null);
-        if(counter++ < 7)
+        if (counter++ < 7)
             drawDescription(g);
     }
 
-    private void drawOffscreen(Graphics g)
-    {
+    private void drawOffscreen(Graphics g) {
         g.drawImage(imgMosCkt, 0, 0, null);
-        if(typeChanged)
-        {
+        if (typeChanged) {
             Vgs.reverse();
             Vd.reverse();
             typeChanged = false;
@@ -62,10 +53,8 @@ public abstract class MosDevCircuit extends Canvas
         drawChannel(g);
     }
 
-    public void setNChannel(boolean flag)
-    {
-        if(nChannel != flag)
-        {
+    public void setNChannel(boolean flag) {
+        if (nChannel != flag) {
             typeChanged = true;
             nChannel = flag;
             fet.setNChannel(flag);
@@ -77,38 +66,27 @@ public abstract class MosDevCircuit extends Canvas
         }
     }
 
-    public void setVgs(double d)
-    {
+    public void setVgs(double d) {
         vgs = Math.abs(d);
         repaint();
     }
 
-    private void refreshChannel()
-    {
+    private void refreshChannel() {
         initForChannelB();
         repaint();
     }
 
-    public void setVd(double d)
-    {
+    public void setVd(double d) {
         vd = Math.abs(d);
         repaint();
     }
 
-    public void setVt(double d)
-    {
+    public void setVt(double d) {
         vT = Math.abs(d);
         refreshChannel();
     }
 
-    public void setVgsMax(double d)
-    {
-        vgsMax = Math.abs(d);
-        refreshChannel();
-    }
-
-    public double getVgsMax()
-    {
+    public double getVgsMax() {
         return vT + vgsMax;
     }
 
@@ -120,38 +98,31 @@ public abstract class MosDevCircuit extends Canvas
 
     protected abstract void drawChannel(Graphics g);
 
-    protected int getMosY()
-    {
+    protected int getMosY() {
         return fet.getY();
     }
 
-    protected void drawChannel(Graphics g, double d)
-    {
-        if(vgs <= vT)
+    protected void drawChannel(Graphics g, double d) {
+        if (vgs <= vT)
             return;
-        if(d > vgs)
+        if (d > vgs)
             d = vgs;
-        if(nChannel)
+        if (nChannel)
             g.setColor(Color.blue);
         else
             g.setColor(Color.red);
-        if(d > vT)
-        {
-            yLin[1] = yLin[0] + (int)(yToV * (vgs - vT));
-            yLin[2] = yLin[0] + (int)(yToV * (d - vT));
+        if (d > vT) {
+            yLin[1] = yLin[0] + (int) (yToV * (vgs - vT));
+            yLin[2] = yLin[0] + (int) (yToV * (d - vT));
             g.fillPolygon(xLin, yLin, 4);
-            return;
-        } else
-        {
-            ySat[1] = ySat[0] + (int)(yToV * (vgs - vT));
-            xSat[2] = xChannelMaxSat + (int)(xToV * d);
+        } else {
+            ySat[1] = ySat[0] + (int) (yToV * (vgs - vT));
+            xSat[2] = xChannelMaxSat + (int) (xToV * d);
             g.fillPolygon(xSat, ySat, 3);
-            return;
         }
     }
 
-    private void drawDescription(Graphics g)
-    {
+    private void drawDescription(Graphics g) {
         FontMetrics fontmetrics = g.getFontMetrics();
         int i = fontmetrics.getHeight();
         int j = fet.getChannelY() + i;
@@ -166,28 +137,23 @@ public abstract class MosDevCircuit extends Canvas
         g.drawString("oxide", fet.getX(), fet.getY());
     }
 
-    private void initImg()
-    {
-        Dimension dimension = size();
-        if(dimension.width == width && dimension.height == height)
+    private void initImg() {
+        Dimension dimension = getSize();
+        if (dimension.width == width && dimension.height == height)
             return;
         width = dimension.width;
         height = dimension.height;
-        if(width > 130 && width < 300)
-        {
+        if (width > 130 && width < 300) {
             Vgs.setScale(3);
             Vd.setScale(3);
-        } else
-        if(width >= 300)
-        {
+        } else if (width >= 300) {
             Vgs.setScale(4);
             Vd.setScale(4);
         }
         initImgMosCkt();
     }
 
-    private void initImgMosCkt()
-    {
+    private void initImgMosCkt() {
         imgMosCkt = createImage(width, height);
         Graphics g = imgMosCkt.getGraphics();
         yMos = height / 2;
@@ -201,8 +167,7 @@ public abstract class MosDevCircuit extends Canvas
         gOff = imgOff.getGraphics();
     }
 
-    private void initForChannelA()
-    {
+    private void initForChannelA() {
         xSat[0] = fet.getChannelX();
         ySat[0] = fet.getChannelY();
         xSat[1] = xSat[0];
@@ -215,16 +180,14 @@ public abstract class MosDevCircuit extends Canvas
         yLin[3] = yLin[0];
     }
 
-    private void initForChannelB()
-    {
+    private void initForChannelB() {
         int i = (fet.getChannelHeight() * 2) / 3;
         xChannelMaxSat = (fet.getGateX() + xLin[2]) / 2;
-        yToV = (double)i / vgsMax;
-        xToV = (double)(xLin[2] - xChannelMaxSat) / vT;
+        yToV = (double) i / vgsMax;
+        xToV = (double) (xLin[2] - xChannelMaxSat) / vT;
     }
 
-    private void drawCircuit(Graphics g)
-    {
+    private void drawCircuit(Graphics g) {
         fet.draw(g);
         int i = fet.getBulkX();
         int j = fet.getBulkY();
@@ -257,7 +220,7 @@ public abstract class MosDevCircuit extends Canvas
         g.drawLine(i1, j2, Vgs.getLeftX(), j2);
         g.drawLine(Vgs.getRightX(), j2, k2, j2);
         g.drawLine(k2, j2, k2, j);
-        if(i2 != j2)
+        if (i2 != j2)
             g.drawLine(i1, i2, k2, i2);
         i = fet.getDrainX();
         int l2 = i;
@@ -284,8 +247,7 @@ public abstract class MosDevCircuit extends Canvas
         sGrd.draw(g);
     }
 
-    private void drawValues(Graphics g)
-    {
+    private void drawValues(Graphics g) {
         g.setColor(Color.magenta);
         int i = Vgs.getLeftX();
         int j = Vgs.getHiY() - fm.getDescent();
@@ -301,21 +263,17 @@ public abstract class MosDevCircuit extends Canvas
     private Graphics gOff;
     private int width;
     private int height;
-    private MOSFET fet;
+    private Mosfet2D fet;
     private GroundSymbol bGrd;
     private GroundSymbol sGrd;
     private BatterySymbol Vgs;
     protected BatterySymbol Vd;
-    private String VdName;
     private int yMos;
     private int yLowWire;
     private FontMetrics fm;
-    private int maxWSource;
     private int xChannelMaxSat;
     private double yToV;
     private double xToV;
-    private static final int nSat = 3;
-    private static final int nLin = 4;
     private int xSat[];
     private int ySat[];
     private int xLin[];

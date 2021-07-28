@@ -1,12 +1,7 @@
-
-
 package me.mahdiyar.d2;
 
+public class DataFormatException extends Exception {
 
-public class DataFormatException extends Exception
-{
-
-    public DataFormatException()
-    {
+    public DataFormatException() {
     }
 }

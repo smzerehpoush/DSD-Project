@@ -31,13 +31,18 @@ abstract class MosSouthControl extends Panel {
         vd.addListener(mosoperation);
         add(new Label("   "));
         add(choice);
+        choice.addItemListener(e -> {
+            String s1 = choice.getSelectedItem();
+            try {
+                double d1 = getVt(s1);
+                mos.setVt(d1);
+                mos.repaint();
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+        });
         add(channelType);
-        add(checkbox);
-        nChannel = true;
-    }
-
-    public boolean action(Event event, Object obj) {
-        if (event.target == channelType) {
+        channelType.addItemListener(e -> {
             String s = channelType.getSelectedItem();
             nChannel = mos.isNChannel();
             if (s.equals("N-channel"))
@@ -54,24 +59,11 @@ abstract class MosSouthControl extends Panel {
                 mos.setVd(d3);
                 mos.setVt(d);
                 mos.repaint();
-                return true;
             }
-        } else if (event.target == choice) {
-            String s1 = choice.getSelectedItem();
-            try {
-                double d1 = getVt(s1);
-                mos.setVt(d1);
-                mos.repaint();
-                return true;
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-            }
-        } else if (event.target == checkbox) {
-            mos.setLabelsVisibility(checkbox.getState());
-            mos.repaint();
-            return true;
-        }
-        return false;
+        });
+        checkbox.addItemListener(e -> mos.setLabelsVisibility(checkbox.getState()));
+        add(checkbox);
+        nChannel = true;
     }
 
     protected abstract String getVdLabel();

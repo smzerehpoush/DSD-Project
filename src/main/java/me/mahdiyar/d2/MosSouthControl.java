@@ -1,17 +1,11 @@
-
 package me.mahdiyar.d2;
 
 import java.awt.*;
 import java.util.StringTokenizer;
 
-// Referenced classes of package v10.mos_2:
-//            MosOperation, UpDown10, UpDown
+abstract class MosSouthControl extends Panel {
 
-abstract class MosSouthControl extends Panel
-{
-
-    public MosSouthControl(MosOperation mosoperation)
-    {
+    protected MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
         initComps();
         add(Vgs);
@@ -23,25 +17,25 @@ abstract class MosSouthControl extends Panel
         mosoperation.setVdControl(vd);
         vd.addListener(mosoperation);
         add(new Label("   "));
+        choice.addItemListener(e -> {
+            String s1 = choice.getSelectedItem();
+            try {
+                double d1 = getVt(s1);
+                mos.setVt(d1);
+                mos.repaint();
+            } catch (NumberFormatException ex) {
+                //do nothing
+            }
+        });
         add(choice);
-        add(channelType);
-        nChannel = true;
-    }
-
-    public boolean action(Event event, Object obj)
-    {
-        Object obj1 = null;
-        if(event.target == channelType)
-        {
+        channelType.addItemListener(e -> {
             String s = channelType.getSelectedItem();
             nChannel = mos.isNChannel();
-            if(s.equals("N-channel"))
+            if (s.equals("N-channel"))
                 nChannel = true;
-            else
-            if(s.equals("P-channel"))
+            else if (s.equals("P-channel"))
                 nChannel = false;
-            if(nChannel != mos.isNChannel())
-            {
+            if (nChannel != mos.isNChannel()) {
                 setChoice();
                 mos.setNChannel(nChannel);
                 double d2 = 0.0D;
@@ -51,51 +45,36 @@ abstract class MosSouthControl extends Panel
                 mos.setVd(d3);
                 mos.setVt(d);
                 mos.repaint();
-                return true;
             }
-        } else
-        if(event.target == choice)
-        {
-            String s1 = choice.getSelectedItem();
-            try
-            {
-                double d1 = getVt(s1);
-                mos.setVt(d1);
-                mos.repaint();
-                return true;
-            }
-            catch(NumberFormatException _ex) { }
-        }
-        return false;
+        });
+        add(channelType);
+        nChannel = true;
     }
 
     protected abstract String getVdLabel();
 
     private double getVt(String s)
-        throws NumberFormatException
-    {
+            throws NumberFormatException {
         double d = 0.0D;
         StringTokenizer stringtokenizer = new StringTokenizer(s);
         int i;
-        for(i = 0; stringtokenizer.hasMoreElements() && i < 3; i++)
-        {
+        for (i = 0; stringtokenizer.hasMoreElements() && i < 3; i++) {
             String s1 = stringtokenizer.nextToken();
-            if(i == 2)
-                d = (new Double(s1)).doubleValue();
+            if (i == 2)
+                d = new Double(s1);
         }
 
-        if(i < 2)
+        if (i < 2)
             throw new NumberFormatException();
         else
             return d;
     }
 
-    private void initComps()
-    {
+    private void initComps() {
         Vgs = new Label("Vgs");
-        Vgs.setAlignment(2);
+        Vgs.setAlignment(Label.RIGHT);
         Vd = new Label(getVdLabel());
-        Vd.setAlignment(2);
+        Vd.setAlignment(Label.RIGHT);
         vgs = new UpDown10(12, 25, Color.black, Color.lightGray);
         vd = new UpDown10(12, 25, Color.black, Color.lightGray);
         nVt = new Choice();
@@ -120,8 +99,7 @@ abstract class MosSouthControl extends Panel
         channelType.select("N-channel");
     }
 
-    private void setChoice()
-    {
+    private void setChoice() {
         remove(choice);
         choice = nChannel ? nVt : pVt;
         add(choice, 5);
@@ -129,7 +107,7 @@ abstract class MosSouthControl extends Panel
         choice.select(1);
     }
 
-    private MosOperation mos;
+    private final MosOperation mos;
     private Label Vgs;
     private Label Vd;
     private UpDown10 vgs;

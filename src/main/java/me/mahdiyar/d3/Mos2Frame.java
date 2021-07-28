@@ -1,6 +1,6 @@
 package me.mahdiyar.d3;
 
-import me.mahdiyar.d2.Mos_2;
+import me.mahdiyar.d2.Mos2DPanel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,22 +16,22 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
 
     private final Mos2Panel mos2Panel;
     private final Panel panelContent;
-    private final Mos_2 mos_2;
+    private final Mos2DPanel mos_2DPanel;
     private final CardLayout cardLayout;
 
     public Mos2Frame() throws HeadlessException {
         cardLayout = new CardLayout();
         panelContent =new Panel();
         mos2Panel = new Mos2Panel();
-        mos_2 = new Mos_2();
+        mos_2DPanel = new Mos2DPanel();
 
         panelContent.setLayout(cardLayout);
 
         mos2Panel.setSize(800, 600);
-        mos_2.setSize(800, 600);
+        mos_2DPanel.setSize(800, 600);
 
         panelContent.add(mos2Panel,"3D");
-        panelContent.add(mos_2,"2D");
+        panelContent.add(mos_2DPanel,"2D");
 
         cardLayout.show(panelContent,"3D");
         setLayout(new BorderLayout());
@@ -55,7 +55,7 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         add("North", dimension);
         dimension.addItemListener(e -> {
             mos2Panel.setVisible(!mos2Panel.isVisible());
-            mos_2.setVisible(!mos_2.isVisible());
+            mos_2DPanel.setVisible(!mos_2DPanel.isVisible());
         });
     }
 

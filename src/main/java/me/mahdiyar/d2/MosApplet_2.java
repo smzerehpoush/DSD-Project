@@ -14,9 +14,9 @@ public class MosApplet_2 extends Applet
     {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
-        Mos_2 mos_2 = new Mos_2();
-        mos_2.resize(410, 370);
-        add("Center", mos_2);
+        Mos2DPanel mos_2DPanel = new Mos2DPanel();
+        mos_2DPanel.resize(410, 370);
+        add("Center", mos_2DPanel);
         resize(410, 370);
     }
 

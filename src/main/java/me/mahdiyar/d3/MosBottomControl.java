@@ -13,29 +13,15 @@ class MosBottomControl extends Panel {
         mos = mosoperation;
         id = new Button("Id vs. Vds");
         add(id);
+        id.addActionListener(e -> mos.outVisible());
         add(new Label("   "));
         ids = new Button("Ids vs. Vgs");
+        ids.addActionListener(e -> mos.transVisible());
         add(ids);
         add(new Label("   "));
         info = new Button("Discussion");
+        info.addActionListener(e -> mos.infoVisible());
         add(info);
         add(new Label("   "));
-    }
-
-    public boolean action(Event event, Object obj) {
-        if (event.target == id) {
-            mos.outVisible();
-            return true;
-        }
-        if (event.target == ids) {
-            mos.transVisible();
-            return true;
-        }
-        if (event.target == info) {
-            mos.infoVisible();
-            return true;
-        } else {
-            return false;
-        }
     }
 }

@@ -1,10 +1,20 @@
-
-
 package me.mahdiyar.d2;
 
 import java.awt.*;
 
 abstract class MosInfo extends Canvas {
+
+    protected String info[];
+    protected boolean nChannel;
+    protected double Vt;
+    protected double Vgs;
+    protected double Vd;
+    protected boolean changed;
+    private int width;
+    private int height;
+    private Image img;
+    private Graphics gImg;
+    private int counter;
 
     protected MosInfo() {
         nChannel = true;
@@ -109,16 +119,4 @@ abstract class MosInfo extends Canvas {
             info[0] = "Vgs > Vt : the p-channel is cutoff.";
         }
     }
-
-    private int width;
-    private int height;
-    private Image img;
-    private Graphics gImg;
-    protected String info[];
-    protected boolean nChannel;
-    protected double Vt;
-    protected double Vgs;
-    protected double Vd;
-    protected boolean changed;
-    private int counter;
 }

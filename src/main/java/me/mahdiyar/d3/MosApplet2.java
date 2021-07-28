@@ -11,7 +11,7 @@ public class MosApplet2 extends Applet {
     public void init() {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
-        Mos2Panel mos2 = new Mos2Panel();
+        Mos3DPanel mos2 = new Mos3DPanel();
         mos2.setSize(410, 370);
         add("Center", mos2);
         resize(410, 370);

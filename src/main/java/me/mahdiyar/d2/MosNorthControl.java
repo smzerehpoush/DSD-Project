@@ -7,6 +7,10 @@ import java.awt.*;
 
 class MosNorthControl extends Panel {
 
+    MosOperation mos;
+    Button id;
+    Button ids;
+    Button info;
     public MosNorthControl(MosOperation mosoperation) {
         mos = mosoperation;
         id = new Button("Id vs. Vds");
@@ -36,9 +40,4 @@ class MosNorthControl extends Panel {
             return false;
         }
     }
-
-    MosOperation mos;
-    Button id;
-    Button ids;
-    Button info;
 }

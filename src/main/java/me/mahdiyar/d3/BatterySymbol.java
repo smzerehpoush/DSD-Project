@@ -2,7 +2,6 @@ package me.mahdiyar.d3;
 
 import java.awt.*;
 
-
 public class BatterySymbol
         implements VisualElement {
 

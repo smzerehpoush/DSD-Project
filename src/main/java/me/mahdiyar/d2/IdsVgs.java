@@ -2,6 +2,13 @@ package me.mahdiyar.d2;
 
 class IdsVgs extends FunctionData {
 
+    private double K;
+    private double Vt;
+    private boolean isNChannel;
+
+    IdsVgs() {
+    }
+
     public boolean isCurrentDrawable() {
         return false;
     }
@@ -77,11 +84,4 @@ class IdsVgs extends FunctionData {
     public Format getFormatY() {
         return new Format(2, 1000D);
     }
-
-    IdsVgs() {
-    }
-
-    private double K;
-    private double Vt;
-    private boolean isNChannel;
 }

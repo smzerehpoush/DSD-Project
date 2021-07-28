@@ -2,10 +2,6 @@ package me.mahdiyar.d3;
 
 public abstract class FunctionData extends Data {
 
-
-    public FunctionData() {
-    }
-
     protected abstract double f(double d, double d1);
 
     public abstract boolean isCurrentDrawable();

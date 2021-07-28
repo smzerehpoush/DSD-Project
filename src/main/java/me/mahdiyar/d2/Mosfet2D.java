@@ -4,6 +4,36 @@ import java.awt.*;
 
 public class Mosfet2D {
 
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private boolean nChannel;
+    private int yContactTop;
+    private int ySemiTop;
+    private int yNeutralTop;
+    private int ySemiBottom;
+    private int yBulkElectrode;
+    private int hContact;
+    private int hOxide;
+    private int hChannel;
+    private int hNeutral;
+    private int hBulkContact;
+    private int hNeutralCenter;
+    private int hNeutralSide;
+    private int xS;
+    private int xD;
+    private int xG;
+    private int xBulkElectrode;
+    private int xSEnd;
+    private int xDEnd;
+    private int xNeutralCenter;
+    private int wContactTop;
+    private int wContactBottom;
+    private int wChannel;
+    private int wSource;
+    private int wNeutralCenter;
+    private int wNeutralSide;
     public Mosfet2D() {
         nChannel = true;
     }
@@ -21,12 +51,12 @@ public class Mosfet2D {
         g.fillRect(x, y, width, height);
     }
 
-    public void setNChannel(boolean flag) {
-        nChannel = flag;
-    }
-
     public boolean isNChannel() {
         return nChannel;
+    }
+
+    public void setNChannel(boolean flag) {
+        nChannel = flag;
     }
 
     public void setRect(int i, int j, int k, int l) {
@@ -176,35 +206,4 @@ public class Mosfet2D {
         int k = hNeutralSide - hChannel;
         wNeutralSide = xS - wSource / 2 - k - x;
     }
-
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private boolean nChannel;
-    private int yContactTop;
-    private int ySemiTop;
-    private int yNeutralTop;
-    private int ySemiBottom;
-    private int yBulkElectrode;
-    private int hContact;
-    private int hOxide;
-    private int hChannel;
-    private int hNeutral;
-    private int hBulkContact;
-    private int hNeutralCenter;
-    private int hNeutralSide;
-    private int xS;
-    private int xD;
-    private int xG;
-    private int xBulkElectrode;
-    private int xSEnd;
-    private int xDEnd;
-    private int xNeutralCenter;
-    private int wContactTop;
-    private int wContactBottom;
-    private int wChannel;
-    private int wSource;
-    private int wNeutralCenter;
-    private int wNeutralSide;
 }

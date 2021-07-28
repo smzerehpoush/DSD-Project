@@ -6,6 +6,17 @@ import java.util.Vector;
 
 public class DataWrapper {
 
+    private final PlotCanvas canvas;
+    private final Axis axis;
+    private final Conversion conv;
+    private final Vector dataset;
+    private final FloatPoint origin;
+    private FloatRange xRange;
+    private FloatRange yRange;
+    private double pCurrent;
+    private double xCurrent;
+    private boolean showSpot;
+
     public DataWrapper(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
         axis = plotcanvas.getAxis();
@@ -186,15 +197,4 @@ public class DataWrapper {
 
         return s;
     }
-
-    private final PlotCanvas canvas;
-    private final Axis axis;
-    private final Conversion conv;
-    private final Vector dataset;
-    private FloatRange xRange;
-    private FloatRange yRange;
-    private double pCurrent;
-    private double xCurrent;
-    private boolean showSpot;
-    private final FloatPoint origin;
 }

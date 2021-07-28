@@ -5,6 +5,11 @@ import java.awt.*;
 public class GroundSymbol
         implements VisualElement {
 
+    private final Point position;
+    private int wide;
+    private int space;
+    private int scale;
+
     public GroundSymbol() {
         scale = 2;
         position = new Point(0, 0);
@@ -30,15 +35,15 @@ public class GroundSymbol
         return position;
     }
 
-    public void setScale(int i) {
-        scale = i;
-    }
-
     public int getScale() {
         if (scale > 4 || scale < 0)
             return 2;
         else
             return scale;
+    }
+
+    public void setScale(int i) {
+        scale = i;
     }
 
     public int getHeight() {
@@ -75,9 +80,4 @@ public class GroundSymbol
                 return;
         }
     }
-
-    private final Point position;
-    private int wide;
-    private int space;
-    private int scale;
 }

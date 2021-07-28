@@ -2,6 +2,13 @@ package me.mahdiyar.d2;
 
 public class Conversion {
 
+    private final double xFillFactor;
+    private final double yFillFactor;
+    private double xToScr;
+    private double yToScr;
+    private double xToPhys;
+    private double yToPhys;
+
     public Conversion() {
         xFillFactor = 0.94999999999999996D;
         yFillFactor = 0.94999999999999996D;
@@ -72,11 +79,4 @@ public class Conversion {
         yToScr = (yFillFactor * (double) i) / d;
         yToPhys = 1.0D / yToScr;
     }
-
-    private double xToScr;
-    private double yToScr;
-    private double xToPhys;
-    private double yToPhys;
-    private final double xFillFactor;
-    private final double yFillFactor;
 }

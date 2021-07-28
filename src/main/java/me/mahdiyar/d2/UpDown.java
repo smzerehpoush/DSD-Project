@@ -5,6 +5,21 @@ import java.awt.*;
 
 public class UpDown extends Canvas {
 
+    protected int width;
+    protected int height;
+    protected int dxArrow;
+    protected int dyArrow;
+    protected boolean topPressed;
+    protected boolean bottomPressed;
+    protected CustomAWT listener;
+    int xpoints[];
+    int ypoints[];
+    private Color arrowColor;
+    private Color bkgdColor;
+    private Polygon upArrow;
+    private Polygon downArrow;
+    private Image offscreen;
+    private Graphics gOffscreen;
     public UpDown(int i, int j, Color color, Color color1) {
         topPressed = false;
         bottomPressed = false;
@@ -72,20 +87,4 @@ public class UpDown extends Canvas {
         g.fillPolygon(upArrow);
         g.fillPolygon(downArrow);
     }
-
-    protected int width;
-    protected int height;
-    protected int dxArrow;
-    protected int dyArrow;
-    protected boolean topPressed;
-    protected boolean bottomPressed;
-    protected CustomAWT listener;
-    private Color arrowColor;
-    private Color bkgdColor;
-    private Polygon upArrow;
-    private Polygon downArrow;
-    private Image offscreen;
-    private Graphics gOffscreen;
-    int xpoints[];
-    int ypoints[];
 }

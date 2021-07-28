@@ -2,6 +2,9 @@ package me.mahdiyar.d2;
 
 public abstract class FunctionData extends Data {
 
+    public FunctionData() {
+    }
+
     protected abstract double f(double d, double d1);
 
     public abstract boolean isCurrentDrawable();
@@ -39,8 +42,5 @@ public abstract class FunctionData extends Data {
             ad1[i] = getCurrentY(ad[i]);
 
         return ad1;
-    }
-
-    public FunctionData() {
     }
 }

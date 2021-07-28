@@ -46,11 +46,13 @@ abstract class MosOperation extends Panel
         Vt = 1.0D;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
 
+    @Override
     public void paint(Graphics g) {
         checkSize();
         setVgs();
@@ -102,12 +104,14 @@ abstract class MosOperation extends Panel
         }
     }
 
+    @Override
     public void start() {
         if (kicker == null)
             kicker = new Thread(this);
         kicker.start();
     }
 
+    @Override
     public void stop() {
         if (kicker != null)
             kicker.stop();
@@ -179,9 +183,5 @@ abstract class MosOperation extends Panel
         info.repaint();
     }
 
-    public abstract void run();
-
     public abstract void setLabelsVisibility(boolean state);
-
-    public abstract void setDimension(String selectedItem);
 }

@@ -8,6 +8,7 @@ public class UpDown10 extends UpDown {
         super(i, j, color, color1);
     }
 
+    @Override
     public boolean mouseDown(Event event, int i, int j) {
         if (i >= 0 && i <= super.width && j >= 0 && j <= super.dyArrow) {
             if (super.listener != null)
@@ -27,6 +28,7 @@ public class UpDown10 extends UpDown {
         }
     }
 
+    @Override
     public boolean mouseDrag(Event event, int i, int j) {
         if (super.topPressed && (i < 0 || i > super.width || j < 0 || j > super.dyArrow)) {
             if (super.listener != null)
@@ -46,6 +48,7 @@ public class UpDown10 extends UpDown {
         }
     }
 
+    @Override
     public boolean mouseUp(Event event, int i, int j) {
         if (super.listener != null)
             super.listener.stop();

@@ -21,6 +21,7 @@ public class PlotCanvas extends Canvas {
         dataChanged = false;
     }
 
+    @Override
     public void addNotify() {
         super.addNotify();
         axis.init();
@@ -31,10 +32,12 @@ public class PlotCanvas extends Canvas {
         dataChanged = true;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
         Dimension dimension = getSize();
         if (dimension.width != width || dimension.height != height) {

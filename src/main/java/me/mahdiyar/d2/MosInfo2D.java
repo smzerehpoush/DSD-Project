@@ -2,6 +2,9 @@ package me.mahdiyar.d2;
 
 class MosInfo2D extends MosInfo {
 
+    MosInfo2D() {
+    }
+
     protected void setVd(double d) {
         double d1 = super.Vgs - super.Vt;
         if (super.nChannel && d < 0.0D)
@@ -57,9 +60,6 @@ class MosInfo2D extends MosInfo {
             super.info[2] = "Id varies with Vds : Id = k [(Vgs - Vt)*Vds - Vds*Vds/2] ";
             super.info[3] = "The MOS Transistor acts as a Triode.";
         }
-    }
-
-    MosInfo2D() {
     }
 
 }

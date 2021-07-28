@@ -2,6 +2,11 @@ package me.mahdiyar.d2;
 
 public class Format {
 
+    private int noOfSigDigits;
+    private double commonFactor;
+    private int exponent;
+    private boolean rounded;
+
     public Format() {
         noOfSigDigits = 3;
         commonFactor = 1.0D;
@@ -142,9 +147,4 @@ public class Format {
             return "000000";
         }
     }
-
-    private int noOfSigDigits;
-    private double commonFactor;
-    private int exponent;
-    private boolean rounded;
 }

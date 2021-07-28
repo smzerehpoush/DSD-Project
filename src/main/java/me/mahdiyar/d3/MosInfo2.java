@@ -2,9 +2,6 @@ package me.mahdiyar.d3;
 
 class MosInfo2 extends MosInfo {
 
-    MosInfo2() {
-    }
-
     protected void setVd(double d) {
         double d1 = super.Vgs - super.Vt;
         if (super.nChannel && d < 0.0D)
@@ -16,6 +13,7 @@ class MosInfo2 extends MosInfo {
         super.Vd = d;
     }
 
+    @Override
     public void setVgs(double d) {
         double d1 = super.Vgs - super.Vt;
         double d2 = d - super.Vt;

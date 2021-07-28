@@ -14,33 +14,32 @@ import java.awt.print.PrinterJob;
 
 public class Mos2Frame extends Frame implements Printable, ActionListener {
 
-    private final Mos2Panel mos2Panel;
-    private final Panel panelContent;
-    private final Mos2DPanel mos_2DPanel;
-    private final CardLayout cardLayout;
+    private final Mos3DPanel mos3DPanel;
+    private final Mos2DPanel mos2DPanel;
 
     public Mos2Frame() throws HeadlessException {
-        cardLayout = new CardLayout();
-        panelContent =new Panel();
-        mos2Panel = new Mos2Panel();
-        mos_2DPanel = new Mos2DPanel();
+        CardLayout cardLayout = new CardLayout();
+        Panel panelContent = new Panel();
+        mos3DPanel = new Mos3DPanel();
+        mos2DPanel = new Mos2DPanel();
 
         panelContent.setLayout(cardLayout);
 
-        mos2Panel.setSize(800, 600);
-        mos_2DPanel.setSize(800, 600);
+        mos3DPanel.setSize(800, 600);
+        mos2DPanel.setSize(800, 600);
 
-        panelContent.add(mos2Panel,"3D");
-        panelContent.add(mos_2DPanel,"2D");
+        panelContent.add(mos3DPanel, "3D");
+        panelContent.add(mos2DPanel, "2D");
 
-        cardLayout.show(panelContent,"3D");
+        cardLayout.show(panelContent, "3D");
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
 
-        add( panelContent);
+        add(panelContent);
         setSize(800, 600);
         setVisible(true);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
@@ -54,8 +53,8 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         dimension.select("3D");
         add("North", dimension);
         dimension.addItemListener(e -> {
-            mos2Panel.setVisible(!mos2Panel.isVisible());
-            mos_2DPanel.setVisible(!mos_2DPanel.isVisible());
+            mos3DPanel.setVisible(!mos3DPanel.isVisible());
+            mos2DPanel.setVisible(!mos2DPanel.isVisible());
         });
     }
 
@@ -72,7 +71,7 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         }
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        mos2Panel.printAll(g);
+        mos3DPanel.printAll(g);
         return PAGE_EXISTS;
     }
 

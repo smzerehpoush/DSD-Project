@@ -5,6 +5,23 @@ import java.awt.*;
 abstract class MosOperation extends Panel
         implements CustomAWT {
 
+    protected double Vgs;
+    protected double Vd;
+    protected double Vt;
+    protected boolean isNChannel;
+    protected UpDown udVgs;
+    protected UpDown udVd;
+    protected PlotCanvas outputPlot;
+    protected PlotCanvas transferPlot;
+    protected FunctionData outputIV;
+    protected FunctionData transferIV;
+    protected DataWrapper outputWrap;
+    protected DataWrapper transferWrap;
+    protected MosDevCircuit mosCkt;
+    protected MosInfo info;
+    private int width;
+    private int height;
+
     protected MosOperation(FunctionData functiondata, MosDevCircuit mosdevcircuit) {
         setLayout(null);
         mosCkt = mosdevcircuit;
@@ -39,13 +56,6 @@ abstract class MosOperation extends Panel
         setVgs();
         setVd();
         repaintComps();
-    }
-
-    public void setNChannel(boolean flag) {
-        if (isNChannel != flag) {
-            isNChannel = flag;
-            setChannelType();
-        }
     }
 
     public void setVt(double d) {
@@ -83,6 +93,13 @@ abstract class MosOperation extends Panel
 
     public boolean isNChannel() {
         return isNChannel;
+    }
+
+    public void setNChannel(boolean flag) {
+        if (isNChannel != flag) {
+            isNChannel = flag;
+            setChannelType();
+        }
     }
 
     protected abstract void setVd();
@@ -149,21 +166,4 @@ abstract class MosOperation extends Panel
         transferPlot.repaint();
         info.repaint();
     }
-
-    private int width;
-    private int height;
-    protected double Vgs;
-    protected double Vd;
-    protected double Vt;
-    protected boolean isNChannel;
-    protected UpDown udVgs;
-    protected UpDown udVd;
-    protected PlotCanvas outputPlot;
-    protected PlotCanvas transferPlot;
-    protected FunctionData outputIV;
-    protected FunctionData transferIV;
-    protected DataWrapper outputWrap;
-    protected DataWrapper transferWrap;
-    protected MosDevCircuit mosCkt;
-    protected MosInfo info;
 }

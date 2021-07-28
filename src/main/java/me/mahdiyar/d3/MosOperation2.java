@@ -11,7 +11,7 @@ class MosOperation2 extends MosOperation {
         super.mosCkt.setVd(super.Vd);
         super.info.setVd(super.Vd);
         super.outputWrap.setCurrentX(super.Vd);
-        if (super.isNChannel)
+        if (super.isNChannel) {
             if (super.Vgs < super.Vt || super.Vd < super.Vgs - super.Vt) {
                 super.transferWrap.showCurrentSpot(false);
                 return;
@@ -19,6 +19,7 @@ class MosOperation2 extends MosOperation {
                 super.transferWrap.showCurrentSpot(true);
                 return;
             }
+        }
         super.transferWrap.showCurrentSpot(!(super.Vgs > super.Vt) && !(super.Vd > super.Vgs - super.Vt));
     }
 
@@ -81,11 +82,5 @@ class MosOperation2 extends MosOperation {
     public void setLabelsVisibility(boolean state) {
         if (mosCkt != null)
             mosCkt.setLabelsVisibilityState(state);
-    }
-
-    @Override
-    public void setDimension(String dimension) {
-        if (mosCkt != null)
-            mosCkt.setDimension(dimension);
     }
 }

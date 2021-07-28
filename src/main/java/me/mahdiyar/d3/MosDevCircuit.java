@@ -34,7 +34,6 @@ public abstract class MosDevCircuit extends Canvas {
     private double vT;
     private int counter;
     private boolean labelsVisibilityState = true;
-    private String dimension = "3D";
 
     public MosDevCircuit() {
         bGrd = new GroundSymbol();
@@ -57,18 +56,16 @@ public abstract class MosDevCircuit extends Canvas {
         fet.setNChannel(nChannel);
     }
 
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
     public void setLabelsVisibilityState(boolean labelsVisibilityState) {
         this.labelsVisibilityState = labelsVisibilityState;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
         initImg();
         drawOffscreen(gOff);

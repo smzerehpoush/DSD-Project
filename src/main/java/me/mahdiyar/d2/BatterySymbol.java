@@ -4,6 +4,15 @@ import java.awt.*;
 
 public class BatterySymbol implements VisualElement {
 
+    private int scale;
+    private int plusToMinus;
+    private int plusHalfWidth;
+    private int minusHalfWidth;
+    private Point plus;
+    private Point minus;
+    private String align;
+    private String plusSide;
+
     public BatterySymbol(String s, String s1) {
         scale = 2;
         plusToMinus = 4;
@@ -192,13 +201,4 @@ public class BatterySymbol implements VisualElement {
             minus.x = plus.x - plusToMinus;
         }
     }
-
-    private int scale;
-    private int plusToMinus;
-    private int plusHalfWidth;
-    private int minusHalfWidth;
-    private Point plus;
-    private Point minus;
-    private String align;
-    private String plusSide;
 }

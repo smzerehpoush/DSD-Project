@@ -4,6 +4,10 @@ import java.awt.*;
 
 public abstract class Data {
 
+    private static final Format FORMAT = new Format(2, 1.0D);
+    private FloatRange xRange;
+    private FloatRange yRange;
+
     protected Data() {
         init();
         setRange();
@@ -83,9 +87,5 @@ public abstract class Data {
 
         yRange = new FloatRange(d, d1);
     }
-
-    private static final Format FORMAT = new Format(2, 1.0D);
-    private FloatRange xRange;
-    private FloatRange yRange;
 
 }

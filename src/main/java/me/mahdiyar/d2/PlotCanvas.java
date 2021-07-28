@@ -4,6 +4,15 @@ import java.awt.*;
 
 public class PlotCanvas extends Canvas {
 
+    private Axis axis;
+    private DataWrapper data;
+    private Conversion conv;
+    private int width;
+    private int height;
+    private Image imgBkgd;
+    private boolean showFullData;
+    private boolean dataChanged;
+
     public PlotCanvas() {
         conv = new Conversion();
         axis = new Axis(this);
@@ -43,7 +52,6 @@ public class PlotCanvas extends Canvas {
         data.drawSpot(g, Color.red);
     }
 
-
     public DataWrapper getData() {
         return data;
     }
@@ -71,13 +79,4 @@ public class PlotCanvas extends Canvas {
         g.dispose();
         dataChanged = false;
     }
-
-    private Axis axis;
-    private DataWrapper data;
-    private Conversion conv;
-    private int width;
-    private int height;
-    private Image imgBkgd;
-    private boolean showFullData;
-    private boolean dataChanged;
 }

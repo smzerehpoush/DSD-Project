@@ -2,6 +2,14 @@ package me.mahdiyar.d2;
 
 class OutputIV extends FunctionData {
 
+    private double Vt;
+    private double K;
+    private double lmbd;
+    private boolean isNChannel;
+
+    OutputIV() {
+    }
+
     @Override
     protected void init() {
         Vt = 1.0D;
@@ -110,12 +118,4 @@ class OutputIV extends FunctionData {
     public Format getFormatP() {
         return new Format(2, 1.0D);
     }
-
-    OutputIV() {
-    }
-
-    private double Vt;
-    private double K;
-    private double lmbd;
-    private boolean isNChannel;
 }

@@ -4,6 +4,19 @@ import java.awt.*;
 
 public class Axis {
 
+    private final PlotCanvas canvas;
+    private final Conversion conv;
+    private final Point origin;
+    private final boolean logX;
+    private final boolean logY;
+    private DataWrapper data;
+    private boolean labelXUp;
+    private boolean labelYLeft;
+    private boolean arrowUp;
+    private boolean arrowLeft;
+    private IntRange xLogRange;
+    private IntRange yLogRange;
+
     public Axis(PlotCanvas plotcanvas) {
         canvas = plotcanvas;
         origin = new Point(0, 0);
@@ -31,7 +44,6 @@ public class Axis {
         drawX(g, format);
         drawY(g, format1);
     }
-
 
     public Point getOrigin() {
         return origin;
@@ -384,17 +396,4 @@ public class Axis {
         }
         conv.setY(k, (double) yLogRange.max - yLogRange.min);
     }
-
-    private final PlotCanvas canvas;
-    private DataWrapper data;
-    private final Conversion conv;
-    private final Point origin;
-    private boolean labelXUp;
-    private boolean labelYLeft;
-    private boolean arrowUp;
-    private boolean arrowLeft;
-    private IntRange xLogRange;
-    private IntRange yLogRange;
-    private final boolean logX;
-    private final boolean logY;
 }

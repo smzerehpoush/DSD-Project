@@ -16,7 +16,7 @@ abstract class MosInfo extends Canvas {
     private Graphics gImg;
     private int counter;
 
-    public MosInfo() {
+    protected MosInfo() {
         nChannel = true;
         changed = true;
         info = new String[4];
@@ -24,10 +24,12 @@ abstract class MosInfo extends Canvas {
         Vt = 1.0D;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
         checkSize();
         if (changed)
@@ -88,11 +90,12 @@ abstract class MosInfo extends Canvas {
                     gImg.setColor(Color.blue);
                 else
                     gImg.setColor(Color.red);
-            } else if (k == 1)
+            } else if (k == 1) {
                 if (counter++ % 2 == 0)
                     gImg.setColor(Color.magenta);
                 else
                     gImg.setColor(Color.black);
+            }
             gImg.drawString(info[k], 2, j);
             j += i;
         }

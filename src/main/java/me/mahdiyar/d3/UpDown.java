@@ -39,10 +39,12 @@ public class UpDown extends Canvas {
         return topPressed;
     }
 
+    @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    @Override
     public void paint(Graphics g) {
         Dimension dimension = getSize();
         if (width != dimension.width || height != dimension.height)

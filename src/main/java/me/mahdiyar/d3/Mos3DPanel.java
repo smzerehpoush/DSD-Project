@@ -2,9 +2,9 @@ package me.mahdiyar.d3;
 
 import java.awt.*;
 
-public class Mos2Panel extends Panel {
+public class Mos3DPanel extends Panel {
 
-    public Mos2Panel() {
+    public Mos3DPanel() {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
         OutputIV outputiv = new OutputIV();

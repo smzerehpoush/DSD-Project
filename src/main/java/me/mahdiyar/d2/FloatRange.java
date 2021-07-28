@@ -1,10 +1,11 @@
-
-
 package me.mahdiyar.d2;
 
 
 public class FloatRange {
 
+
+    public double min;
+    public double max;
 
     public FloatRange(double d, double d1) {
         min = d;
@@ -20,7 +21,4 @@ public class FloatRange {
         min = Math.min(floatrange.min, min);
         max = Math.max(floatrange.max, max);
     }
-
-    public double min;
-    public double max;
 }

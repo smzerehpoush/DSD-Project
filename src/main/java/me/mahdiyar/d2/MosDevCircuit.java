@@ -4,6 +4,34 @@ import java.awt.*;
 
 public abstract class MosDevCircuit extends Canvas {
 
+    protected BatterySymbol Vd;
+    protected double vgs;
+    protected double vd;
+    private Image imgMosCkt;
+    private Image imgOff;
+    private Graphics gOff;
+    private int width;
+    private int height;
+    private Mosfet2D fet;
+    private GroundSymbol bGrd;
+    private GroundSymbol sGrd;
+    private BatterySymbol Vgs;
+    private int yMos;
+    private int yLowWire;
+    private FontMetrics fm;
+    private int xChannelMaxSat;
+    private double yToV;
+    private double xToV;
+    private int xSat[];
+    private int ySat[];
+    private int xLin[];
+    private int yLin[];
+    private Format format;
+    private boolean typeChanged;
+    private boolean nChannel;
+    private double vT;
+    private double vgsMax;
+    private int counter;
     protected MosDevCircuit() {
         bGrd = new GroundSymbol();
         sGrd = new GroundSymbol();
@@ -257,33 +285,4 @@ public abstract class MosDevCircuit extends Canvas {
         j = Vd.getHiY() - fm.getDescent();
         g.drawString(s + format.formE(vd) + " V", i, j);
     }
-
-    private Image imgMosCkt;
-    private Image imgOff;
-    private Graphics gOff;
-    private int width;
-    private int height;
-    private Mosfet2D fet;
-    private GroundSymbol bGrd;
-    private GroundSymbol sGrd;
-    private BatterySymbol Vgs;
-    protected BatterySymbol Vd;
-    private int yMos;
-    private int yLowWire;
-    private FontMetrics fm;
-    private int xChannelMaxSat;
-    private double yToV;
-    private double xToV;
-    private int xSat[];
-    private int ySat[];
-    private int xLin[];
-    private int yLin[];
-    private Format format;
-    private boolean typeChanged;
-    private boolean nChannel;
-    private double vT;
-    private double vgsMax;
-    protected double vgs;
-    protected double vd;
-    private int counter;
 }

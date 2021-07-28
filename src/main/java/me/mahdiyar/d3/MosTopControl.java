@@ -5,6 +5,7 @@ class MosTopControl extends MosSouthControl {
         super(mosoperation);
     }
 
+    @Override
     protected String getVdLabel() {
         return "Vds";
     }

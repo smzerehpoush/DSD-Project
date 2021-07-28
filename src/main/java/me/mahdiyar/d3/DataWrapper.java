@@ -28,14 +28,6 @@ public class DataWrapper {
         origin = new FloatPoint();
     }
 
-    public void removeAll() {
-        dataset.removeAllElements();
-    }
-
-    public boolean remove(Data data) {
-        return dataset.removeElement(data);
-    }
-
     public void add(Data data) {
         if (dataset.isEmpty()) {
             xRange = new FloatRange(data.getRangeX());
@@ -150,10 +142,6 @@ public class DataWrapper {
 
     public void setCurrentX(double d) {
         xCurrent = d;
-    }
-
-    public boolean isEmpty() {
-        return dataset.isEmpty();
     }
 
     public FloatRange getRangeX() {

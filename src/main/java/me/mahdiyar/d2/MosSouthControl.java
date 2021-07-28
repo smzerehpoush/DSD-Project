@@ -5,6 +5,16 @@ import java.util.StringTokenizer;
 
 abstract class MosSouthControl extends Panel {
 
+    private final MosOperation mos;
+    private Label Vgs;
+    private Label Vd;
+    private UpDown10 vgs;
+    private UpDown10 vd;
+    private Choice choice;
+    private Choice nVt;
+    private Choice pVt;
+    private Choice channelType;
+    private boolean nChannel;
     protected MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
         initComps();
@@ -106,15 +116,4 @@ abstract class MosSouthControl extends Panel {
         validate();
         choice.select(1);
     }
-
-    private final MosOperation mos;
-    private Label Vgs;
-    private Label Vd;
-    private UpDown10 vgs;
-    private UpDown10 vd;
-    private Choice choice;
-    private Choice nVt;
-    private Choice pVt;
-    private Choice channelType;
-    private boolean nChannel;
 }

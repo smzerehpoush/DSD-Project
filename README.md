@@ -1,6 +1,6 @@
 # DSD-Project
 
-project goal is to convert 
+project goal is to convert
 
 ![](https://user-images.githubusercontent.com/6152197/122866947-0af20b80-d33e-11eb-809b-7f8091b55bbd.png)
 

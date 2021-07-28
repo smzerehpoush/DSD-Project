@@ -36,13 +36,6 @@ public class GroundSymbol
         return position;
     }
 
-    public int getScale() {
-        if (scale > 4 || scale < 0)
-            return 2;
-        else
-            return scale;
-    }
-
     public void setScale(int i) {
         scale = i;
     }

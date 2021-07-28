@@ -32,6 +32,7 @@ public abstract class MosDevCircuit extends Canvas {
     private double vT;
     private final double vgsMax;
     private int counter;
+    public boolean labelsVisibilityState = true;
 
     public MosDevCircuit() {
         bGrd = new GroundSymbol();
@@ -49,7 +50,7 @@ public abstract class MosDevCircuit extends Canvas {
         vgsMax = 4D;
         vgs = 0.0D;
         vd = 0.0D;
-        setBackground(Color.white);
+        setBackground(Color.lightGray);
         fet = new MOSFET();
         fet.setNChannel(nChannel);
     }
@@ -152,13 +153,15 @@ public abstract class MosDevCircuit extends Canvas {
         int i = fontmetrics.getHeight();
         int j = fet.getChannelY() + i;
         g.setColor(Color.white);
-        String s = nChannel ? "n" : "p";
+        String s = nChannel ? "n+" : "p+";
         String s1 = nChannel ? "p-type Si" : "n-type Si";
-        g.drawString(s, fet.getSourceX(), j);
+        if (labelsVisibilityState) {
+            g.drawString(s, fet.getSourceX(), j);
+        }
         g.drawString(s, fet.getDrainX(), j);
         int k = fontmetrics.stringWidth(s1) / 2;
         g.drawString(s1, fet.getGateX() - k, fet.getBulkY() - 2 * i);
-        g.setColor(Color.gray);
+        g.setColor(Color.white);
         g.drawString("oxide", fet.getX(), fet.getY());
     }
 
@@ -218,7 +221,7 @@ public abstract class MosDevCircuit extends Canvas {
         int j = fet.getBulkY();
         byte byte0 = 7;
         bGrd.setLocation(i, j + byte0);
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         bGrd.draw(g);
         g.drawLine(i, j, i, j + byte0);
         fm = g.getFontMetrics();

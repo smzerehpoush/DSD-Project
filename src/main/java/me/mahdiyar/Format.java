@@ -1,8 +1,5 @@
 package me.mahdiyar;
 
-// Referenced classes of package v10.mos_2:
-//            DataFormatException
-
 public class Format {
 
     private int noOfSigDigits;

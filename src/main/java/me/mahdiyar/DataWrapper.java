@@ -4,10 +4,6 @@ import java.awt.*;
 import java.util.Enumeration;
 import java.util.Vector;
 
-// Referenced classes of package v10.mos_2:
-//            PlotCanvas, FloatPoint, Format, Conversion, 
-//            Axis, FloatRange, FunctionData, Data
-
 public class DataWrapper {
 
     private final PlotCanvas canvas;

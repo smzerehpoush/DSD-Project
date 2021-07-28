@@ -6,6 +6,7 @@ class MosOperation2 extends MosOperation {
         super(functiondata, new MosDevCircuit2());
     }
 
+    @Override
     protected void setVd() {
         super.mosCkt.setVd(super.Vd);
         super.info.setVd(super.Vd);
@@ -21,10 +22,12 @@ class MosOperation2 extends MosOperation {
         super.transferWrap.showCurrentSpot(!(super.Vgs > super.Vt) && !(super.Vd > super.Vgs - super.Vt));
     }
 
+    @Override
     protected void setInfo() {
         super.info = new MosInfo2();
     }
 
+    @Override
     public void run() {
         double d = 0.10000000000000001D;
         double d1 = super.mosCkt.getVgsMax();
@@ -72,5 +75,11 @@ class MosOperation2 extends MosOperation {
                 ex.printStackTrace();
             }
         } while (true);
+    }
+
+    @Override
+    public void setLabelsVisibility(boolean state) {
+        if (mosCkt != null)
+            mosCkt.labelsVisibilityState = state;
     }
 }

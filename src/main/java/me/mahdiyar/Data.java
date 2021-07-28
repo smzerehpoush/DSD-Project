@@ -2,9 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            Format, FloatRange
-
 public abstract class Data {
 
     private static final Format FORMAT = new Format(2, 1.0D);

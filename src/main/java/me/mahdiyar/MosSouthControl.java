@@ -3,9 +3,6 @@ package me.mahdiyar;
 import java.awt.*;
 import java.util.StringTokenizer;
 
-// Referenced classes of package v10.mos_2:
-//            MosOperation, UpDown10, UpDown
-
 abstract class MosSouthControl extends Panel {
 
     private final MosOperation mos;
@@ -17,6 +14,7 @@ abstract class MosSouthControl extends Panel {
     private Choice nVt;
     private Choice pVt;
     private Choice channelType;
+    private Checkbox checkbox;
     private boolean nChannel;
 
     public MosSouthControl(MosOperation mosoperation) {
@@ -33,6 +31,7 @@ abstract class MosSouthControl extends Panel {
         add(new Label("   "));
         add(choice);
         add(channelType);
+        add(checkbox);
         nChannel = true;
     }
 
@@ -56,7 +55,8 @@ abstract class MosSouthControl extends Panel {
                 mos.repaint();
                 return true;
             }
-        } else if (event.target == choice) {
+        }
+        else if (event.target == choice) {
             String s1 = choice.getSelectedItem();
             try {
                 double d1 = getVt(s1);
@@ -66,6 +66,10 @@ abstract class MosSouthControl extends Panel {
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
+        }
+        else if (event.target == checkbox){
+            mos.setLabelsVisibility(checkbox.getState());
+            mos.repaint();
         }
         return false;
     }
@@ -116,6 +120,8 @@ abstract class MosSouthControl extends Panel {
         channelType.addItem("N-channel");
         channelType.addItem("P-channel");
         channelType.select("N-channel");
+        checkbox = new Checkbox("show labels");
+        checkbox.setState(true);
     }
 
     private void setChoice() {

@@ -2,8 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            CustomAWT
 
 public class UpDown extends Canvas {
 

@@ -2,9 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            MosDevCircuit, BatterySymbol
-
 class MosDevCircuit2 extends MosDevCircuit {
 
     MosDevCircuit2() {

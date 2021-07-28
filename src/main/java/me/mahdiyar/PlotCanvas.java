@@ -2,9 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            Conversion, Axis, DataWrapper, Data
-
 public class PlotCanvas extends Canvas {
 
     private final Axis axis;
@@ -70,7 +67,7 @@ public class PlotCanvas extends Canvas {
 
     private void repaintImg() {
         Graphics g = imgBkgd.getGraphics();
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.fillRect(0, 0, width, height);
         g.setColor(Color.black);
         axis.draw(g);

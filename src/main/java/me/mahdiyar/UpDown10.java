@@ -2,9 +2,6 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-// Referenced classes of package v10.mos_2:
-//            UpDown, CustomAWT
-
 public class UpDown10 extends UpDown {
 
     public UpDown10(int i, int j, Color color, Color color1) {

@@ -1,9 +1,5 @@
 package me.mahdiyar;
 
-
-// Referenced classes of package v10.mos_2:
-//            FunctionData, Data, Format
-
 class IdsVgs extends FunctionData {
 
     private double K;

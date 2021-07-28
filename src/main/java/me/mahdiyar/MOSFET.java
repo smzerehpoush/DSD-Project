@@ -48,7 +48,7 @@ public class MOSFET {
     }
 
     public void clear(Graphics g) {
-        g.setColor(Color.white);
+        g.setColor(Color.lightGray);
         g.fillRect(x, y, width, height);
     }
 
@@ -130,7 +130,7 @@ public class MOSFET {
     }
 
     private void drawContacts(Graphics g) {
-        g.setColor(Color.gray);
+        g.setColor(Color.black);
         int i = yContactTop;
         int j = wContactTop / 2;
         int k = wContactBottom / 2;
@@ -158,12 +158,11 @@ public class MOSFET {
         //2
         g.fillRect(xD - i, ySemiTop, wSource, hChannel);
         drawTop(g, xD - i, ySemiTop, wSource, shift, color);
-        drawRightSide(g, xD - i, ySemiTop, wSource, hChannel, shift, lightColor);
         drawTop(g, xS - i + wSource, ySemiTop, xD - xS, shift, color);
     }
 
     private void drawOxide(Graphics g) {
-        Color color = Color.LIGHT_GRAY;
+        Color color = Color.GRAY;
         Color tmp = g.getColor();
         g.setColor(color);
         g.fillRect(x, y, width, hOxide);
@@ -174,13 +173,14 @@ public class MOSFET {
         drawBulkNeutral2(g);
         Color color = nChannel ? Color.RED : Color.blue;
         Color lightColor = nChannel ? new Color(255, 127, 127) : new Color(114, 188, 212);
-        //1 - red
+        Color lightColor2 = !nChannel ? new Color(255, 127, 127) : new Color(114, 188, 212);
+        drawRightSide(g, xD - (wSource/2), ySemiTop, wSource, hChannel, shift, lightColor2);//1
         g.setColor(color);
         g.fillRect(x, ySemiTop, wNeutralSide, hNeutralSide);
         drawRightSide(g, x, ySemiTop, wNeutralSide, hNeutralSide, shift, lightColor);
-        //2 - green
+        //2
         g.fillRect(x, yNeutralTop, width, hNeutral);
-        //3 - blue
+        //3
         g.fillRect((x + width) - wNeutralSide, ySemiTop, wNeutralSide, hNeutralSide);
         g.setColor(Color.black);
         drawTop(g, x, ySemiTop, wNeutralSide, shift, color);

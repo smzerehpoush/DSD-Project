@@ -1,8 +1,5 @@
 package me.mahdiyar;
 
-// Referenced classes of package v10.mos_2:
-//            FloatRange
-
 public class Conversion {
 
     private final double xFillFactor;

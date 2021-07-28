@@ -180,4 +180,6 @@ abstract class MosOperation extends Panel
     }
 
     public abstract void run();
+
+    public abstract void setLabelsVisibility(boolean state);
 }

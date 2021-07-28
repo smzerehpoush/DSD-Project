@@ -1,9 +1,5 @@
 package me.mahdiyar;
 
-
-// Referenced classes of package v10.mos_2:
-//            MosInfo
-
 class MosInfo2 extends MosInfo {
 
     MosInfo2() {

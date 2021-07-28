@@ -8,7 +8,7 @@ public class Mos2Frame extends Frame {
 
     public Mos2Frame() throws HeadlessException {
         setLayout(new BorderLayout());
-        setBackground(Color.white);
+        setBackground(Color.lightGray);
         Mos2Panel mos2Panel = new Mos2Panel();
         mos2Panel.setSize(800, 600);
         add("Center", mos2Panel);

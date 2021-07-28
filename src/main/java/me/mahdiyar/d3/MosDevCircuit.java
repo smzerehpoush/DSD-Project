@@ -1,13 +1,11 @@
 package me.mahdiyar.d3;
 
-import me.mahdiyar.d2.MOSFET2D;
 
 import java.awt.*;
 
 public abstract class MosDevCircuit extends Canvas {
 
     private final MOSFET fet;
-    private final MOSFET2D fet2d;
     private final GroundSymbol bGrd;
     private final GroundSymbol sGrd;
     private final BatterySymbol Vgs;
@@ -16,6 +14,7 @@ public abstract class MosDevCircuit extends Canvas {
     private final int[] xLin;
     private final int[] yLin;
     private final Format format;
+    private final double vgsMax;
     protected BatterySymbol Vd;
     protected double vgs;
     protected double vd;
@@ -33,18 +32,9 @@ public abstract class MosDevCircuit extends Canvas {
     private boolean typeChanged;
     private boolean nChannel;
     private double vT;
-    private final double vgsMax;
     private int counter;
     private boolean labelsVisibilityState = true;
     private String dimension = "3D";
-
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    public void setLabelsVisibilityState(boolean labelsVisibilityState) {
-        this.labelsVisibilityState = labelsVisibilityState;
-    }
 
     public MosDevCircuit() {
         bGrd = new GroundSymbol();
@@ -65,8 +55,14 @@ public abstract class MosDevCircuit extends Canvas {
         setBackground(Color.lightGray);
         fet = new MOSFET();
         fet.setNChannel(nChannel);
-        fet2d = new MOSFET2D();
-        fet2d.setNChannel(nChannel);
+    }
+
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
+
+    public void setLabelsVisibilityState(boolean labelsVisibilityState) {
+        this.labelsVisibilityState = labelsVisibilityState;
     }
 
     public void update(Graphics g) {
@@ -203,11 +199,7 @@ public abstract class MosDevCircuit extends Canvas {
         fet.setRect(width / 10, yMos, (width * 8) / 10, (height * 4) / 10, height / 2);
         initForChannelA();
         initForChannelB();
-        if (dimension.equals("3D")) {
-            drawCircuit(g);
-        } else {
-            drawCircuit2D(g);
-        }
+        drawCircuit(g);
         g.dispose();
         imgOff = createImage(width, height);
         gOff = imgOff.getGraphics();
@@ -280,66 +272,6 @@ public abstract class MosDevCircuit extends Canvas {
         int i3 = i + 12;
         g.drawLine(i, j, i3, j);
         Plot.drawArrowLeft(i, j, 3, g);
-        g.drawString("Id", i3 + 2, yLowWire + fm.getAscent());
-        l = fm.getAscent() + fm.getLeading();
-        g.drawString("Vgs", Vgs.getLeftX(), Vgs.getLowY() + l);
-        g.drawString(getVdName(), Vd.getLeftX(), Vd.getLowY() + l);
-        j = (yLowWire + j2) / 2;
-        i = i1 / 2;
-        l = i;
-        g.drawLine(i, j, i1, j);
-        sGrd.setLocation(i, j + l);
-        g.drawLine(i, j, i, sGrd.getLocation().y);
-        sGrd.draw(g);
-    }
-
-    private void drawCircuit2D(Graphics g) {
-        fet2d.draw(g);
-        int i = fet2d.getBulkX();
-        int j = fet2d.getBulkY();
-        byte byte0 = 7;
-        bGrd.setLocation(i, j + byte0);
-        g.setColor(Color.black);
-        bGrd.draw(g);
-        g.drawLine(i, j, i, j + byte0);
-        fm = g.getFontMetrics();
-        int k = fm.stringWidth("S");
-        int l = fm.getDescent();
-        j = fet2d.getContactY() - l;
-        g.drawString("S", fet2d.getSourceX() + k, j);
-        g.drawString("G", fet2d.getGateX() + k, j);
-        g.drawString("D", fet2d.getDrainX() + k, j);
-        int i1 = fet2d.getX();
-        int j1 = i1 + fet2d.getWidth();
-        int k1 = (i1 + fet2d.getGateX()) / 2;
-        int l1 = (fet2d.getGateX() + j1) / 2;
-        Vgs.setLocation(k1, getVgsY());
-        Vd.setLocation(l1, getVdY());
-        j = fet2d.getContactY();
-        i = fet2d.getSourceX();
-        int i2 = Vd.getLocation().y;
-        int j2 = Vgs.getLocation().y;
-        int k2 = fet2d.getGateX();
-        g.drawLine(i, j, i, yLowWire);
-        g.drawLine(i, yLowWire, i1, yLowWire);
-        g.drawLine(i1, yLowWire, i1, i2);
-        g.drawLine(i1, j2, Vgs.getLeftX(), j2);
-        g.drawLine(Vgs.getRightX(), j2, k2, j2);
-        g.drawLine(k2, j2, k2, j);
-        if (i2 != j2)
-            g.drawLine(i1, i2, k2, i2);
-        i = fet2d.getDrainX();
-        int l2 = i;
-        g.drawLine(i, j, i, yLowWire);
-        g.drawLine(i, yLowWire, j1, yLowWire);
-        g.drawLine(j1, yLowWire, j1, i2);
-        g.drawLine(j1, i2, Vd.getRightX(), i2);
-        g.drawLine(k2, i2, Vd.getLeftX(), i2);
-        j = yLowWire + (fm.getAscent() * 2) / 3;
-        i = (l2 * 2) / 3 + j1 / 3;
-        int i3 = i + 12;
-        g.drawLine(i, j, i3, j);
-        me.mahdiyar.d2.Plot.drawArrowLeft(i, j, 3, g);
         g.drawString("Id", i3 + 2, yLowWire + fm.getAscent());
         l = fm.getAscent() + fm.getLeading();
         g.drawString("Vgs", Vgs.getLeftX(), Vgs.getLowY() + l);

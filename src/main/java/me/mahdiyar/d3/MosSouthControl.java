@@ -1,6 +1,9 @@
 package me.mahdiyar.d3;
 
 import java.awt.*;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.util.StringTokenizer;
 
 abstract class MosSouthControl extends Panel {
@@ -17,6 +20,8 @@ abstract class MosSouthControl extends Panel {
     private Checkbox checkbox;
     private Choice dimension;
     private boolean nChannel;
+    private Button printButton;
+
 
     public MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
@@ -34,6 +39,7 @@ abstract class MosSouthControl extends Panel {
         add(channelType);
         add(checkbox);
         add(dimension);
+        add(printButton);
         nChannel = true;
     }
 
@@ -57,8 +63,7 @@ abstract class MosSouthControl extends Panel {
                 mos.repaint();
                 return true;
             }
-        }
-        else if (event.target == choice) {
+        } else if (event.target == choice) {
             String s1 = choice.getSelectedItem();
             try {
                 double d1 = getVt(s1);
@@ -68,19 +73,43 @@ abstract class MosSouthControl extends Panel {
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
-        }
-        else if (event.target == checkbox){
+        } else if (event.target == checkbox) {
             mos.setLabelsVisibility(checkbox.getState());
             mos.repaint();
             return true;
-        }
-        else if (event.target == dimension){
+        } else if (event.target == dimension) {
             mos.setDimension(dimension.getSelectedItem());
             mos.repaint();
             return true;
 
+        } else if (event.target == printButton) {
+            printComponent(mos);
+            return true;
         }
         return false;
+    }
+
+    public void printComponent(Component component) {
+
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        pj.setJobName(" Print Component ");
+
+        pj.setPrintable((pg, pf, pageNum) -> {
+            if (pageNum > 0) return Printable.NO_SUCH_PAGE;
+
+            Graphics2D g2 = (Graphics2D) pg;
+            g2.translate(pf.getImageableX(), pf.getImageableY());
+            component.paint(g2);
+            return Printable.PAGE_EXISTS;
+        });
+
+        if (!pj.printDialog()) return;
+
+        try {
+            pj.print();
+        } catch (PrinterException ex) {
+            // handle exception
+        }
     }
 
     protected abstract String getVdLabel();
@@ -135,6 +164,7 @@ abstract class MosSouthControl extends Panel {
         dimension.addItem("3D");
         dimension.addItem("2D");
         dimension.select("3D");
+        printButton = new Button("print");
     }
 
     private void setChoice() {

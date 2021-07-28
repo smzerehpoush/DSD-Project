@@ -174,7 +174,7 @@ public class MOSFET {
         Color color = nChannel ? Color.RED : Color.blue;
         Color lightColor = nChannel ? new Color(255, 127, 127) : new Color(114, 188, 212);
         Color lightColor2 = !nChannel ? new Color(255, 127, 127) : new Color(114, 188, 212);
-        drawRightSide(g, xD - (wSource/2), ySemiTop, wSource, hChannel, shift, lightColor2);//1
+        drawRightSide(g, xD - (wSource / 2), ySemiTop, wSource, hChannel, shift, lightColor2);//1
         g.setColor(color);
         g.fillRect(x, ySemiTop, wNeutralSide, hNeutralSide);
         drawRightSide(g, x, ySemiTop, wNeutralSide, hNeutralSide, shift, lightColor);

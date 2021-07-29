@@ -64,6 +64,7 @@ abstract class MosSouthControl extends Panel {
         checkbox.addItemListener(e -> {
             mos.setLabelsVisibility(checkbox.getState());
             mos.repaint();
+            mos.mosCkt.repaint();
         });
         add(checkbox);
         nChannel = true;

@@ -32,7 +32,6 @@ public abstract class MosDevCircuit extends Canvas {
     private boolean typeChanged;
     private boolean nChannel;
     private double vT;
-    private int counter;
     private boolean labelsVisibilityState = true;
 
     public MosDevCircuit() {
@@ -70,8 +69,7 @@ public abstract class MosDevCircuit extends Canvas {
         initImg();
         drawOffscreen(gOff);
         g.drawImage(imgOff, 0, 0, null);
-        if (counter++ < 7)
-            drawDescription(g);
+        drawDescription(g);
     }
 
     private void drawOffscreen(Graphics g) {
@@ -96,7 +94,6 @@ public abstract class MosDevCircuit extends Canvas {
             Graphics g = imgMosCkt.getGraphics();
             fet.draw(g);
             g.dispose();
-            counter = 0;
             repaint();
         }
     }
@@ -167,15 +164,17 @@ public abstract class MosDevCircuit extends Canvas {
             g.drawString(s, fet.getDrainX(), j);
         }
         int k = fontmetrics.stringWidth(s1) / 2;
-        g.drawString(s1, fet.getGateX() - k, fet.getBulkY() - 2 * i);
+        if (labelsVisibilityState) {
+            g.drawString(s1, fet.getGateX() - k, fet.getBulkY() - 2 * i);
+        }
         g.setColor(Color.white);
-        g.drawString("oxide", fet.getX(), fet.getY());
+        if (labelsVisibilityState) {
+            g.drawString("oxide", fet.getX(), fet.getY());
+        }
     }
 
     private void initImg() {
         Dimension dimension = getSize();
-        if (dimension.width == width && dimension.height == height)
-            return;
         width = dimension.width;
         height = dimension.height;
         if (width > 130 && width < 300) {
@@ -235,9 +234,11 @@ public abstract class MosDevCircuit extends Canvas {
         int k = fm.stringWidth("S");
         int l = fm.getDescent();
         j = fet.getContactY() - l;
-        g.drawString("S", fet.getSourceX() + k, j);
-        g.drawString("G", fet.getGateX() + k, j);
-        g.drawString("D", fet.getDrainX() + k, j);
+        if (labelsVisibilityState) {
+            g.drawString("S", fet.getSourceX() + k, j);
+            g.drawString("G", fet.getGateX() + k, j);
+            g.drawString("D", fet.getDrainX() + k, j);
+        }
         int i1 = fet.getX();
         int j1 = i1 + fet.getWidth();
         int k1 = (i1 + fet.getGateX()) / 2;
@@ -269,10 +270,13 @@ public abstract class MosDevCircuit extends Canvas {
         int i3 = i + 12;
         g.drawLine(i, j, i3, j);
         Plot.drawArrowLeft(i, j, 3, g);
-        g.drawString("Id", i3 + 2, yLowWire + fm.getAscent());
-        l = fm.getAscent() + fm.getLeading();
-        g.drawString("Vgs", Vgs.getLeftX(), Vgs.getLowY() + l);
-        g.drawString(getVdName(), Vd.getLeftX(), Vd.getLowY() + l);
+        if (labelsVisibilityState) {
+            g.drawString("Id", i3 + 2, yLowWire + fm.getAscent());
+            l = fm.getAscent() + fm.getLeading();
+            g.drawString("Vgs", Vgs.getLeftX(), Vgs.getLowY() + l);
+            g.drawString(getVdName(), Vd.getLeftX(), Vd.getLowY() + l);
+        }
+
         j = (yLowWire + j2) / 2;
         i = i1 / 2;
         l = i;

@@ -32,6 +32,7 @@ public abstract class MosDevCircuit extends Canvas {
     private double vT;
     private double vgsMax;
     private int counter;
+
     protected MosDevCircuit() {
         bGrd = new GroundSymbol();
         sGrd = new GroundSymbol();

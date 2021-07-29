@@ -15,6 +15,7 @@ abstract class MosSouthControl extends Panel {
     private Choice pVt;
     private Choice channelType;
     private boolean nChannel;
+
     protected MosSouthControl(MosOperation mosoperation) {
         mos = mosoperation;
         initComps();

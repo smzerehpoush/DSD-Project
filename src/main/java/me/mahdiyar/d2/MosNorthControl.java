@@ -11,6 +11,7 @@ class MosNorthControl extends Panel {
     Button id;
     Button ids;
     Button info;
+
     public MosNorthControl(MosOperation mosoperation) {
         mos = mosoperation;
         id = new Button("Id vs. Vds");

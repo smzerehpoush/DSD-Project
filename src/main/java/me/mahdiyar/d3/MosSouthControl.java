@@ -1,8 +1,6 @@
 package me.mahdiyar.d3;
 
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.StringTokenizer;
 
 abstract class MosSouthControl extends Panel {
@@ -63,12 +61,9 @@ abstract class MosSouthControl extends Panel {
                 mos.repaint();
             }
         });
-        checkbox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                mos.setLabelsVisibility(checkbox.getState());
-                mos.repaint();
-            }
+        checkbox.addItemListener(e -> {
+            mos.setLabelsVisibility(checkbox.getState());
+            mos.repaint();
         });
         add(checkbox);
         nChannel = true;

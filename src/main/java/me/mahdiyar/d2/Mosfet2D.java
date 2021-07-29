@@ -34,6 +34,7 @@ public class Mosfet2D {
     private int wSource;
     private int wNeutralCenter;
     private int wNeutralSide;
+
     public Mosfet2D() {
         nChannel = true;
     }

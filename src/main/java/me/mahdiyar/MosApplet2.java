@@ -48,6 +48,7 @@ public class MosApplet2 extends Applet implements Printable, ActionListener {
         });
     }
 
+    @Override
     public void init() {
         new MosApplet2();
     }

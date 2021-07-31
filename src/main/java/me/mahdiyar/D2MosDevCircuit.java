@@ -4,7 +4,7 @@ import java.awt.*;
 
 public abstract class D2MosDevCircuit extends Canvas {
 
-    protected D2BatterySymbol Vd;
+    protected BatterySymbol Vd;
     protected double vgs;
     protected double vd;
     private Image imgMosCkt;
@@ -13,9 +13,9 @@ public abstract class D2MosDevCircuit extends Canvas {
     private int width;
     private int height;
     private D2Mosfet2D fet;
-    private D2GroundSymbol bGrd;
-    private D2GroundSymbol sGrd;
-    private D2BatterySymbol Vgs;
+    private GroundSymbol bGrd;
+    private GroundSymbol sGrd;
+    private BatterySymbol Vgs;
     private int yMos;
     private int yLowWire;
     private FontMetrics fm;
@@ -26,7 +26,7 @@ public abstract class D2MosDevCircuit extends Canvas {
     private int ySat[];
     private int xLin[];
     private int yLin[];
-    private D2Format format;
+    private Format format;
     private boolean typeChanged;
     private boolean nChannel;
     private double vT;
@@ -34,11 +34,11 @@ public abstract class D2MosDevCircuit extends Canvas {
     private int counter;
 
     protected D2MosDevCircuit() {
-        bGrd = new D2GroundSymbol();
-        sGrd = new D2GroundSymbol();
-        Vgs = new D2BatterySymbol("horizontal", "right");
-        Vd = new D2BatterySymbol("horizontal", "left");
-        format = new D2Format(2, 1.0D);
+        bGrd = new GroundSymbol();
+        sGrd = new GroundSymbol();
+        Vgs = new BatterySymbol("horizontal", "right");
+        Vd = new BatterySymbol("horizontal", "left");
+        format = new Format(2, 1.0D);
         nChannel = true;
         typeChanged = false;
         xSat = new int[3];
@@ -262,7 +262,7 @@ public abstract class D2MosDevCircuit extends Canvas {
         i = (l2 * 2) / 3 + j1 / 3;
         int i3 = i + 12;
         g.drawLine(i, j, i3, j);
-        D2Plot.drawArrowLeft(i, j, 3, g);
+        Plot.drawArrowLeft(i, j, 3, g);
         g.drawString("Id", i3 + 2, yLowWire + fm.getAscent());
         l = fm.getAscent() + fm.getLeading();
         g.drawString("Vgs", Vgs.getLeftX(), Vgs.getLowY() + l);

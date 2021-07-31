@@ -2,33 +2,32 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-abstract class D2MosOperation extends Panel
-        implements D2CustomAWT {
+abstract class D2MosOperation extends Panel implements CustomAWT {
 
     protected double Vgs;
     protected double Vd;
     protected double Vt;
     protected boolean isNChannel;
-    protected D2UpDown udVgs;
-    protected D2UpDown udVd;
-    protected D2PlotCanvas outputPlot;
-    protected D2PlotCanvas transferPlot;
-    protected D2FunctionData outputIV;
-    protected D2FunctionData transferIV;
-    protected D2DataWrapper outputWrap;
-    protected D2DataWrapper transferWrap;
+    protected UpDown udVgs;
+    protected UpDown udVd;
+    protected PlotCanvas outputPlot;
+    protected PlotCanvas transferPlot;
+    protected FunctionData outputIV;
+    protected FunctionData transferIV;
+    protected DataWrapper outputWrap;
+    protected DataWrapper transferWrap;
     protected D2MosDevCircuit mosCkt;
-    protected D2MosInfo info;
+    protected MosInfo info;
     private int width;
     private int height;
 
-    protected D2MosOperation(D2FunctionData functiondata, D2MosDevCircuit mosdevcircuit) {
+    protected D2MosOperation(FunctionData functiondata, D2MosDevCircuit mosdevcircuit) {
         setLayout(null);
         mosCkt = mosdevcircuit;
-        outputPlot = new D2PlotCanvas();
-        transferPlot = new D2PlotCanvas();
+        outputPlot = new PlotCanvas();
+        transferPlot = new PlotCanvas();
         outputIV = functiondata;
-        transferIV = new D2IdsVgs();
+        transferIV = new IdsVgs();
         outputPlot.addData(outputIV);
         transferPlot.addData(transferIV);
         outputWrap = outputPlot.getData();
@@ -83,11 +82,11 @@ abstract class D2MosOperation extends Panel
         transferPlot.setVisible(!transferPlot.isVisible());
     }
 
-    public void setVgsControl(D2UpDown updown) {
+    public void setVgsControl(UpDown updown) {
         udVgs = updown;
     }
 
-    public void setVdControl(D2UpDown updown) {
+    public void setVdControl(UpDown updown) {
         udVd = updown;
     }
 

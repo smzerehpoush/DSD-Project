@@ -16,7 +16,6 @@ class MosDevCircuit2 extends MosDevCircuit {
     }
 
     protected String getVdName() {
-//        super.Vd.reverse();
         return "Vds";
     }
 

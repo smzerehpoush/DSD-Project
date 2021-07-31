@@ -8,8 +8,8 @@ abstract class D2MosSouthControl extends Panel {
     private final D2MosOperation mos;
     private Label Vgs;
     private Label Vd;
-    private D2UpDown10 vgs;
-    private D2UpDown10 vd;
+    private UpDown10 vgs;
+    private UpDown10 vd;
     private Choice choice;
     private Choice nVt;
     private Choice pVt;
@@ -86,8 +86,8 @@ abstract class D2MosSouthControl extends Panel {
         Vgs.setAlignment(Label.RIGHT);
         Vd = new Label(getVdLabel());
         Vd.setAlignment(Label.RIGHT);
-        vgs = new D2UpDown10(12, 25, Color.black, Color.lightGray);
-        vd = new D2UpDown10(12, 25, Color.black, Color.lightGray);
+        vgs = new UpDown10(12, 25, Color.black, Color.lightGray);
+        vd = new UpDown10(12, 25, Color.black, Color.lightGray);
         nVt = new Choice();
         nVt.addItem("Vt = 0.5 V");
         nVt.addItem("Vt = 1.0 V");

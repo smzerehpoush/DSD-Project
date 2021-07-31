@@ -67,6 +67,8 @@ public class GroundSymbol
             case 4: // '\004'
                 wide = 8;
                 space = 6;
+                return;
+            default:
         }
     }
 }

@@ -2,8 +2,8 @@ package me.mahdiyar;
 
 public class D2MosOperation2D extends D2MosOperation {
 
-    public D2MosOperation2D(D2FunctionData functiondata) {
-        super(functiondata, new D2MosDevCircuit_2());
+    public D2MosOperation2D(FunctionData functiondata) {
+        super(functiondata, new D2MosDevCircuit2());
     }
 
     protected void setVd() {
@@ -23,7 +23,7 @@ public class D2MosOperation2D extends D2MosOperation {
     }
 
     protected void setInfo() {
-        super.info = new D2MosInfo2D();
+        super.info = new MosInfo2();
     }
 
     public void run() {

@@ -55,7 +55,7 @@ public class Format {
     }
 
     private String toSigDigits(double d) {
-        double d1 = Math.pow(10D, noOfSigDigits - 1);
+        double d1 = Math.pow(10D, (double) noOfSigDigits - 1);
         int i = (int) (d * d1 + 0.5D);
         int j = 1;
         for (int k = 0; k < noOfSigDigits; k++)

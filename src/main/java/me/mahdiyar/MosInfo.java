@@ -104,7 +104,7 @@ abstract class MosInfo extends Canvas {
     }
 
     private void setDescrA() {
-        if (nChannel)
+        if (nChannel) {
             if (Vgs >= Vt) {
                 info[0] = "Vgs > Vt : n-channel is induced.";
                 return;
@@ -112,6 +112,7 @@ abstract class MosInfo extends Canvas {
                 info[0] = "Vgs < Vt : the n-channel is cutoff.";
                 return;
             }
+        }
         if (Vgs <= Vt) {
             info[0] = "Vgs < Vt : p-channel is induced.";
         } else {

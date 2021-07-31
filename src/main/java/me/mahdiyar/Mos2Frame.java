@@ -30,26 +30,20 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
         panelContent.add(mos2DPanel, "2D");
 
         cardLayout.show(panelContent, "3D");
-        setLayout(new BorderLayout());
-        setBackground(Color.lightGray);
+        this.setLayout(new BorderLayout());
+        this.setBackground(Color.lightGray);
 
-        add(panelContent);
-        setSize(800, 600);
-        setVisible(true);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+        this.add("Center", panelContent);
+        this.setSize(800, 600);
+        this.setVisible(true);
         Button printButton = new Button("Print This Window");
         printButton.addActionListener(this);
-        add("South", printButton);
+        this.add("South", printButton);
         Choice dimension = new Choice();
         dimension.addItem("3D");
         dimension.addItem("2D");
         dimension.select("3D");
-        add("North", dimension);
+        this.add("North", dimension);
         dimension.addItemListener(e -> {
             mos3DPanel.setVisible(!mos3DPanel.isVisible());
             mos2DPanel.setVisible(!mos2DPanel.isVisible());
@@ -57,9 +51,15 @@ public class Mos2Frame extends Frame implements Printable, ActionListener {
     }
 
     public static void main(String[] args) {
-        Frame frame = new Mos2Frame();
-        frame.pack();
+        Mos2Frame frame = new Mos2Frame();
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         frame.setVisible(true);
+        frame.pack();
     }
 
     @Override

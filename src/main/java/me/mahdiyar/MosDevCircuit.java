@@ -1,6 +1,5 @@
 package me.mahdiyar;
 
-
 import java.awt.*;
 
 public abstract class MosDevCircuit extends Canvas {

@@ -2,7 +2,7 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-class MosBottomControl extends Panel {
+public class MosBottomControl extends Panel {
 
     MosOperation mos;
     Button id;

@@ -2,8 +2,7 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-abstract class MosOperation extends Panel
-        implements CustomAWT {
+public abstract class MosOperation extends Panel implements CustomAWT {
 
     protected double Vgs;
     protected double Vd;

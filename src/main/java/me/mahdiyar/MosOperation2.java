@@ -1,6 +1,6 @@
 package me.mahdiyar;
 
-class MosOperation2 extends MosOperation {
+public class MosOperation2 extends MosOperation {
 
     public MosOperation2(FunctionData functiondata) {
         super(functiondata, new MosDevCircuit2());

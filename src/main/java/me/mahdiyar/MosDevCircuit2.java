@@ -7,14 +7,17 @@ class MosDevCircuit2 extends MosDevCircuit {
     MosDevCircuit2() {
     }
 
+    @Override
     protected int getVgsY() {
         return getMosY() / 2;
     }
 
+    @Override
     protected int getVdY() {
         return getMosY() / 4;
     }
 
+    @Override
     protected String getVdName() {
         return "Vds";
     }

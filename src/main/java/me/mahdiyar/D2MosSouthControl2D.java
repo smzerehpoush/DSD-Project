@@ -1,6 +1,6 @@
 package me.mahdiyar;
 
-class D2MosSouthControl2D extends D2MosSouthControl {
+public class D2MosSouthControl2D extends D2MosSouthControl {
 
     public D2MosSouthControl2D(D2MosOperation mosoperation) {
         super(mosoperation);

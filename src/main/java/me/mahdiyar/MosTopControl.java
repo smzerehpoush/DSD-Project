@@ -1,6 +1,6 @@
 package me.mahdiyar;
 
-class MosTopControl extends MosSouthControl {
+public class MosTopControl extends MosSouthControl {
     public MosTopControl(MosOperation mosoperation) {
         super(mosoperation);
     }

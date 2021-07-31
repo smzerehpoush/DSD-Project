@@ -12,25 +12,25 @@ public abstract class D2MosDevCircuit extends Canvas {
     private Graphics gOff;
     private int width;
     private int height;
-    private D2Mosfet2D fet;
-    private GroundSymbol bGrd;
-    private GroundSymbol sGrd;
-    private BatterySymbol Vgs;
+    private final D2Mosfet2D fet;
+    private final GroundSymbol bGrd;
+    private final GroundSymbol sGrd;
+    private final BatterySymbol Vgs;
     private int yMos;
     private int yLowWire;
     private FontMetrics fm;
     private int xChannelMaxSat;
     private double yToV;
     private double xToV;
-    private int xSat[];
-    private int ySat[];
-    private int xLin[];
-    private int yLin[];
-    private Format format;
+    private final int[] xSat;
+    private final int[] ySat;
+    private final int[] xLin;
+    private final int[] yLin;
+    private final Format format;
     private boolean typeChanged;
     private boolean nChannel;
     private double vT;
-    private double vgsMax;
+    private final double vgsMax;
     private int counter;
 
     protected D2MosDevCircuit() {

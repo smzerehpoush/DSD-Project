@@ -1,7 +1,7 @@
 package me.mahdiyar;
 
 
-class OutputIV extends FunctionData {
+public class OutputIV extends FunctionData {
 
     private double Vt;
     private double K;

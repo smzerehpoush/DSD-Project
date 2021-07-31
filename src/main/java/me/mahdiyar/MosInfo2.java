@@ -1,6 +1,6 @@
 package me.mahdiyar;
 
-class MosInfo2 extends MosInfo {
+public class MosInfo2 extends MosInfo {
 
     protected void setVd(double d) {
         double d1 = super.Vgs - super.Vt;

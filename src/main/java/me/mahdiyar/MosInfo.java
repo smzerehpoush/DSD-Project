@@ -2,7 +2,7 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-abstract class MosInfo extends Canvas {
+public abstract class MosInfo extends Canvas {
 
     protected String[] info;
     protected boolean nChannel;

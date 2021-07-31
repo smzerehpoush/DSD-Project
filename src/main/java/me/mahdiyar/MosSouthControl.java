@@ -3,7 +3,7 @@ package me.mahdiyar;
 import java.awt.*;
 import java.util.StringTokenizer;
 
-abstract class MosSouthControl extends Panel {
+public abstract class MosSouthControl extends Panel {
 
     private final MosOperation mos;
     private Label Vgs;

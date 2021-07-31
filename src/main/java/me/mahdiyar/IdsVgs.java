@@ -1,6 +1,6 @@
 package me.mahdiyar;
 
-class IdsVgs extends FunctionData {
+public class IdsVgs extends FunctionData {
 
     private double K;
     private double Vt;

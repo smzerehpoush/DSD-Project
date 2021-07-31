@@ -2,7 +2,7 @@ package me.mahdiyar;
 
 import java.awt.*;
 
-class D2MosNorthControl extends Panel {
+public class D2MosNorthControl extends Panel {
 
     D2MosOperation mos;
     Button id;

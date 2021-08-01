@@ -11,6 +11,6 @@ public class Mos2Panel extends Panel {
         MosOperation2Panel mosoperation2 = new MosOperation2Panel(outputiv);
         add("Center", mosoperation2);
         add("North", new UpControl(mosoperation2));
-        add("South", new MosSouthControl(mosoperation2));
+        add("South", new DownControl(mosoperation2));
     }
 }

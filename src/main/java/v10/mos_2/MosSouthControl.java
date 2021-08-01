@@ -70,6 +70,46 @@ public abstract class MosSouthControl extends Panel {
         nChannel = true;
     }
 
+    public boolean action(Event event, Object obj)
+    {
+        Object obj1 = null;
+        if(event.target == channelType)
+        {
+            String s = channelType.getSelectedItem();
+            nChannel = mos.isNChannel();
+            if(s.equals("N-channel"))
+                nChannel = true;
+            else
+            if(s.equals("P-channel"))
+                nChannel = false;
+            if(nChannel != mos.isNChannel())
+            {
+                setChoice();
+                mos.setNChannel(nChannel);
+                double d2 = 0.0D;
+                double d3 = 0.0D;
+                double d = nChannel ? 1.0D : -1D;
+                mos.setVgs(d2);
+                mos.setVd(d3);
+                mos.setVt(d);
+                mos.repaint();
+                return true;
+            }
+        } else
+        if(event.target == choice)
+        {
+            String s1 = choice.getSelectedItem();
+            try
+            {
+                double d1 = getVt(s1);
+                mos.setVt(d1);
+                mos.repaint();
+                return true;
+            }
+            catch(NumberFormatException _ex) { }
+        }
+        return false;
+    }
     protected abstract String getVdLabel();
 
     private double getVt(String s)

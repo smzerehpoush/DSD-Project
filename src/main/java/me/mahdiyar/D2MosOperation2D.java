@@ -6,6 +6,7 @@ public class D2MosOperation2D extends D2MosOperation {
         super(functiondata, new D2MosDevCircuit2());
     }
 
+    @Override
     protected void setVd() {
         super.mosCkt.setVd(super.Vd);
         super.info.setVd(super.Vd);
@@ -22,10 +23,12 @@ public class D2MosOperation2D extends D2MosOperation {
         super.transferWrap.showCurrentSpot(!(super.Vgs > super.Vt) && !(super.Vd > super.Vgs - super.Vt));
     }
 
+    @Override
     protected void setInfo() {
         super.info = new MosInfo2();
     }
 
+    @Override
     public void run() {
         double d = 0.10000000000000001D;
         double d1 = super.mosCkt.getVgsMax();
@@ -70,18 +73,8 @@ public class D2MosOperation2D extends D2MosOperation {
             try {
                 Thread.sleep(100L);
             } catch (InterruptedException ex) {
-                //do nothing
+                ex.printStackTrace();
             }
         } while (true);
-    }
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-
     }
 }

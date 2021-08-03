@@ -8,6 +8,7 @@ public abstract class D2MosOperation extends Panel implements CustomAWT {
     protected double Vd;
     protected double Vt;
     protected boolean isNChannel;
+    protected Thread kicker;
     protected UpDown udVgs;
     protected UpDown udVd;
     protected PlotCanvas outputPlot;
@@ -99,6 +100,20 @@ public abstract class D2MosOperation extends Panel implements CustomAWT {
             isNChannel = flag;
             setChannelType();
         }
+    }
+
+    @Override
+    public void start() {
+        if (kicker == null)
+            kicker = new Thread(this);
+        kicker.start();
+    }
+
+    @Override
+    public void stop() {
+        if (kicker != null)
+            kicker.stop();
+        kicker = null;
     }
 
     protected abstract void setVd();

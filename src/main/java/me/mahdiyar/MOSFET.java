@@ -34,6 +34,22 @@ public class MOSFET {
     private int wSource;
     private int wNeutralCenter;
     private int wNeutralSide;
+    private boolean drawChannel = true;
+    private int channelX;
+    private int channelY;
+    private int channelWidth;
+
+    public void setChannelX(int channelX) {
+        this.channelX = channelX;
+    }
+
+    public void setChannelY(int channelY) {
+        this.channelY = channelY;
+    }
+
+    public void setChannelWidth(int channelWidth) {
+        this.channelWidth = channelWidth;
+    }
 
     public MOSFET() {
         nChannel = true;
@@ -157,8 +173,10 @@ public class MOSFET {
         drawRightSide(g, xS - i, ySemiTop, wSource, hChannel, shift, lightColor);
         //2
         g.fillRect(xD - i, ySemiTop, wSource, hChannel);
-        drawTop(g, xD - i, ySemiTop, wSource, shift, color);
-        drawTop(g, xS - i + wSource, ySemiTop, xD - xS, shift, color);
+
+        if (drawChannel)
+            drawTop(g, channelX, channelY, channelWidth, shift, Color.BLUE);
+        drawTop(g, -i + xD, ySemiTop, wSource, shift, color);
     }
 
     private void drawOxide(Graphics g) {
@@ -248,5 +266,9 @@ public class MOSFET {
         xNeutralCenter = xG - wNeutralCenter / 2;
         int k = hNeutralSide - hChannel;
         wNeutralSide = xS - wSource / 2 - k - x;
+    }
+
+    public void setDrawChannel(boolean drawChannel) {
+        this.drawChannel = drawChannel;
     }
 }

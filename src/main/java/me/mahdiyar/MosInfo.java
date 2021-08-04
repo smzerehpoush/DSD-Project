@@ -107,16 +107,15 @@ public abstract class MosInfo extends Canvas {
         if (nChannel) {
             if (Vgs >= Vt) {
                 info[0] = "Vgs > Vt : n-channel is induced.";
-                return;
             } else {
                 info[0] = "Vgs < Vt : the n-channel is cutoff.";
-                return;
             }
-        }
-        if (Vgs <= Vt) {
-            info[0] = "Vgs < Vt : p-channel is induced.";
         } else {
-            info[0] = "Vgs > Vt : the p-channel is cutoff.";
+            if (Vgs <= Vt) {
+                info[0] = "Vgs < Vt : p-channel is induced.";
+            } else {
+                info[0] = "Vgs > Vt : the p-channel is cutoff.";
+            }
         }
     }
 }

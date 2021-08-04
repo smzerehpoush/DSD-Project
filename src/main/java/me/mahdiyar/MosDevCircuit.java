@@ -134,8 +134,10 @@ public abstract class MosDevCircuit extends Canvas {
     }
 
     protected void drawChannel(Graphics g, double d) {
-        if (vgs <= vT)
+        if (vgs <= vT) {
+            fet.setDrawChannel(yLin[1] != yLin[2]);
             return;
+        }
         if (d > vgs)
             d = vgs;
         Color color = nChannel ? Color.BLUE : Color.RED;
@@ -143,12 +145,31 @@ public abstract class MosDevCircuit extends Canvas {
         if (d > vT) {
             yLin[1] = yLin[0] + (int) (yToV * (vgs - vT));
             yLin[2] = yLin[0] + (int) (yToV * (d - vT));
+            fet.setChannelX(xLin[0]);
+            fet.setChannelY(yLin[0]);
+            fet.setChannelWidth(xLin[3] - xLin[0]);
             g.fillPolygon(xLin, yLin, 4);
         } else {
+
             ySat[1] = ySat[0] + (int) (yToV * (vgs - vT));
             xSat[2] = xChannelMaxSat + (int) (xToV * d);
+            fet.setDrawChannel(true);
+            fet.setChannelWidth(xLin[3] - xLin[0]);
+            fet.setChannelX(xSat[0]);
+            fet.setChannelY(ySat[0]);
+            fet.setChannelWidth(xSat[2] - xSat[0]);
             g.fillPolygon(xSat, ySat, 3);
         }
+
+    }
+
+    private void drawTop(Graphics g, int x, int y, int width, int d, Color color) {
+        Color tmp = g.getColor();
+        g.setColor(color);
+        int[] xPoints = new int[]{x, x + d, x + width + d, x + width};
+        int[] yPoints = new int[]{y, y - d, y - d, y};
+        g.fillPolygon(xPoints, yPoints, 4);
+        g.setColor(tmp);
     }
 
     private void drawDescription(Graphics g) {

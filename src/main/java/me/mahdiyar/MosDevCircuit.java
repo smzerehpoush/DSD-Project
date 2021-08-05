@@ -142,6 +142,7 @@ public abstract class MosDevCircuit extends Canvas {
             d = vgs;
         Color color = nChannel ? Color.BLUE : Color.RED;
         g.setColor(color);
+        fet.setDrawChannel(true);
         if (d > vT) {
             yLin[1] = yLin[0] + (int) (yToV * (vgs - vT));
             yLin[2] = yLin[0] + (int) (yToV * (d - vT));
@@ -153,7 +154,6 @@ public abstract class MosDevCircuit extends Canvas {
 
             ySat[1] = ySat[0] + (int) (yToV * (vgs - vT));
             xSat[2] = xChannelMaxSat + (int) (xToV * d);
-            fet.setDrawChannel(true);
             fet.setChannelWidth(xLin[3] - xLin[0]);
             fet.setChannelX(xSat[0]);
             fet.setChannelY(ySat[0]);
